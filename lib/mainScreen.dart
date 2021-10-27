@@ -24,6 +24,14 @@ class _MainPageState extends GenericPageState {
   @override
   Widget build(BuildContext context) {
     Widget page = Scaffold(appBar: new AppBar(
+      centerTitle: true,
+      title: new Text(
+        'ZONeXUS',
+        style: TextStyle(
+          fontFamily: "Montserrat",
+          color: Colors.white,
+        ),
+      ),
       backgroundColor: const Color(0xFF1D1D1D),
       foregroundColor: Colors.black,
       elevation: 0,

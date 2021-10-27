@@ -40,6 +40,12 @@ dev_dependencies:
 flutter:
   assets:
     - assets/small_logo.png
+    - assets/big_logo.png
+
+  fonts:
+    - family: Montserrat
+      fonts:
+        - asset: assets/Montserrat-Regular.ttf
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
