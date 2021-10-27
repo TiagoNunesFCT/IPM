@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:zone/mainScreen.dart';
 
 import 'genericPage.dart';
 
@@ -39,17 +40,16 @@ class _SplashScreenState extends GenericPageState {
   }
   //splash timer start
   timerStart() async {
-    var duration = new Duration(seconds: 6);
+    var duration = new Duration(seconds: 3);
     return new Timer(duration, route);
   }
 
   route() {
-    /*Navigator.pushReplacement(context, MaterialPageRoute(
-        builder: (context) => GenericPage()
+    Navigator.pushReplacement(context, MaterialPageRoute(
+        builder: (context) => MainPage()
     )
-    );*/
+    );
   }
 
 }
-
 
