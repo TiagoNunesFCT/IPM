@@ -73,7 +73,13 @@ class _MainPageState extends GenericPageState {
           fontSize: 24,
           color: Colors.white,
         ),
-      ),Container(,child:Text(
+      ),Container(      decoration: new BoxDecoration(
+          shape: BoxShape.rectangle,
+          border: new Border.all(
+            color: Colors.black,
+            width: 1.0,
+          ),
+        ),child:Text(
         zoneName,
         style: TextStyle(
           fontFamily: "Nasalization",
