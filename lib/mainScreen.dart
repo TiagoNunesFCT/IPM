@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:zone/rover.dart';
 
 import 'genericPage.dart';
 
@@ -100,18 +101,18 @@ class _MainPageState extends GenericPageState {
                                     fontSize: 24,
                                   ),
                                 )
-                              ])),
+                              ])),Container(width:2),
                       Container(
                           padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                           decoration: new BoxDecoration(
                             shape: BoxShape.rectangle,
                             borderRadius: BorderRadius.circular(5),
-                            color: Colors.black38,
+                            color: const Color(0x61111111),
                             border: new Border.all(
                               color: Colors.white12,
                               width: 1.0,
                             ),
-                          ),child:IconButton(icon: Icon(Icons.arrow_forward_ios_rounded,color: Colors.white,), color: Colors.white,))])
+                          ),child:IconButton(icon: Icon(Icons.arrow_forward_ios_rounded,color: Colors.white,), color: Colors.white,))]),new Rover(true, true, true)
                   ]),
 
                 ],
