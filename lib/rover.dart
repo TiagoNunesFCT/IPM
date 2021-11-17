@@ -20,7 +20,7 @@ class Rover extends StatelessWidget{
 
   Widget homeButton(BuildContext context){
 
-    return IconButton(icon: Icon(Icons.house_rounded,color: Colors.white), onPressed: () {
+    return IconButton(icon: Icon(Icons.house_rounded,color: Colors.white, size: 30), onPressed: () {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => MainPage()),
@@ -28,7 +28,7 @@ class Rover extends StatelessWidget{
     },             );
   }
   Widget mapButton(BuildContext context){
-    return IconButton(icon: Icon(Icons.map_rounded,color: Colors.white), onPressed: () {
+    return IconButton(icon: Icon(Icons.map_rounded,color: Colors.white, size: 30), onPressed: () {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => MainPage()),
@@ -37,7 +37,7 @@ class Rover extends StatelessWidget{
   }
 
   Widget listButton(BuildContext context){
-    return IconButton(icon: Icon(Icons.list_rounded,color: Colors.white), onPressed: () {
+    return IconButton(icon: Icon(Icons.list_rounded,color: Colors.white, size: 30), onPressed: () {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => MainPage()),

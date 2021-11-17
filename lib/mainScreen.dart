@@ -77,7 +77,8 @@ class _MainPageState extends GenericPageState {
                         color: Colors.white,
                       ),
                     ),
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    SizedBox(height: 10),
+                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                       Container(
                           padding: EdgeInsets.fromLTRB(10, 9.5, 10, 9.5),
                           decoration: new BoxDecoration(
@@ -112,7 +113,7 @@ class _MainPageState extends GenericPageState {
                               color: Colors.white12,
                               width: 1.0,
                             ),
-                          ),child:IconButton(icon: Icon(Icons.arrow_forward_ios_rounded,color: Colors.white,), color: Colors.white,))]),new Rover(true, true, true)
+                          ),child:IconButton(icon: Icon(Icons.arrow_forward_ios_rounded,color: Colors.white,), color: Colors.white,))]),SizedBox(height:60),new Rover(false, true, true)
                   ]),
 
                 ],
