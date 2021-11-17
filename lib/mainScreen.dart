@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:zone/rover.dart';
+import 'package:zone/userScreen.dart';
 
 import 'genericPage.dart';
 
@@ -34,7 +35,12 @@ class _MainPageState extends GenericPageState {
             child: Builder(
               builder: (context) => IconButton(
                 icon: Icon(Icons.supervised_user_circle_rounded),
-                onPressed: () => Scaffold.of(context).openDrawer(),
+                onPressed: () {
+                Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => UserPage()),
+              );
+  },
               ),
             ),
           ),
