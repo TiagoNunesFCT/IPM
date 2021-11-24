@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:zone/backButton.dart' as buttonBack;
+import 'package:zone/widgets/backButton.dart' as buttonBack;
 
 import 'genericPage.dart';
 

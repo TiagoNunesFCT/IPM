@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:zone/mainScreen.dart';
+import 'package:zone/views/mainScreen.dart';
 
 import 'genericPage.dart';
 

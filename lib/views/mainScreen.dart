@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:zone/rover.dart';
-import 'package:zone/userScreen.dart';
+import 'package:zone/widgets/rover.dart';
+import 'userScreen.dart';
 
 
 import 'genericPage.dart';

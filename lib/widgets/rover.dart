@@ -1,7 +1,7 @@
 //Rover is the Widget at the bottom of the screen which allows us to change between Main Views (Map, List, Home)
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:zone/MainScreen.dart';
+import 'package:zone/views/MainScreen.dart';
 
 class Rover extends StatelessWidget{
 
