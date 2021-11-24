@@ -317,6 +317,7 @@ class DatabaseHelper {
   //Seed (Populate) the database
   void seed() async {
 
+    /**
     DatabaseHelper.instance.insertThemeSeed(geoNames.toMapWithoutId());
     DatabaseHelper.instance.insertThemeSeed(outdoorActivities.toMapWithoutId());
     DatabaseHelper.instance.insertThemeSeed(travelling.toMapWithoutId());
@@ -341,6 +342,7 @@ class DatabaseHelper {
     DatabaseHelper.instance.insertTagSeed(hotel.toMapWithoutId());
     DatabaseHelper.instance.insertTagSeed(publicTransport.toMapWithoutId());
     DatabaseHelper.instance.insertTagSeed(restaurant.toMapWithoutId());
+        **/
   }
 
   //Return number of Tags
