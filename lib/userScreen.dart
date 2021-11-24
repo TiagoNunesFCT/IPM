@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:zone/backButton.dart' as buttonBack;
 
 import 'genericPage.dart';
 
@@ -24,7 +25,7 @@ class _UserPageState extends GenericPageState {
   String zoneName = "Laranjeiro e Feijó";
   String cityName = "Almada";
   String countryName = "🇵🇹";
-  String userDesc = "Hi! I just started using this App!";
+  String userDesc = "Hi! I just started using this App! This is a very long descriptions solely for demonstration purporses and In no way represents the final look/ functionality of the app.";
 
   //Build the widget
   @override
@@ -39,7 +40,7 @@ class _UserPageState extends GenericPageState {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Column(mainAxisSize: MainAxisSize.min, children: [
+          Column(mainAxisSize: MainAxisSize.max, children: [
             IconButton(
                 iconSize: 240,
                 icon: Stack(alignment: Alignment.center, children: [
@@ -87,6 +88,7 @@ class _UserPageState extends GenericPageState {
             ])
           ]),
           Container(margin:EdgeInsets.fromLTRB(10, 0, 10, 5),padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
+              height:250,
               decoration: new BoxDecoration(
                 shape: BoxShape.rectangle,
                 borderRadius: BorderRadius.circular(5),
@@ -96,7 +98,7 @@ class _UserPageState extends GenericPageState {
                   width: 1.0,
                 ),
               ),
-              child: Column(mainAxisSize: MainAxisSize.min, children: [
+              child: SingleChildScrollView(child:Column(mainAxisSize: MainAxisSize.min,crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                   Text("Zone:",
                       style: TextStyle(
@@ -139,14 +141,20 @@ class _UserPageState extends GenericPageState {
                         color: Colors.white,
                       ))
                 ]),
-                Text("About Me: \n" + userDesc,
+                Text("About Me:",
                     style: TextStyle(
                       fontFamily: "Montserrat",
                       fontSize: 24,
                       color: Colors.white,
+                    )),
+                Text(userDesc,
+                    style: TextStyle(
+                      fontFamily: "Montserrat",
+                      fontSize: 20,
+                      color: Colors.white,
                     ))
-              ]))
-        ],
+              ])))
+            ,buttonBack.BackButton()],
       ),
     )));
     return page;

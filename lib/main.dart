@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:zone/splashScreen.dart';
 
 void main() {
@@ -9,6 +10,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(style);
+    hideBar();
     return MaterialApp(
       title: 'ZONeXUS',
       theme: ThemeData(
@@ -112,3 +115,12 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+final style = SystemUiOverlayStyle(
+  systemNavigationBarDividerColor: Colors.transparent,
+  systemNavigationBarColor: Colors.transparent,
+  systemNavigationBarIconBrightness: Brightness.light,
+);
+
+Future hideBar() async =>
+    SystemChrome.setEnabledSystemUIOverlays([]);
