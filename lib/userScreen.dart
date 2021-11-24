@@ -154,7 +154,7 @@ class _UserPageState extends GenericPageState {
                       color: Colors.white,
                     ))
               ])))
-            ,buttonBack.BackButton()],
+            ,Row(children:[Container(margin:EdgeInsets.fromLTRB(10, 0, 10, 5),child:buttonBack.BackButton())])],
       ),
     )));
     return page;
