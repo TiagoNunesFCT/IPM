@@ -13,38 +13,48 @@ import 'package:path_provider/path_provider.dart';
  *      READ ME
  *
  *      Tables necessárias:
- *      Users
- *      Settings
- *      Zones (cidade, país, e coordenadas no mapa)
- *      Overall Classifications (main key é o id da zona)
- *      Infos (todas as infos vão estar na mesma table, e vão ter uma tag que é o tipo de info. Quando selecionamos o tipo de info é que filtramos pelo tipo de tag (serviços, etc))
- *      Individual Ratings, (main key é o id da zona), tem como attrs o nome da pessoa, link para a imagem (ver como fazer), número de estrelas, timestamp e descrição do feedback
- *      Forums (main key é o id da zona), tem como attrs o nome da pessoa, link para a imagem (ver como fazer), título , descrição do post e respostas? (ver como fazer)
- *      Crime News (main key é o id da zona), tem como attrs o nome do canal de notícias, link para o logotipo (ver como fazer), breve descrição da notícia, hyperlink para o artigo (maybe fake), e timestamp
+ *      Users Têm id único.
+ *      Settings Têm id único.
+ *      Zones (cidade, país, e coordenadas no mapa)Têm id único.
+ *      Overall Classifications (main key é o id da zona).Têm id único.
+ *      Infos (todas as infos vão estar na mesma table, e vão ter uma tag que é o tipo de info. Quando selecionamos o tipo de info é que filtramos pelo tipo de tag (serviços, etc)). Também vão ter um id único
+ *      Individual Ratings, (main key é o id da zona), tem como attrs o nome da pessoa, id único, link para a imagem (ver como fazer), número de estrelas, timestamp e descrição do feedback
+ *      Forums (main key é o id da zona), tem como attrs o nome da pessoa, id único, link para a imagem (ver como fazer), título , descrição do post e IDs das respostas
+ *      Crime News (main key é o id da zona), tem como attrs o nome do canal de notícias, id único, link para o logotipo (ver como fazer), breve descrição da notícia, hyperlink para o artigo (maybe fake), e timestamp
  */
 
-//This Class is what interfaces directly with the SQLite Database (hence it's called Database Helper)
-class DatabaseHelper {
+//This Class is what interfaces directly with the SQLite Database (hence it's called DBHandler)
+class DBHandler {
+
   //Database Name File
-  static final _databaseName = "waypoint_db.db";
+  static final _databaseName = "ZonexDatabase.db";
 
   //Database Version. Change This when the database has been modified (eg. columns added, etc.), these changes must be implemented in the onUpgrade Function
-  static final _databaseVersion = 9;
+  static final _databaseVersion = 1;
 
-  //Waypoint Table
-  static final table = 'wayp_table';
+  //Users Table
+  static final userTable = 'users_table';
 
-  //Settings Table (in case multiple configurations are added in the future)
-  // ignore: non_constant_identifier_names
-  static final set_table = 'settings_table';
+  //Settings Table
+  static final setTable = 'settings_table';
 
-  //Tags Table
-  // ignore: non_constant_identifier_names
-  static final tag_table = 'tags_table';
+  //Zones Table
+  static final zoneTable = 'zonesTable';
 
-  //Themes Table
-  // ignore: non_constant_identifier_names
-  static final them_table = 'themes_table';
+  //Overall Ratings Table
+  static final overallRTable = 'overallRatingsTable';
+
+  //Infos Table
+  static final infoTable = 'infosTable';
+
+  //Individual Ratings Table
+  static final indivRTable = 'individualRatingsTable';
+
+  //Forum Messages Table
+  static final forumsTable = 'forumMessagesTable';
+
+  //Crime News Table
+  static final crimeTable = 'crimeNewsTable';
 
   //Names of Columns, grouped by table
   //Waypoint Columns
@@ -125,9 +135,9 @@ class DatabaseHelper {
 
    */
 
-  DatabaseHelper._privateConstructor();
+  DBHandler._privateConstructor();
 
-  static final DatabaseHelper instance = new DatabaseHelper._privateConstructor();
+  static final DBHandler instance = new DBHandler._privateConstructor();
 
   //The Database Object we are going to Handle
   static Database _database;
