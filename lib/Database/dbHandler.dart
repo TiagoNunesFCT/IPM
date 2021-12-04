@@ -6,22 +6,6 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
 
 
-/**
- *
- *      READ ME
- *      READ ME
- *      READ ME
- *
- *      Tables necessárias:
- *      Users Têm id único.
- *      Settings Têm id único.
- *      Zones (cidade, país, e coordenadas no mapa)Têm id único.
- *      Overall Classifications (main key é o id da zona).Têm id único.
- *      Infos (todas as infos vão estar na mesma table, e vão ter uma tag que é o tipo de info. Quando selecionamos o tipo de info é que filtramos pelo tipo de tag (serviços, etc)). Também vão ter um id único
- *      Individual Ratings, (main key é o id da zona), tem como attrs o nome da pessoa, id único, link para a imagem (ver como fazer), número de estrelas, timestamp e descrição do feedback
- *      Forums (main key é o id da zona), tem como attrs o nome da pessoa, id único, link para a imagem (ver como fazer), título , descrição do post e IDs das respostas
- *      Crime News (main key é o id da zona), tem como attrs o nome do canal de notícias, id único, link para o logotipo (ver como fazer), breve descrição da notícia, hyperlink para o artigo (maybe fake), e timestamp
- */
 
 //This Class is what interfaces directly with the SQLite Database (hence it's called DBHandler)
 class DBHandler {
@@ -57,46 +41,76 @@ class DBHandler {
   static final crimeTable = 'crimeNewsTable';
 
   //Names of Columns, grouped by table
-  //Waypoint Columns
-  static final columnId = 'wayp_id';
-  static final columnLatitude = 'wayp_lat';
-  static final columnLongitude = 'wayp_lon';
-  static final columnAltitude = 'wayp_alt';
-  static final columnAccuracy = 'wayp_acc';
-  static final columnSpeed = 'wayp_spd';
-  static final columnHeading = 'wayp_hdg';
-  static final columnTimestamp = 'wayp_tim';
-  static final columnName = 'wayp_nam';
-  static final columnSource = 'wayp_src';
-  static final columnTags = 'wayp_tag';
+  //Users Columns
+  static final columnUserId = 'usr_id';
+  static final columnUserName = 'usr_name';          //The name won't be unique, since in real life many people can have the same name
+  static final columnUserCountry = 'usr_ctr';
+  static final columnUserCity = 'usr_cty';
+  static final columnUserZone = 'usr_zne';
+  static final columnUserDescription = 'usr_desc';
+  static final columnUserFriendsString = 'usr_frnd'; //Experimental: a long string containing the IDs of all the User's friends, separated by semicolons (;)
+  static final columnUserImage = 'usr_img';          //so we can access the user's photo
+  static final columnUserType = 'usr_typ';           //for debug purposes (admin user)
+
 
   //Settings Columns
   static final columnSettingsId = 'settings_id';
-  static final columnLanguage = 'settings_lang';
-  static final columnCoordinates = 'settings_coord';
-  static final columnUnits = 'settings_unit';
-  static final columnStreamFrequency = 'settings_freq';
-  static final columnPowerSave = 'settings_power';
-  static final columnStoragePath = 'settings_stor';
-  static final columnReceiver = 'settings_recv';
-  static final columnSound = 'settings_snd';
-  static final columnNotifications = 'settings_note';
-  static final columnScreenTimeout = 'settings_tim';
-  static final columnCurrentTheme = 'settings_cur';
-  static final columnDirty = 'settings_dirty';
-  static final columnAutoZoom = 'settings_zoom';
+  static final columnSettingsLanguage = 'settings_lang';
+  static final columnSettingsTheme = 'settings_them';
+  static final columnSettingsDirty = 'settings_dirty';    //database seeding purposes
+  static final columnSettingsAutoZoom = 'settings_zoom';  //map purposes
 
-  //Tags Columns
-  static final columnTagId = 'tag_id';
-  static final columnTagName = 'tag_name';
-  static final columnTagTheme = 'tag_theme';
-  static final columnTagOrder = 'tag_order';
+  //Zones Columns
+  static final columnZoneId = 'zon_id';
+  static final columnZoneName = 'zon_name';
+  static final columnZoneCountry = 'zon_ctr';
+  static final columnZoneCity = 'zon_cty';
+  static final columnZoneLatitude = 'zon_lat';
+  static final columnZoneLongitude = 'zon_lon';
 
-  //Themes Columns
-  static final columnThemId = 'them_id';
-  static final columnThemName = 'them_name';
-  static final columnThemSector = 'them_sect';
+  //Overall Ratings Columns
+  static final columnOverallRId = 'ovrt_id';
+  static final columnOverallRZone = 'ovrt_zone';
+  static final columnOverallROne = 'ovrt_one';        //these 5 are the number of ratings of each star the zone has
+  static final columnOverallRTwo = 'ovrt_two';
+  static final columnOverallRThree = 'ovrt_tre';
+  static final columnOverallRFour = 'ovrt_for';
+  static final columnOverallRFive = 'ovrt_fiv';
 
+  //Zone Information Columns
+  static final columnInfoId = 'info_id';
+  static final columnInfoZone = 'info_zone';
+  static final columnInfoType = 'info_type';        //this is a tag that specifies the type of info this is (rent/service/leisure/waterprice, etc)
+  static final columnInfoName = 'info_name';        //some infos might have a name, like, for instance, "CTT" or "Pingo Doce"
+  static final columnInfoValue = 'info_val';        //the value of that info, can be a string or an int, for instance: rent - int, CTT - closed/open
+
+
+  //Individual Ratings Columns
+  static final columnIndividualRId = 'idrt_id';
+  static final columnIndividualRZone = 'idrt_zone';
+  static final columnIndividualRUId = 'idrt_uid';        //the id of the user who posted the rating, so we can link directly to their page
+  static final columnIndividualRStars = 'idrt_str';      //the numbr of stars in this individual rating
+  static final columnIndividualRTimestamp = 'idrt_tst';  //the timestamp of the rating
+  static final columnIndividualRDescription = 'idrt_dsc';//the description of the rating
+
+  //Forum Messages Columns
+  static final columnForumsId = 'frum_id';
+  static final columnForumsZone = 'frum_zone';
+  static final columnForumsUid = 'frum_uid';
+  static final columnForumsTitle = 'frum_ttl';
+  static final columnForumsDesc = 'frum_dsc';
+  static final columnForumsReplies = 'frum_rpl';  //Experimental: a long string containing the IDs of all the Posts's replies, separated by semicolons (;)
+  static final columnForumsTimestamp = 'idrt_tst';//the timestamp of the post
+  static final columnForumsIsReply = 'frum_isr';  //a boolean stating if the post is a reply, if it is, it won't show up on the main list, only in the replies of the original post
+
+  //Crime News Columns Crime News (main key é o id da zona), tem como attrs o nome do canal de notícias, id único, link para o logotipo (ver como fazer), breve descrição da notícia, hyperlink para o artigo (maybe fake), e timestamp
+  static final columnCrimeNId = 'crim_id';
+  static final columnCrimeNZone = 'crim_zone';
+  static final columnCrimeNName = 'crim_name';        //the name of the news outlet
+  static final columnCrimeNLogo = 'crim_logo';        //the logo of the news outlet (asset image)
+  static final columnCrimeNDesc = 'crim_dsc';         //brief description of the article
+  static final columnCrimeNHyper = 'crim_hyp';        //hyperlink for the article
+  static final columnCrimeNTimestamp = 'crim_tst';    //the timestamp of the article
   /*
 
     DATABASE SEEDS - - - THESE WILL BE THE DEFAULT THEMES/TAGS. THEY WILL APPEAR WHENEVER THE DATABASE IS CREATED
@@ -182,147 +196,285 @@ class DBHandler {
   //When the Database is created for the first time, this is what should happen:
   Future _onCreate(Database db, int version) async {
     await db.execute('''
-          CREATE TABLE IF NOT EXISTS $table (
-            $columnId INTEGER PRIMARY KEY,
-            $columnLatitude REAL,
-            $columnLongitude REAL,
-            $columnAltitude REAL,
-            $columnAccuracy REAL,
-            $columnSpeed REAL,
-            $columnHeading REAL,
-            $columnTimestamp REAL,
-            $columnName TEXT,
-            $columnSource TEXT,
-            $columnTags TEXT
+          CREATE TABLE IF NOT EXISTS $userTable (
+            $columnUserId INTEGER PRIMARY KEY,
+            $columnUserName TEXT,
+            $columnUserCountry TEXT,
+            $columnUserCity TEXT,
+            $columnUserZone TEXT,
+            $columnUserDescription TEXT,
+            $columnUserFriendsString TEXT,
+            $columnUserImage TEXT,
+            $columnUserType TEXT
           )
           ''');
     await db.execute('''
-          CREATE TABLE IF NOT EXISTS $set_table (
+          CREATE TABLE IF NOT EXISTS $setTable (
             $columnSettingsId INTEGER PRIMARY KEY,
-            $columnLanguage TEXT,
-            $columnCoordinates INTEGER,
-            $columnUnits INTEGER ,
-            $columnStreamFrequency REAL,
-            $columnPowerSave INTEGER,
-            $columnStoragePath TEXT,
-            $columnReceiver INTEGER,
-            $columnSound INTEGER,
-            $columnNotifications INTEGER,
-            $columnScreenTimeout REAL,
-            $columnCurrentTheme TEXT,
-            $columnDirty INTEGER,
-            $columnAutoZoom INTEGER
+            $columnSettingsLanguage TEXT,
+            $columnSettingsTheme TEXT,
+            $columnSettingsDirty INTEGER,
+            $columnSettingsAutoZoom INTEGER
           )
           ''');
     await db.execute('''
-          CREATE TABLE IF NOT EXISTS $tag_table (
-            $columnTagId INTEGER PRIMARY KEY,
-            $columnTagName TEXT,
-            $columnTagOrder INTEGER,
-            $columnTagTheme TEXT
+          CREATE TABLE IF NOT EXISTS $zoneTable (
+            $columnZoneId INTEGER PRIMARY KEY,
+            $columnZoneName TEXT,
+            $columnZoneCountry TEXT,
+            $columnZoneCity TEXT,
+            $columnZoneLatitude REAL,
+            $columnZoneLongitude REAL
           )
           ''');
     await db.execute('''
-          CREATE TABLE IF NOT EXISTS $them_table (
-            $columnThemId INTEGER PRIMARY KEY,
-            $columnThemName TEXT,
-            $columnThemSector INTEGER
+          CREATE TABLE IF NOT EXISTS $overallRTable (
+            $columnOverallRId INTEGER PRIMARY KEY,
+            $columnOverallRZone INTEGER,
+            $columnOverallROne INTEGER,
+            $columnOverallRTwo INTEGER,
+            $columnOverallRThree INTEGER,
+            $columnOverallRFour INTEGER,
+            $columnOverallRFive INTEGER
+          )
+          ''');
+    await db.execute('''
+          CREATE TABLE IF NOT EXISTS $infoTable (
+            $columnInfoId INTEGER PRIMARY KEY,
+            $columnInfoZone INTEGER,
+            $columnInfoType TEXT,
+            $columnInfoName TEXT,
+            $columnInfoValue TEXT
+          )
+          ''');
+    await db.execute('''
+          CREATE TABLE IF NOT EXISTS $indivRTable (
+            $columnIndividualRId INTEGER PRIMARY KEY,
+            $columnIndividualRZone INTEGER,
+            $columnIndividualRUId INTEGER,
+            $columnIndividualRStars INTEGER,
+            $columnIndividualRTimestamp TEXT,
+            $columnIndividualRDescription TEXT
+          )
+          ''');
+    await db.execute('''
+          CREATE TABLE IF NOT EXISTS $forumsTable (
+            $columnForumsId INTEGER PRIMARY KEY,
+            $columnForumsZone INTEGER,
+            $columnForumsUid INTEGER,
+            $columnForumsTitle TEXT,
+            $columnForumsDesc TEXT,
+            $columnForumsReplies TEXT,
+            $columnForumsTimestamp TEXT,
+            $columnForumsIsReply INTEGER
+          )
+          ''');
+
+    await db.execute('''
+          CREATE TABLE IF NOT EXISTS $crimeTable (
+            $columnCrimeNId INTEGER PRIMARY KEY,
+            $columnCrimeNZone INTEGER,
+            $columnCrimeNName TEXT,
+            $columnCrimeNLogo TEXT,
+            $columnCrimeNDesc TEXT,
+            $columnCrimeNHyper TEXT,
+            $columnCrimeNTimestamp TEXT
           )
           ''');
   }
 
-  // ignore: missing_return
-  Future manualUpgrade(Database db) {
-    db.execute('''
-          CREATE TABLE IF NOT EXISTS $tag_table (
-            $columnTagId INTEGER PRIMARY KEY,
-            $columnTagName TEXT,
-            $columnTagOrder INTEGER,
-            $columnTagTheme TEXT
-          )
-          ''');
-    db.execute('''
-          CREATE TABLE IF NOT EXISTS $them_table (
-            $columnThemId INTEGER PRIMARY KEY,
-            $columnThemName TEXT,
-            $columnThemSector INTEGER
-          )
-          ''');
-  }
-
-  //Inserting a new Waypoint into the Database
-  Future<int> insert(Map<String, dynamic> row) async {
+  //Inserting a new User into the Database
+  Future<int> insertUser(Map<String, dynamic> row) async {
     Database db = await instance.database;
-    return await db.insert(table, row);
+    return await db.insert(userTable, row);
   }
 
   //Inserting a new Settings Configuration into the Database
   Future<int> insertSettings(Map<String, dynamic> row) async {
     Database db = await instance.database;
-    return await db.insert(set_table, row);
+    return await db.insert(setTable, row);
   }
 
-  //Inserting a new Tag into the Database
-  Future<int> insertTag(Map<String, dynamic> row) async {
+  //Inserting a new Zone into the Database
+  Future<int> insertZone(Map<String, dynamic> row) async {
     Database db = await instance.database;
-    return await db.insert(tag_table, row);
+    return await db.insert(zoneTable, row);
   }
 
-  //Inserting a new Theme into the Database
-  Future<int> insertTheme(Map<String, dynamic> row) async {
+  //Inserting a new Overall Ratings object into the Database
+  Future<int> insertOverallR(Map<String, dynamic> row) async {
     Database db = await instance.database;
-    return await db.insert(them_table, row);
+    return await db.insert(overallRTable, row);
   }
 
-  //Inserting a new Tag as a seed (no prior initialization) into the Database
-  Future<int> insertTagSeed(Map<String, dynamic> row) async {
-    return await _database.insert(tag_table, row);
-  }
-
-  //Inserting a new Theme as a seed (no prior initialization) into the Database
-  Future<int> insertThemeSeed(Map<String, dynamic> row) async {
-    return await _database.insert(them_table, row);
-  }
-
-  //Query (return) all Waypoints
-  Future<List<Map<String, dynamic>>> queryAllRows() async {
+  //Inserting a new piece of Information into the Database
+  Future<int> insertInfo(Map<String, dynamic> row) async {
     Database db = await instance.database;
-    var result = await db.query(table);
+    return await db.insert(infoTable, row);
+  }
+
+  //Inserting a new Individual Ratings object into the Database
+  Future<int> insertIndividualR(Map<String, dynamic> row) async {
+    Database db = await instance.database;
+    return await db.insert(indivRTable, row);
+  }
+
+  //Inserting a new Forums Post into the Database
+  Future<int> insertForums(Map<String, dynamic> row) async {
+    Database db = await instance.database;
+    return await db.insert(forumsTable, row);
+  }
+
+  //Inserting a new Crime News Article into the Database
+  Future<int> insertCrime(Map<String, dynamic> row) async {
+    Database db = await instance.database;
+    return await db.insert(crimeTable, row);
+  }
+
+  //Inserting a new User as a seed (no prior initialization) into the Database
+  Future<int> insertUserSeed(Map<String, dynamic> row) async {
+    return await _database.insert(userTable, row);
+  }
+
+  //Inserting a new Settings configuration as a seed (no prior initialization) into the Database
+  Future<int> insertSettingsSeed(Map<String, dynamic> row) async {
+    return await _database.insert(setTable, row);
+  }
+
+  //Inserting a new Zone as a seed (no prior initialization) into the Database
+  Future<int> insertZoneSeed(Map<String, dynamic> row) async {
+    return await _database.insert(zoneTable, row);
+  }
+
+  //Inserting a new Overall Ratings Object as a seed (no prior initialization) into the Database
+  Future<int> insertOverallRSeed(Map<String, dynamic> row) async {
+    return await _database.insert(overallRTable, row);
+  }
+
+  //Inserting a new piece of Information as a seed (no prior initialization) into the Database
+  Future<int> insertInfoSeed(Map<String, dynamic> row) async {
+    return await _database.insert(infoTable, row);
+  }
+
+  //Inserting a new Settings configuration as a seed (no prior initialization) into the Database
+  Future<int> insertIndividualRSeed(Map<String, dynamic> row) async {
+    return await _database.insert(indivRTable, row);
+  }
+
+  //Inserting a new Forums Post as a seed (no prior initialization) into the Database
+  Future<int> insertForumsSeed(Map<String, dynamic> row) async {
+    return await _database.insert(forumsTable, row);
+  }
+
+  //Inserting a new Crime News Article as a seed (no prior initialization) into the Database
+  Future<int> insertCrimeSeed(Map<String, dynamic> row) async {
+    return await _database.insert(crimeTable, row);
+  }
+
+  //Query (return) all Users
+  Future<List<Map<String, dynamic>>> queryAllRowsUsers() async {
+    Database db = await instance.database;
+    var result = await db.query(userTable);
     return result.toList();
   }
 
   //Query (return) all Settings Configurations
   Future<List<Map<String, dynamic>>> queryAllRowsSettings() async {
     Database db = await instance.database;
-    var result = await db.query(set_table);
+    var result = await db.query(setTable);
     return result.toList();
   }
 
-  //Query (return) all Tags
-  Future<List<Map<String, dynamic>>> queryAllRowsTags() async {
+  //Query (return) all Zones
+  Future<List<Map<String, dynamic>>> queryAllRowsZones() async {
     Database db = await instance.database;
-    var result = await db.query(tag_table);
+    var result = await db.query(zoneTable);
     return result.toList();
   }
 
-  //Query (return) all Themes
-  Future<List<Map<String, dynamic>>> queryAllRowsThemes() async {
+  //Query (return) all Overall Ratings Objects
+  Future<List<Map<String, dynamic>>> queryAllRowsOverallR() async {
     Database db = await instance.database;
-    var result = await db.query(them_table);
+    var result = await db.query(overallRTable);
     return result.toList();
   }
 
-  //Return number of Waypoints
-  Future<int> queryRowCount() async {
+  //Query (return) all pieces of information
+  Future<List<Map<String, dynamic>>> queryAllRowsInfo() async {
     Database db = await instance.database;
-    return Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM $table'));
+    var result = await db.query(infoTable);
+    return result.toList();
+  }
+
+  //Query (return) all Individual Rating Objects
+  Future<List<Map<String, dynamic>>> queryAllRowsIndividualR() async {
+    Database db = await instance.database;
+    var result = await db.query(indivRTable);
+    return result.toList();
+  }
+
+  //Query (return) all Forum Posts
+  Future<List<Map<String, dynamic>>> queryAllRowsForums() async {
+    Database db = await instance.database;
+    var result = await db.query(forumsTable);
+    return result.toList();
+  }
+
+  //Query (return) all Crime News
+  Future<List<Map<String, dynamic>>> queryAllRowsCrime() async {
+    Database db = await instance.database;
+    var result = await db.query(crimeTable);
+    return result.toList();
+  }
+
+  //Return number of Users
+  Future<int> queryRowCountUsers() async {
+    Database db = await instance.database;
+    return Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM $userTable'));
   }
 
   //Return number of Settings Configurations
   Future<int> queryRowCountSettings() async {
     Database db = await instance.database;
-    return Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM $set_table'));
+    return Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM $setTable'));
   }
+
+  //Return number of Zones
+  Future<int> queryRowCountZones() async {
+    Database db = await instance.database;
+    return Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM $zoneTable'));
+  }
+
+  //Return number of OverallRatings
+  Future<int> queryRowCountOverallR() async {
+    Database db = await instance.database;
+    return Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM $overallRTable'));
+  }
+
+  //Return number of Pieces of Information
+  Future<int> queryRowCountInfos() async {
+    Database db = await instance.database;
+    return Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM $infoTable'));
+  }
+
+  //Return number of IndividualRatings
+  Future<int> queryRowCountIndividualR() async {
+    Database db = await instance.database;
+    return Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM $indivRTable'));
+  }
+
+  //Return number of Forum Messages
+  Future<int> queryRowCountForums() async {
+    Database db = await instance.database;
+    return Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM $forumsTable'));
+  }
+
+  //Return number of Crime News Articles
+  Future<int> queryRowCountCrimes() async {
+    Database db = await instance.database;
+    return Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM $crimeTable'));
+  }
+
 
   //Seed (Populate) the database
   void seed() async {
@@ -355,67 +507,107 @@ class DBHandler {
         **/
   }
 
-  //Return number of Tags
-  Future<int> queryRowCountTags() async {
+  //Update existing User Object
+  Future<int> updateUser(Map<String, dynamic> row) async {
     Database db = await instance.database;
-    return Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM $tag_table'));
-  }
-
-  //Return number of Themes
-  Future<int> queryRowCountThemes() async {
-    Database db = await instance.database;
-    return Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM $them_table'));
-  }
-
-  //Update existing Waypoint Object
-  Future<int> update(Map<String, dynamic> row) async {
-    Database db = await instance.database;
-    int id = row[columnId];
-    return await db.update(table, row, where: '$columnId = ?', whereArgs: [id]);
+    int id = row[columnUserId];
+    return await db.update(userTable, row, where: '$columnUserId = ?', whereArgs: [id]);
   }
 
   //Update existing Settings Configuration Object
   Future<int> updateSettings(Map<String, dynamic> row) async {
     Database db = await instance.database;
     int id = row[columnSettingsId];
-    return await db.update(set_table, row, where: '$columnSettingsId = ?', whereArgs: [id]);
+    return await db.update(setTable, row, where: '$columnSettingsId = ?', whereArgs: [id]);
   }
 
-  //Update existing Tag Object
-  Future<int> updateTag(Map<String, dynamic> row) async {
+  //Update existing Zone Object
+  Future<int> updateZone(Map<String, dynamic> row) async {
     Database db = await instance.database;
-    int id = row[columnTagId];
-    return await db.update(tag_table, row, where: '$columnTagId = ?', whereArgs: [id]);
+    int id = row[columnZoneId];
+    return await db.update(zoneTable, row, where: '$columnZoneId = ?', whereArgs: [id]);
   }
 
-  //Update existing Theme Object
-  Future<int> updateTheme(Map<String, dynamic> row) async {
+  //Update existing Overall Rankings Object
+  Future<int> updateOverallR(Map<String, dynamic> row) async {
     Database db = await instance.database;
-    int id = row[columnThemId];
-    return await db.update(them_table, row, where: '$columnThemId = ?', whereArgs: [id]);
+    int id = row[columnOverallRId];
+    return await db.update(overallRTable, row, where: '$columnOverallRId = ?', whereArgs: [id]);
   }
 
-  //Delete a Waypoint
-  Future<int> delete(int id) async {
+  //Update existing Info Object
+  Future<int> updateInfo(Map<String, dynamic> row) async {
     Database db = await instance.database;
-    return await db.delete(table, where: '$columnId = ?', whereArgs: [id]);
+    int id = row[columnInfoId];
+    return await db.update(infoTable, row, where: '$columnInfoId = ?', whereArgs: [id]);
+  }
+
+  //Update existing Individual Ratings Object
+  Future<int> updateIndividualR(Map<String, dynamic> row) async {
+    Database db = await instance.database;
+    int id = row[columnIndividualRId];
+    return await db.update(indivRTable, row, where: '$columnIndividualRId = ?', whereArgs: [id]);
+  }
+
+  //Update existing Forum Post Object
+  Future<int> updateForum(Map<String, dynamic> row) async {
+    Database db = await instance.database;
+    int id = row[columnForumsId];
+    return await db.update(forumsTable, row, where: '$columnForumsId = ?', whereArgs: [id]);
+  }
+
+  //Update existing Crime News Article Object
+  Future<int> updateCrime(Map<String, dynamic> row) async {
+    Database db = await instance.database;
+    int id = row[columnCrimeNId];
+    return await db.update(crimeTable, row, where: '$columnCrimeNId = ?', whereArgs: [id]);
+  }
+
+  //Delete a User
+  Future<int> deleteUser(int id) async {
+    Database db = await instance.database;
+    return await db.delete(userTable, where: '$columnUserId = ?', whereArgs: [id]);
   }
 
   //Delete a Settings Configuration
   Future<int> deleteSettings(int id) async {
     Database db = await instance.database;
-    return await db.delete(set_table, where: '$columnSettingsId = ?', whereArgs: [id]);
+    return await db.delete(setTable, where: '$columnSettingsId = ?', whereArgs: [id]);
   }
 
-  //Delete a Tag
-  Future<int> deleteTag(int id) async {
+  //Delete a Zone
+  Future<int> deleteZone(int id) async {
     Database db = await instance.database;
-    return await db.delete(tag_table, where: '$columnTagId = ?', whereArgs: [id]);
+    return await db.delete(zoneTable, where: '$columnZoneId = ?', whereArgs: [id]);
   }
 
-  //Delete a Theme
+  //Delete an Overall Ratings Object
+  Future<int> deleteOverallR(int id) async {
+    Database db = await instance.database;
+    return await db.delete(overallRTable, where: '$columnOverallRId = ?', whereArgs: [id]);
+  }
+
+  //Delete a piece of Information
+  Future<int> deleteInfo(int id) async {
+    Database db = await instance.database;
+    return await db.delete(infoTable, where: '$columnInfoId = ?', whereArgs: [id]);
+  }
+
+  //Delete an Individual Ratings object
+  Future<int> deleteIndividualR(int id) async {
+    Database db = await instance.database;
+    return await db.delete(indivRTable, where: '$columnIndividualRId = ?', whereArgs: [id]);
+  }
+
+  //Delete a Forums Post
+  Future<int> deleteForum(int id) async {
+    Database db = await instance.database;
+    return await db.delete(forumsTable, where: '$columnForumsId = ?', whereArgs: [id]);
+  }
+
+  //Delete a Crime News Article
   Future<int> deleteTheme(int id) async {
     Database db = await instance.database;
-    return await db.delete(them_table, where: '$columnThemId = ?', whereArgs: [id]);
+    return await db.delete(crimeTable, where: '$columnCrimeNId = ?', whereArgs: [id]);
   }
 }
