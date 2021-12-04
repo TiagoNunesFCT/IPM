@@ -96,7 +96,7 @@ class DBHandler {
   //Forum Messages Columns
   static final columnForumsId = 'frum_id';
   static final columnForumsZone = 'frum_zone';
-  static final columnForumsUid = 'frum_uid';
+  static final columnForumsUId = 'frum_uid';
   static final columnForumsTitle = 'frum_ttl';
   static final columnForumsDesc = 'frum_dsc';
   static final columnForumsReplies = 'frum_rpl';  //Experimental: a long string containing the IDs of all the Posts's replies, separated by semicolons (;)
@@ -261,7 +261,7 @@ class DBHandler {
           CREATE TABLE IF NOT EXISTS $forumsTable (
             $columnForumsId INTEGER PRIMARY KEY,
             $columnForumsZone INTEGER,
-            $columnForumsUid INTEGER,
+            $columnForumsUId INTEGER,
             $columnForumsTitle TEXT,
             $columnForumsDesc TEXT,
             $columnForumsReplies TEXT,
