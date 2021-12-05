@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:zone/widgets/rover.dart';
+import 'currentLocScreen.dart';
 import 'userScreen.dart';
 
 
@@ -120,7 +121,12 @@ class _MainPageState extends GenericPageState {
                               color: Colors.white12,
                               width: 1.0,
                             ),
-                          ),child:IconButton(icon: Icon(Icons.arrow_forward_ios_rounded,color: Colors.white,), color: Colors.white,))]),SizedBox(height:60),new Rover(false, true, true)
+                          ),child:IconButton(icon: Icon(Icons.arrow_forward_ios_rounded,color: Colors.white),onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => CurrentLocPage()),
+                        );
+                      }, color: Colors.white,))]),SizedBox(height:60),new Rover(false, true, true)
                   ]),
 
                 ],

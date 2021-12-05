@@ -1,22 +1,24 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:zone/widgets/rover.dart';
+import 'package:zone/widgets/backButton.dart' as buttonBack;
+import 'package:zone/widgets/starShower.dart';
 
 import 'genericPage.dart';
 
 // ignore: must_be_immutable
-class MainPage extends GenericPage {
+class CurrentLocPage extends GenericPage {
   //empty constructor, there isn't much we can do here
-  MainPage();
+  CurrentLocPage();
 
   @override
-  _MainPageState createState() => new _MainPageState();
+  _CurrentLocPageState createState() => new _CurrentLocPageState();
 }
 
-class _MainPageState extends GenericPageState {
+class _CurrentLocPageState extends GenericPageState {
   @override
   void initState() {
-
     super.initState();
   }
 
@@ -24,91 +26,142 @@ class _MainPageState extends GenericPageState {
   String cityName = "Almada";
   String zoneQuality = "Average";
   String zoneRanking = "(47th)";
+  String countryName = "🇵🇹";
 
   //Build the widget
   @override
   Widget build(BuildContext context) {
-    Widget page = Scaffold(appBar: new AppBar(
-      leading:Container(
-        child: Builder(
-          builder: (context) => IconButton(
-            icon: Icon(Icons.supervised_user_circle_rounded),
-            onPressed: () => Scaffold.of(context).openDrawer(),
-          ),
-        ),
-      ),
-      actions: [
-        Container(
-          child: Builder(
-            builder: (context) => IconButton(
-
-              icon: Icon(Icons.settings_rounded, color: Colors.white),
-              onPressed: () => Scaffold.of(context).openDrawer(),
-            ),
-          ),
-        ),
-      ],
-      centerTitle: true,
-      title: new Text(
-        'ZONeX',
-        style: TextStyle(
-          fontFamily: "Nasalization",
-          color: Colors.white,
-        ),
-      ),
-      backgroundColor: const Color(0xFF1D1D1D),
-      foregroundColor: Colors.black,
-      elevation: 0,
-    ),
-      body:Center(
-      child: Container(
+    Widget page = Scaffold(
+        body: Center(
+            child: Container(
       width: double.infinity,
       height: double.infinity,
       color: const Color(0xFF1D1D1D),
-      child:Column(mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [Column(children:[Text(
-        'Current Zone:',
-        style: TextStyle(
-          fontFamily: "Montserrat",
-          fontSize: 24,
-          color: Colors.white,
-        ),
-      ),Container(      decoration: new BoxDecoration(
-          shape: BoxShape.rectangle,
-          border: new Border.all(
-            color: Colors.black,
-            width: 1.0,
-          ),
-        ),child:Text(
-        zoneName,
-        style: TextStyle(
-          fontFamily: "Nasalization",
-          color: (ratingToColor(zoneQuality)),
-          fontSize: 24,
-        ),
-      ),)]),Text(
-        'City: '+cityName,
-        style: TextStyle(
-          fontFamily: "Montserrat",
-          color: Colors.white,
-        ),
-      ),Text(
-        zoneQuality+' '+zoneRanking,
-        style: TextStyle(
-          fontFamily: "Montserrat",
-          color: Colors.white,
-        ),
-      ),],),))
-    );
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Column(children: [
+            Text(
+              'Current Zone:',
+              style: TextStyle(
+                fontFamily: "Montserrat",
+                fontSize: 24,
+                color: Colors.white,
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.all(5),
+              decoration: new BoxDecoration(
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(5),
+                color: Colors.black38,
+                border: new Border.all(
+                  color: Colors.white12,
+                  width: 1.0,
+                ),
+              ),
+              child: Text(
+                zoneName,
+                style: TextStyle(
+                  fontFamily: "Nasalization",
+                  color: (ratingToColor(zoneQuality)),
+                  fontSize: 24,
+                ),
+              ),
+            )
+          ,Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,children:[Container(padding: EdgeInsets.fromLTRB(0, 5, 0, 5),child:Text(
+              'City: ' + cityName,
+              style: TextStyle(
+                fontFamily: "Montserrat",
+                color: Colors.white,
+              ),
+            )),Container(padding: EdgeInsets.fromLTRB(0, 5, 0, 5),child:Text(
+              countryName,
+              style: TextStyle(
+                fontFamily: "Montserrat",
+                color: Colors.white,
+              ),
+            ))]),]),
+
+
+          Column(children:[Row(mainAxisSize: MainAxisSize.min, children: [
+            Container(
+                transformAlignment: Alignment.topLeft,
+                alignment: Alignment.topLeft,
+                height: 28,
+                width: 28,
+                padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                decoration: new BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(45),
+                  color: Colors.transparent,
+                  border: new Border.all(
+                    color: Colors.transparent,
+                    width: 1.0,
+                  ),
+                ),
+                child: IconButton(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                    icon: Icon(
+                      Icons.crop_square,
+                      color: Colors.transparent,
+                    ))),
+            StarShower(0),
+            Container(
+                transformAlignment: Alignment.topLeft,
+                alignment: Alignment.topLeft,
+                height: 28,
+                width: 28,
+                padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                decoration: new BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(45),
+                  color: Colors.transparent,
+                  border: new Border.all(
+                    color: Colors.transparent,
+                    width: 1.0,
+                  ),
+                ),
+                child: IconButton(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                    icon: Icon(
+                      Icons.help_outline_rounded,
+                      color: Colors.white12,
+                    )))
+          ])          ,Container(padding: EdgeInsets.fromLTRB(0, 5, 0, 5),child:Text(
+            zoneQuality + ' ' + zoneRanking,
+            style: TextStyle(
+              fontFamily: "Montserrat",
+              color: Colors.white,
+            ),
+          )),]),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Container(margin: EdgeInsets.fromLTRB(10, 0, 10, 0), child: buttonBack.BackButton()),
+            Rover(true, false, false),
+            Container(
+                margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                decoration: new BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(5),
+                  color: Colors.transparent,
+                  border: new Border.all(
+                    color: Colors.transparent,
+                    width: 1.0,
+                  ),
+                ),
+                child: IconButton(
+                  icon: Icon(Icons.arrow_back_ios_rounded, color: Colors.transparent, size: 30),
+                ))
+          ])
+        ],
+      ),
+    )));
     return page;
   }
-
-
-
 }
 
-Color ratingToColor(String color){
-  switch (color){
+Color ratingToColor(String color) {
+  switch (color) {
     case "Horrible":
       return Colors.red.shade900;
       break;
@@ -135,5 +188,35 @@ Color ratingToColor(String color){
       break;
   }
 }
-
-
+  String numberToRating(int rating) {
+  switch (rating) {
+    case 0:
+    case 1:
+      return "Horrible";
+      break;
+    case 2:
+    case 3:
+      return "Bad";
+      break;
+    case 4:
+      return "Unpleasant";
+      break;
+    case 5:
+      return "Average";
+      break;
+    case 6:
+      return "Pleasant";
+      break;
+    case 7:
+    case 8:
+      return "Good";
+      break;
+    case 9:
+    case 10:
+      return "Very Good";
+      break;
+    default:
+      return "None";
+      break;
+  }
+}
