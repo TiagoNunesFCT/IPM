@@ -38,9 +38,10 @@ class _CurrentLocPageState extends GenericPageState {
       height: double.infinity,
       color: const Color(0xFF1D1D1D),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Column(children: [
+            Container(height: 80),
             Text(
               'Current Zone:',
               style: TextStyle(
@@ -68,91 +69,104 @@ class _CurrentLocPageState extends GenericPageState {
                   fontSize: 24,
                 ),
               ),
-            )
-          ,Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,children:[Container(padding: EdgeInsets.fromLTRB(0, 5, 0, 5),child:Text(
-              'City: ' + cityName,
-              style: TextStyle(
-                fontFamily: "Montserrat",
-                color: Colors.white,
-              ),
-            )),Container(padding: EdgeInsets.fromLTRB(0, 5, 0, 5),child:Text(
-              countryName,
-              style: TextStyle(
-                fontFamily: "Montserrat",
-                color: Colors.white,
-              ),
-            ))]),]),
-
-
-          Column(children:[Row(mainAxisSize: MainAxisSize.min, children: [
-            Container(
-                transformAlignment: Alignment.topLeft,
-                alignment: Alignment.topLeft,
-                height: 28,
-                width: 28,
-                padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                decoration: new BoxDecoration(
-                  shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.circular(45),
-                  color: Colors.transparent,
-                  border: new Border.all(
-                    color: Colors.transparent,
-                    width: 1.0,
-                  ),
-                ),
-                child: IconButton(
-                    padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                    icon: Icon(
-                      Icons.crop_square,
-                      color: Colors.transparent,
-                    ))),
-            StarShower(0),
-            Container(
-                transformAlignment: Alignment.topLeft,
-                alignment: Alignment.topLeft,
-                height: 28,
-                width: 28,
-                padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                decoration: new BoxDecoration(
-                  shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.circular(45),
-                  color: Colors.transparent,
-                  border: new Border.all(
-                    color: Colors.transparent,
-                    width: 1.0,
-                  ),
-                ),
-                child: IconButton(
-                    padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                    icon: Icon(
-                      Icons.help_outline_rounded,
-                      color: Colors.white12,
-                    )))
-          ])          ,Container(padding: EdgeInsets.fromLTRB(0, 5, 0, 5),child:Text(
-            zoneQuality + ' ' + zoneRanking,
-            style: TextStyle(
-              fontFamily: "Montserrat",
-              color: Colors.white,
             ),
-          )),]),
-          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            Container(margin: EdgeInsets.fromLTRB(10, 0, 10, 0), child: buttonBack.BackButton()),
-            Rover(true, false, false),
-            Container(
-                margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                decoration: new BoxDecoration(
-                  shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.circular(5),
-                  color: Colors.transparent,
-                  border: new Border.all(
+            Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+              Container(
+                  padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
+                  child: Text(
+                    'City: ' + cityName,
+                    style: TextStyle(
+                      fontFamily: "Montserrat",
+                      color: Colors.white,
+                    ),
+                  )),
+              Container(
+                  padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
+                  child: Text(
+                    countryName,
+                    style: TextStyle(
+                      fontFamily: "Montserrat",
+                      color: Colors.white,
+                    ),
+                  ))
+            ]),
+          ]),
+          Column(children: [
+            Row(mainAxisSize: MainAxisSize.min, children: [
+              Container(
+                  transformAlignment: Alignment.topLeft,
+                  alignment: Alignment.topLeft,
+                  height: 28,
+                  width: 28,
+                  padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                  decoration: new BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(45),
                     color: Colors.transparent,
-                    width: 1.0,
+                    border: new Border.all(
+                      color: Colors.transparent,
+                      width: 1.0,
+                    ),
                   ),
-                ),
-                child: IconButton(
-                  icon: Icon(Icons.arrow_back_ios_rounded, color: Colors.transparent, size: 30),
-                ))
-          ])
+                  child: IconButton(
+                      padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                      icon: Icon(
+                        Icons.crop_square,
+                        color: Colors.transparent,
+                      ))),
+              StarShower(0),
+              Container(
+                  transformAlignment: Alignment.topLeft,
+                  alignment: Alignment.topLeft,
+                  height: 28,
+                  width: 28,
+                  padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                  decoration: new BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(45),
+                    color: Colors.transparent,
+                    border: new Border.all(
+                      color: Colors.transparent,
+                      width: 1.0,
+                    ),
+                  ),
+                  child: IconButton(
+                      padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                      icon: Icon(
+                        Icons.help_outline_rounded,
+                        color: Colors.white12,
+                      )))
+            ]),
+            Container(
+                padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
+                child: Text(
+                  zoneQuality + ' ' + zoneRanking,
+                  style: TextStyle(
+                    fontFamily: "Montserrat",
+                    color: Colors.white,
+                  ),
+                )),
+          ]),
+          Container(
+              margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
+              child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                Container(margin: EdgeInsets.fromLTRB(10, 0, 10, 0), child: buttonBack.BackButton()),
+                Rover(true, false, false),
+                Container(
+                    margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    decoration: new BoxDecoration(
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.circular(5),
+                      color: Colors.transparent,
+                      border: new Border.all(
+                        color: Colors.transparent,
+                        width: 1.0,
+                      ),
+                    ),
+                    child: IconButton(
+                      icon: Icon(Icons.arrow_back_ios_rounded, color: Colors.transparent, size: 30),
+                    ))
+              ])),
         ],
       ),
     )));
@@ -188,7 +202,8 @@ Color ratingToColor(String color) {
       break;
   }
 }
-  String numberToRating(int rating) {
+
+String numberToRating(int rating) {
   switch (rating) {
     case 0:
     case 1:
