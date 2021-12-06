@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:zone/views/MainScreen.dart';
+import 'package:zone/views/mapScreen.dart';
 
 class Rover extends StatefulWidget {
   bool hasHome;
@@ -129,7 +130,7 @@ class RoverState extends State<Rover> {
           await Future.delayed(const Duration(milliseconds: 10), () {});
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => MainPage()),
+            MaterialPageRoute(builder: (context) => MapPage()),
           );
         }
         break;
