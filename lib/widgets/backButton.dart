@@ -2,39 +2,27 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:zone/views/MainScreen.dart';
 
-bool pressed;
 
-class BackButton extends StatefulWidget{
 
-  BackButton(){
+class BackButton extends StatefulWidget {
+  bool pressed;
+  BackButton() {
     pressed = false;
   }
 
-
-
-
-
-
-
-
-
-
   BackButtonState createState() => new BackButtonState();
-
-
 }
 
-class BackButtonState extends State<BackButton>{
+class BackButtonState extends State<BackButton> {
+  Widget icon(BuildContext context) {
+    return IconButton(
+      icon: Icon(Icons.arrow_back_ios_rounded, color: (widget.pressed) ? Colors.white12 : Colors.white, size: 30),
+      onPressed: () {
+        buttonPressing();
 
-  Widget icon(BuildContext context){
-
-    return IconButton(icon: Icon(Icons.arrow_back_ios_rounded,color: Colors.white, size: 30), onPressed: () {
-      buttonPressing();
-      Navigator.of(context).pop();
-      SystemChrome.setEnabledSystemUIOverlays([]);
-    },             );
+      },
+    );
   }
 
   @override
@@ -44,22 +32,23 @@ class BackButtonState extends State<BackButton>{
         decoration: new BoxDecoration(
           shape: BoxShape.rectangle,
           borderRadius: BorderRadius.circular(5),
-          color: pressed? Colors.white12:Colors.black38,
+          color: widget.pressed ? Colors.white12 : Colors.black38,
           border: new Border.all(
             color: Colors.white12,
             width: 1.0,
           ),
-        ),child:icon(context));
+        ),
+        child: icon(context));
   }
 
   Future<void> buttonPressing() async {
-    pressed = true;
+    widget.pressed = true;
     setState(() {});
     await Future.delayed(const Duration(milliseconds: 10), () {});
-    pressed = false;
+    widget.pressed = false;
     setState(() {});
     await Future.delayed(const Duration(milliseconds: 5), () {});
+    Navigator.of(context).pop();
+    SystemChrome.setEnabledSystemUIOverlays([]);
   }
-
 }
-

@@ -1,22 +1,32 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:zone/widgets/actions.dart';
 import 'package:zone/widgets/rover.dart';
 import 'package:zone/widgets/backButton.dart' as buttonBack;
 import 'package:zone/widgets/starShower.dart';
 
 import 'genericPage.dart';
 
+bool isCurrent;
 // ignore: must_be_immutable
-class CurrentLocPage extends GenericPage {
+class LocPage extends GenericPage {
+
+
   //empty constructor, there isn't much we can do here
-  CurrentLocPage();
+  LocPage(){
+    isCurrent = false;
+  }
+
+  LocPage.currentLoc(){
+    isCurrent = true;
+  }
 
   @override
-  _CurrentLocPageState createState() => new _CurrentLocPageState();
+  _LocPageState createState() => new _LocPageState();
 }
 
-class _CurrentLocPageState extends GenericPageState {
+class _LocPageState extends GenericPageState {
   @override
   void initState() {
     super.initState();
@@ -43,7 +53,7 @@ class _CurrentLocPageState extends GenericPageState {
           Column(children: [
             Container(height: 80),
             Text(
-              'Current Zone:',
+              (isCurrent)?'Current Zone:':'Currently Viewing',
               style: TextStyle(
                 fontFamily: "Montserrat",
                 fontSize: 24,
@@ -146,7 +156,7 @@ class _CurrentLocPageState extends GenericPageState {
                     color: Colors.white,
                   ),
                 )),
-          ]),
+          ]),ActionButton(),
           Container(
               margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
               child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [

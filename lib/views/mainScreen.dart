@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:zone/widgets/rover.dart';
-import 'currentLocScreen.dart';
+import 'locationScreen.dart';
 import 'userScreen.dart';
 
 
@@ -124,7 +124,7 @@ class _MainPageState extends GenericPageState {
                           ),child:IconButton(icon: Icon(Icons.arrow_forward_ios_rounded,color: Colors.white),onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => CurrentLocPage()),
+                          MaterialPageRoute(builder: (context) => LocPage.currentLoc()),
                         );
                       }, color: Colors.white,))]),SizedBox(height:60),new Rover(false, true, true)
                   ]),

@@ -3,46 +3,74 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:zone/views/MainScreen.dart';
 
-class Rover extends StatelessWidget{
-
+class Rover extends StatefulWidget {
   bool hasHome;
   bool hasMap;
   bool hasList;
+  bool homePressed;
+  bool mapPressed;
+  bool listPressed;
   List<Widget> buttonList;
 
-  Rover(bool hasHome, bool hasMap, bool hasList){
+  Rover(bool hasHome, bool hasMap, bool hasList) {
     this.hasHome = hasHome;
     this.hasMap = hasMap;
     this.hasList = hasList;
+    this.homePressed = false;
+    this.mapPressed = false;
+    this.listPressed = false;
   }
 
+  RoverState createState() => new RoverState();
+}
 
+class RoverState extends State<Rover> {
+  Widget homeButton(BuildContext context) {
+    return Container(
+        decoration: new BoxDecoration(
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(5),
+          color: (widget.homePressed) ? Colors.white12 : Colors.transparent,
+        ),
+        child: IconButton(
+          icon: Icon(Icons.house_rounded, color: (widget.homePressed) ? Colors.white12 : Colors.white, size: 30),
+          onPressed: () {
+            buttonPressing("Home");
 
-  Widget homeButton(BuildContext context){
-
-    return IconButton(icon: Icon(Icons.house_rounded,color: Colors.white, size: 30), onPressed: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => MainPage()),
-      );
-    },             );
+          },
+        ));
   }
-  Widget mapButton(BuildContext context){
-    return IconButton(icon: Icon(Icons.map_rounded,color: Colors.white, size: 30), onPressed: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => MainPage()),
-      );
-    },             );
+
+  Widget mapButton(BuildContext context) {
+    return Container(
+        decoration: new BoxDecoration(
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(5),
+          color: (widget.mapPressed) ? Colors.white12 : Colors.transparent,
+        ),
+        child: IconButton(
+          icon: Container(child: Icon(Icons.map_rounded, color: (widget.mapPressed) ? Colors.white12 : Colors.white, size: 30)),
+          onPressed: () {
+            buttonPressing("Map");
+
+          },
+        ));
   }
 
-  Widget listButton(BuildContext context){
-    return IconButton(icon: Icon(Icons.list_rounded,color: Colors.white, size: 30), onPressed: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => MainPage()),
-      );
-    },             );
+  Widget listButton(BuildContext context) {
+    return Container(
+        decoration: new BoxDecoration(
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(5),
+          color: (widget.listPressed) ? Colors.white12 : Colors.transparent,
+        ),
+        child: IconButton(
+          icon: Container(child: Icon(Icons.list_rounded, color: (widget.listPressed) ? Colors.white12 : Colors.white, size: 30)),
+          onPressed: () {
+            buttonPressing("List");
+
+          },
+        ));
   }
 
   @override
@@ -58,20 +86,67 @@ class Rover extends StatelessWidget{
             color: Colors.white12,
             width: 1.0,
           ),
-        ),child:Row(mainAxisSize: MainAxisSize.min,children:buttonList));
+        ),
+        child: Row(mainAxisSize: MainAxisSize.min, children: widget.buttonList));
   }
 
   void buttonListInit(BuildContext context) {
-    buttonList = [];
-    if (hasHome){
-      buttonList.add(homeButton(context));
+    widget.buttonList = [];
+    if (widget.hasHome) {
+      widget.buttonList.add(homeButton(context));
     }
-    if (hasMap){
-      buttonList.add(mapButton(context));
+    if (widget.hasMap) {
+      widget.buttonList.add(mapButton(context));
     }
-    if (hasList){
-      buttonList.add(listButton(context));
+    if (widget.hasList) {
+      widget.buttonList.add(listButton(context));
     }
   }
 
+  Future<void> buttonPressing(String button) async {
+    switch (button) {
+      case ("Home"):
+        {
+          widget.homePressed = true;
+          setState(() {});
+          await Future.delayed(const Duration(milliseconds: 10), () {});
+          widget.homePressed = false;
+          setState(() {});
+          await Future.delayed(const Duration(milliseconds: 10), () {});
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => MainPage()),
+          );
+        }
+        break;
+      case ("Map"):
+        {
+          widget.mapPressed = true;
+          setState(() {});
+          await Future.delayed(const Duration(milliseconds: 10), () {});
+          widget.mapPressed = false;
+          setState(() {});
+          await Future.delayed(const Duration(milliseconds: 10), () {});
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => MainPage()),
+          );
+        }
+        break;
+      case ("List"):
+        {
+          widget.listPressed = true;
+          setState(() {});
+          await Future.delayed(const Duration(milliseconds: 10), () {});
+          widget.listPressed = false;
+          setState(() {});
+          await Future.delayed(const Duration(milliseconds: 10), () {});
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => MainPage()),
+          );
+        }
+        break;
+    }
+  }
 }
