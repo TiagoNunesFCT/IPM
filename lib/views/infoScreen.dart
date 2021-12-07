@@ -2,12 +2,20 @@ import 'package:flutter/material.dart';
 
 import 'genericPage.dart';
 
-class InfoPage extends GenericPage {
-//empty constructor, there isn't much we can do here
-  InfoPage();
+String infoZone = "Laranjeiro e Feijó";
 
-@override
-_InfoPageState createState() => new _InfoPageState();
+class InfoPage extends GenericPage {
+  String zone;
+  String type;
+
+//empty constructor, there isn't much we can do here
+  InfoPage(String zone, String type) {
+    this.zone = zone;
+    this.type = type;
+  }
+
+  @override
+  _InfoPageState createState() => new _InfoPageState();
 }
 
 class _InfoPageState extends GenericPageState {
@@ -16,8 +24,7 @@ class _InfoPageState extends GenericPageState {
     super.initState();
   }
 
-
   Widget build(BuildContext context) {
-    return null; //TODO Return your hierarchy
+    return Scaffold(); //TODO Return your hierarchy
   }
 }

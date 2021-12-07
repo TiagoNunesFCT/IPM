@@ -138,7 +138,15 @@ class _ListPageState extends GenericPageState {
                 height: double.infinity,
                 color: const Color(0xFF1D1D1D),
                 child: Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                  Container(
+                  Container(padding:EdgeInsets.fromLTRB(3, 10, 3, 3),decoration: new BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(5),
+                    color: Colors.black38,
+                    border: new Border.all(
+                      color: Colors.white12,
+                      width: 1.0,
+                    ),
+                  ),
                       margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
                       child: Column(children: [
                         Row(

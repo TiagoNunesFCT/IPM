@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:zone/views/MainScreen.dart';
+import 'package:zone/views/infoMenuScreen.dart';
 import 'package:zone/views/locationScreen.dart';
 
 class ActionButton extends StatefulWidget {
@@ -55,7 +56,7 @@ class ActionButtonState extends State<ActionButton> {
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => MainPage()),
+          MaterialPageRoute(builder: (context) => InfoMenuPage()),
         );
       },
     ));
