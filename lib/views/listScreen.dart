@@ -6,6 +6,11 @@ import 'genericPage.dart';
 String currentCountry = "🇵🇹";
 String currentCity = "Almada";
 
+
+//TODO ADD NUMBER OF CITIES AND METHOD TO CALCULATE NUMBER OF CITIES WHEN FETCHING ALL ZONES
+//TODO ADD NUMBER OF COUNTRIES AND METHOD TO CALCULATE NUMBER OF COUNTRIES WHEN FETCHING ALL ZONES
+//TODO ADD DYNAMIC LIST BUILDING IN THE DROPDOWN MENUS
+
 class ListPage extends GenericPage {
 //empty constructor, there isn't much we can do here
   ListPage();
@@ -148,7 +153,9 @@ class _ListPageState extends GenericPageState {
                               ),
                             ),
                             Container(
-                                padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                alignment: Alignment.centerLeft,
+
+                                padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
                                 decoration: new BoxDecoration(
                                   shape: BoxShape.rectangle,
                                   borderRadius: BorderRadius.circular(5),
@@ -158,14 +165,52 @@ class _ListPageState extends GenericPageState {
                                     width: 1.0,
                                   ),
                                 ),
-                                child: Text(
-                                  currentCountry,
-                                  style: TextStyle(
-                                    fontFamily: "Montserrat",
-                                    fontSize: 47,
-                                    color: Colors.white,
-                                  ),
-                                ))
+                                child: DropdownButton(
+                                  iconSize: 0.0,
+                                    underline: ColoredBox(
+                                      color: Colors.grey.shade900,
+                                    ),
+
+                                    dropdownColor: Colors.grey.shade900,
+                                    value: 0,
+                                    items: [
+                                      DropdownMenuItem(
+                                        child: Container(
+
+                                          child: Text(
+                                            "🇵🇹",
+                                            textAlign: TextAlign.right,
+                                              style: TextStyle(
+                                                fontFamily: "Montserrat",
+                                                fontSize: 47,
+                                                color: Colors.white,
+                                              ),
+                                          ),
+                                        ),
+                                        value: 0,
+                                      ),
+                                      DropdownMenuItem(
+                                        child: Container(
+
+                                          child: Text(
+                                            "🇸🇪",
+                                            textAlign: TextAlign.right,
+                                            style: TextStyle(
+                                              fontFamily: "Montserrat",
+                                              fontSize: 47,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                        value: 1,
+                                      ),
+                                    ],
+                                    onChanged: (value) {
+                                      setState(() {
+                                        value = value;
+                                        updateSettings();
+                                      });
+                                    }))
                           ],
                         ),
                         Container(height: 10),
@@ -181,24 +226,63 @@ class _ListPageState extends GenericPageState {
                               ),
                             ),
                             Container(
-                                padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                                decoration: new BoxDecoration(
-                                  shape: BoxShape.rectangle,
-                                  borderRadius: BorderRadius.circular(5),
-                                  color: Colors.black38,
-                                  border: new Border.all(
-                                    color: Colors.white12,
-                                    width: 1.0,
-                                  ),
+                              alignment: Alignment.centerLeft,
+
+                              padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                              decoration: new BoxDecoration(
+                                shape: BoxShape.rectangle,
+                                borderRadius: BorderRadius.circular(5),
+                                color: Colors.black38,
+                                border: new Border.all(
+                                  color: Colors.white12,
+                                  width: 1.0,
                                 ),
-                                child: Text(
-                                  currentCity,
-                                  style: TextStyle(
-                                    fontFamily: "Montserrat",
-                                    fontSize: 30,
-                                    color: Colors.white,
+                              ),child:DropdownButton(
+                                iconSize: 0.0,
+                                underline: ColoredBox(
+                                  color: Colors.grey.shade900,
+                                ),
+
+                                dropdownColor: Colors.grey.shade900,
+                                value: 0,
+                                items: [
+                                  DropdownMenuItem(
+                                    child: Container(
+                                    alignment: Alignment.centerRight,
+                                      child: Text(
+                                          "Almada",
+                                          textAlign: TextAlign.right,
+                                          style: TextStyle(
+                                            fontFamily: "Montserrat",
+                                            fontSize: 30,
+                                            color: Colors.white,
+                                          )
+                                      ),
+                                    ),
+                                    value: 0,
                                   ),
-                                ))
+                                  DropdownMenuItem(
+                                    child: Container(
+                                      alignment: Alignment.centerRight,
+                                      child: Text(
+                                          "Amadora",
+                                          textAlign: TextAlign.right,
+                                          style: TextStyle(
+                                            fontFamily: "Montserrat",
+                                            fontSize: 30,
+                                            color: Colors.white,
+                                          )
+                                      ),
+                                    ),
+                                    value: 1,
+                                  ),
+                                ],
+                                onChanged: (value) {
+                                  setState(() {
+                                    value = value;
+                                    updateSettings();
+                                  });
+                                }))
                           ],
                         ),
                         Container(height: 10),
