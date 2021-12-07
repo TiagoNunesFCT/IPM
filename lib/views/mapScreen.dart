@@ -86,7 +86,7 @@ class _MapPageState extends GenericPageState {
         ]),
         elevation: 0,
 
-        backgroundColor: Colors.black,
+        backgroundColor: const Color(0xFF1D1D1D),
         foregroundColor: Colors.black,
         actions: [
           Container(
