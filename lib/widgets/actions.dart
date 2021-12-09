@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:zone/views/MainScreen.dart';
+import 'package:zone/views/iRatingScreen.dart';
 import 'package:zone/views/infoMenuScreen.dart';
 import 'package:zone/views/locationScreen.dart';
 import 'package:zone/views/postScreen.dart';
@@ -38,7 +39,7 @@ class ActionButtonState extends State<ActionButton> {
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => LocPage()),
+          MaterialPageRoute(builder: (context) => IRatingPage(widget.currentZone)),
         );
       },
     ));

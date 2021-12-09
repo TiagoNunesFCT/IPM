@@ -44,7 +44,7 @@ class _PostPageState extends GenericPageState {
 
   Widget build(BuildContext context) {
     Widget page;
-    (ogId == null)? {
+    (ogId == null)?
             page = Scaffold(
                 appBar: new AppBar(
                   title: new Text(
@@ -115,8 +115,8 @@ class _PostPageState extends GenericPageState {
                                     ),));
                               })), Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,children:[Container(margin: EdgeInsets.fromLTRB(10, 0, 10, 0), child: buttonBack.BackButton()),Container(margin: EdgeInsets.fromLTRB(10, 0, 10, 0), child:addButton("normal", zone, ogId))])])
                 )))
-          }
-        : {page = Scaffold(
+
+        : page = Scaffold(
         appBar: new AppBar(
           title: new Text(
             "Replies",
@@ -185,7 +185,7 @@ class _PostPageState extends GenericPageState {
                                 color: Colors.white,
                               ),));
                         })), Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,children:[Container(margin: EdgeInsets.fromLTRB(10, 0, 10, 0), child: buttonBack.BackButton()),Container(margin: EdgeInsets.fromLTRB(10, 0, 10, 0), child:addButton("normal", zone, ogId))])])
-            )))};
+            )));
     return page;
   }
 
@@ -313,15 +313,15 @@ class _AddPostDialogState extends State<AddPostDialog>{
                     controller: postDesc,
                     keyboardType: TextInputType.multiline,
                     selectionControls: desktopTextSelectionControls,
-                    cursorColor: const Color(0xFF8FBCBB),
+                    cursorColor: Colors.white12,
                     style: TextStyle(fontFamily: "Montserrat", color: const Color(0xFFD8DEE9), fontWeight: FontWeight.w300, fontSize: 20.0),
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.symmetric(horizontal: 4.0, vertical: 0.0),
                       enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.blueGrey.shade700, width: 1.0),
+                        borderSide: BorderSide(color: Colors.white12, width: 1.0),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.blueGrey.shade700, width: 1.0),
+                        borderSide: BorderSide(color: Colors.white30, width: 1.0),
                       ),
                     ),
                   )),
@@ -339,7 +339,7 @@ class _AddPostDialogState extends State<AddPostDialog>{
                       'Cancel',
                       style: TextStyle(
                           fontFamily: "Montserrat",
-                          color: const Color(0xFF8FBCBB),
+                          color: Colors.white,
                           //Color(0xFFE97553), old color, nicer looking
                           fontWeight: FontWeight.w300,
                           fontSize: 16.0),
@@ -348,7 +348,6 @@ class _AddPostDialogState extends State<AddPostDialog>{
                   new TextButton(
                     onPressed: () {
                       if (postDesc.text.isNotEmpty) {
-                        var postDescription = postDesc.text;
                         ForumPost postToBeAdded = new ForumPost(forumZone: widget.zoneId,forumUId: widget.userId,forumTtl: postTtl.text, forumDsc: postDesc.text, forumRep: (widget.mode=="reply")? widget.OgId:"", forumTst: "20/4/1977", forumIsR:  (widget.mode=="reply")? 1: 0);
                         DBHandler.instance.insertForums(postToBeAdded.toMapWithoutId());
                         Navigator.of(context).pop();
@@ -357,7 +356,7 @@ class _AddPostDialogState extends State<AddPostDialog>{
                     },
                     child: Text(
                       'Publish',
-                      style: TextStyle(fontFamily: "Montserrat", color: const Color(0xFF8FBCBB), fontWeight: FontWeight.w300, fontSize: 16.0),
+                      style: TextStyle(fontFamily: "Montserrat", color: Colors.white, fontWeight: FontWeight.w300, fontSize: 16.0),
                     ),
                   ),
                 ])
