@@ -4,11 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:zone/views/MainScreen.dart';
 import 'package:zone/views/infoMenuScreen.dart';
 import 'package:zone/views/locationScreen.dart';
+import 'package:zone/views/postScreen.dart';
 
 class ActionButton extends StatefulWidget {
 
+  String currentZone;
 
-  ActionButton() {
+  ActionButton(String currentZone) {
+    this.currentZone = currentZone;
   }
 
 
@@ -78,7 +81,7 @@ class ActionButtonState extends State<ActionButton> {
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => MainPage()),
+          MaterialPageRoute(builder: (context) => PostPage(widget.currentZone)),
         );
       },
     ));

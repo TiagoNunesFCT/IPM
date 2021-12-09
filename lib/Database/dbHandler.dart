@@ -100,7 +100,7 @@ class DBHandler {
   static final columnForumsTitle = 'frum_ttl';
   static final columnForumsDesc = 'frum_dsc';
   static final columnForumsReplies = 'frum_rpl';  //Experimental: a long string containing the IDs of all the Posts's replies, separated by semicolons (;)
-  static final columnForumsTimestamp = 'idrt_tst';//the timestamp of the post
+  static final columnForumsTimestamp = 'frum_tst';//the timestamp of the post
   static final columnForumsIsReply = 'frum_isr';  //a boolean stating if the post is a reply, if it is, it won't show up on the main list, only in the replies of the original post
 
   //Crime News Columns Crime News (main key é o id da zona), tem como attrs o nome do canal de notícias, id único, link para o logotipo (ver como fazer), breve descrição da notícia, hyperlink para o artigo (maybe fake), e timestamp

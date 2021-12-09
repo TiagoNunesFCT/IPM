@@ -156,7 +156,7 @@ class _LocPageState extends GenericPageState {
                     color: Colors.white,
                   ),
                 )),
-          ]),ActionButton(),
+          ]),ActionButton(zoneName),
           Container(
               margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
               child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
