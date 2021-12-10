@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:zone/Database/dbHandler.dart';
+import 'package:zone/datatypes/infoObject.dart';
 
 import 'genericPage.dart';
 
@@ -21,6 +23,8 @@ class InfoPage extends GenericPage {
 class _InfoPageState extends GenericPageState {
   String zone;
   String type;
+
+  List<Info> listInfo = [];
 
   _InfoPageState(this.zone, this.type);
 
@@ -115,4 +119,49 @@ class _InfoPageState extends GenericPageState {
         break;
     }
   }
+
+  //database methods
+
+
+
+  Future<List<Map<String, dynamic>>> getInfo() async {
+    listInfo = [];
+    List<Map<String, dynamic>> listMap = (await DBHandler.instance.querySpecificInfos(zone.toString()));
+    setState(() {
+      listMap.forEach((map) => listInfo.add(Info.fromMap(map)));
+    });
+
+
+  }
+
+  List<Info> getSpecific(String type){
+    List<Info> returned = [];
+    String typeLower = type.toLowerCase();
+    if(typeLower == "service"){
+      for (Info i in listInfo){
+        if(i.infoTyp.toLowerCase() == typeLower || i.infoTyp.toLowerCase() == "transport"){
+          returned.add(i);
+        }
+      }
+    }
+    else if(typeLower == "tourism"){
+      for (Info i in listInfo){
+        if(i.infoTyp.toLowerCase() == typeLower || i.infoTyp.toLowerCase() == "leisure"){
+          returned.add(i);
+        }
+      }
+    }else {
+      for (Info i in listInfo) {
+        if (i.infoTyp.toLowerCase() == typeLower) {
+          returned.add(i);
+        }
+      }
+    }
+    return returned;
+  }
+
+
+
 }
+
+

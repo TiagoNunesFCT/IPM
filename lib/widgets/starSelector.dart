@@ -7,7 +7,7 @@ class StarSelector extends StatefulWidget {
 
 
   StarSelector(){
-    nStars = 0;
+    nStars = 3;
   }
 
   @override
@@ -23,7 +23,8 @@ class StarSelector extends StatefulWidget {
 class StarSelectorState extends State<StarSelector> {
   Widget starsW() {
     return Row(
-      mainAxisSize: MainAxisSize.min,
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         IconButton(padding: EdgeInsets.fromLTRB(0, 0, 0, 0),  visualDensity: VisualDensity.compact,
           icon: Icon((nStars >= 1) ? Icons.star_rounded : Icons.star_border_rounded, color: (nStars >= 1) ? Colors.orangeAccent : Colors.white12, size: 30),

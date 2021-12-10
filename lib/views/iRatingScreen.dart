@@ -9,8 +9,6 @@ import 'package:zone/widgets/backButton.dart' as buttonBack;
 
 bool pressed = false;
 
-
-
 class IRatingPage extends GenericPage {
 //empty constructor, there isn't much we can do here
 
@@ -178,6 +176,8 @@ class _AddRatingDialogState extends State<AddRatingDialog> {
 
   TextEditingController rateFeedback = new TextEditingController(text: "Feedback");
 
+  StarSelector starSel = new StarSelector();
+
   @override
   Widget build(BuildContext context) {
     return new Center(
@@ -196,8 +196,7 @@ class _AddRatingDialogState extends State<AddRatingDialog> {
             "Rating:",
             style: TextStyle(fontFamily: "Montserrat", color: const Color(0xFFD8DEE9), fontWeight: FontWeight.w300, fontSize: 14.0),
           ),
-              StarSelector()
-                ,
+          starSel,
           SizedBox(height: 5),
           Text(
             "Feedback:",
@@ -245,8 +244,9 @@ class _AddRatingDialogState extends State<AddRatingDialog> {
           new TextButton(
             onPressed: () {
               if (rateFeedback.text.isNotEmpty) {
-                IndividualR ratingToBeAdded = new IndividualR(indiRZone: widget.zoneId, indiRUId: widget.userId, indiRStr: 5, indiRDsc: rateFeedback.text, indiRTim: "20/4/1977");
-                DBHandler.instance.insertForums(ratingToBeAdded.toMapWithoutId());
+                IndividualR ratingToBeAdded = new IndividualR(indiRZone: widget.zoneId, indiRUId: widget.userId, indiRStr: starSel.getStars(), indiRDsc: rateFeedback.text, indiRTim: "20/4/1977");
+                DBHandler.instance.insertIndividualR(ratingToBeAdded.toMapWithoutId());
+                debugPrint("Got these stars: " + starSel.getStars().toString());
                 Navigator.of(context).pop();
                 SystemChrome.setEnabledSystemUIOverlays([]);
               }

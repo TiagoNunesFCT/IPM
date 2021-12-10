@@ -4,6 +4,13 @@ import 'dart:io';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:zone/datatypes/crimeNewsObject.dart';
+import 'package:zone/datatypes/forumPostObject.dart';
+import 'package:zone/datatypes/individualRObject.dart';
+import 'package:zone/datatypes/infoObject.dart';
+import 'package:zone/datatypes/overallRObject.dart';
+import 'package:zone/datatypes/userObject.dart';
+import 'package:zone/datatypes/zoneObject.dart';
 
 
 
@@ -117,37 +124,106 @@ class DBHandler {
 
    */
 
+  //users
 
-  /*
-  Theme geoNames = new Theme(themNam: "GeoNames", themSect: 0);
-  Theme outdoorActivities = new Theme(themNam: "Outdoor Activities", themSect: 0);
-  Theme travelling = new Theme(themNam: "Travelling", themSect: 0);
+  User userOurs = new User(usrId: 0,usrNam:"Username", usrCtr: "🇵🇹", usrCty: "Almada", usrZne: "Laranjeiro e Feijó", usrDsc: "Hello, I just Joined the App!", usrImg: "default", usrFnd: "", usrTyp: "normal");
+  User userRicardo = new User(usrId: 1,usrNam:"Ricardo Teixeira", usrCtr: "🇵🇹", usrCty: "Almada", usrZne: "Laranjeiro e Feijó", usrDsc: "👺", usrImg: "default", usrFnd: "", usrTyp: "admin");
+  User userPedro = new User(usrId: 2,usrNam:"Pedro Micaelo", usrCtr: "🇵🇹", usrCty: "Seixal", usrZne: "Corroios", usrDsc: "🥶", usrImg: "default", usrFnd: "", usrTyp: "admin");
+  User userTiago = new User(usrId: 3,usrNam:"Tiago Nunes", usrCtr: "🇵🇹", usrCty: "Almada", usrZne: "Laranjeiro e Feijó", usrDsc: "Greetings, earthling", usrImg: "default", usrFnd: "", usrTyp: "admin");
+  User userOther = new User(usrId: 4,usrNam:"Sabrina Ribas", usrCtr: "🇵🇹", usrCty: "Almada", usrZne: "Caparica e Trafaria", usrDsc: "Hello, I just Joined the App!", usrImg: "default", usrFnd: "", usrTyp: "normal");
 
-  Tag waterHarbour = new Tag(tagNam: "Water/Harbour", tagThm: "GeoNames", tagOrd: 1);
-  Tag parksArea = new Tag(tagNam: "Parks/Area", tagThm: "GeoNames", tagOrd: 2);
-  Tag cityVillage = new Tag(tagNam: "City/Village", tagThm: "GeoNames", tagOrd: 3);
-  Tag roadRailroad = new Tag(tagNam: "Road/Railroad", tagThm: "GeoNames", tagOrd: 4);
-  Tag spotBuilding = new Tag(tagNam: "Spot/Building", tagThm: "GeoNames", tagOrd: 5);
-  Tag mountainRock = new Tag(tagNam: "Mountain/Rock", tagThm: "GeoNames", tagOrd: 6);
-  Tag undersea = new Tag(tagNam: "Undersea", tagThm: "GeoNames", tagOrd: 7);
-  Tag forest = new Tag(tagNam: "Forest", tagThm: "GeoNames", tagOrd: 8);
+  //zones
 
-  Tag hiking = new Tag(tagNam: "Hiking", tagThm: "Outdoor Activities", tagOrd: 1);
-  Tag running = new Tag(tagNam: "Running", tagThm: "Outdoor Activities", tagOrd: 2);
-  Tag cyclingBiking = new Tag(tagNam: "Cycling/Biking", tagThm: "Outdoor Activities", tagOrd: 3);
-  Tag offroad = new Tag(tagNam: "Offroad", tagThm: "Outdoor Activities", tagOrd: 4);
-  Tag sailing = new Tag(tagNam: "Sailing", tagThm: "Outdoor Activities", tagOrd: 5);
-  Tag flying = new Tag(tagNam: "Flying", tagThm: "Outdoor Activities", tagOrd: 6);
+  Zone laranFeij = new Zone(zoneId: 0,zoneNam: "Laranjeiro e Feijó", zoneLat: 38.657, zoneLon: -9.15, zoneCtr: "🇵🇹", zoneCty: "Almada");
+  Zone capTraf = new Zone(zoneId: 1,zoneNam: "Caparica e Trafaria", zoneLat: 38.663, zoneLon: -9.215, zoneCtr: "🇵🇹", zoneCty: "Almada");
 
-  Tag monumentMuseum = new Tag(tagNam: "Monument/Museum", tagThm: "Travelling", tagOrd: 1);
-  Tag natureParks = new Tag(tagNam: "Nature/Parks", tagThm: "Travelling", tagOrd: 2);
-  Tag funAttraction = new Tag(tagNam: "Fun Attraction", tagThm: "Travelling", tagOrd: 3);
-  Tag neighborhood = new Tag(tagNam: "Neighborhood", tagThm: "Travelling", tagOrd: 4);
-  Tag hotel = new Tag(tagNam: "Hotel", tagThm: "Travelling", tagOrd: 5);
-  Tag publicTransport = new Tag(tagNam: "Public Transport", tagThm: "Travelling", tagOrd: 6);
-  Tag restaurant = new Tag(tagNam: "Restaurant", tagThm: "Travelling", tagOrd: 7);
+  //overall ratings
 
-   */
+  OverallR overallLF = new OverallR(overRZon: 0, overROne: 13, overRTwo: 40, overRTre: 32, overRFor: 5, overRFiv: 10);
+  OverallR overallCT = new OverallR(overRZon: 1, overROne: 70, overRTwo: 10, overRTre: 15, overRFor: 3, overRFiv: 2);
+
+  //infos laranjeiro e feijó
+
+  Info waterpriceLF = new Info(infoZone: 0, infoTyp: "prices", infoNam: "Water price (l)", infoVal: "0,35€");
+  Info gaspriceLF = new Info(infoZone: 0, infoTyp: "prices", infoNam: "Gas price (m³)", infoVal: "0,64€");
+  Info elecpriceLF = new Info(infoZone: 0, infoTyp: "prices", infoNam: "Electricity price (kWh)", infoVal: "0,69€");
+  Info rentpriceLF = new Info(infoZone: 0, infoTyp: "prices", infoNam: "Rent (avg)", infoVal: "42€");
+
+  Info cttLF = new Info(infoZone: 0, infoTyp: "service", infoNam: "CTT", infoVal: "Closed");
+  Info balcfinLF = new Info(infoZone: 0, infoTyp: "service", infoNam: "Balcão das Finanças", infoVal: "Open");
+  Info juntaLF = new Info(infoZone: 0, infoTyp: "service", infoNam: "Junta de Freguesia", infoVal: "Open");
+
+  Info tst1LF = new Info(infoZone: 0, infoTyp: "transport", infoNam: "TST - Rua João Cardoso", infoVal: "");
+  Info tst2LF = new Info(infoZone: 0, infoTyp: "transport", infoNam: "TST - Avenida 25 de Abril", infoVal: "");
+  Info tst3LF = new Info(infoZone: 0, infoTyp: "transport", infoNam: "TST - Alameda Rui Simões", infoVal: "");
+  Info mts1LF = new Info(infoZone: 0, infoTyp: "transport", infoNam: "MTS - António Gedeão", infoVal: "");
+  Info mts2LF = new Info(infoZone: 0, infoTyp: "transport", infoNam: "MTS - Laranjeiro", infoVal: "");
+
+  Info pingoDoceLF = new Info(infoZone: 0, infoTyp: "shopping", infoNam: "Pingo Doce", infoVal: "Open");
+  Info aldiLF = new Info(infoZone: 0, infoTyp: "shopping", infoNam: "Aldi", infoVal: "Closed");
+
+  Info tourismLF = new Info(infoZone: 0, infoTyp: "tourism", infoNam: "None", infoVal: "");
+
+  Info parkLF = new Info(infoZone: 0, infoTyp: "leisure", infoNam: "Parque da Paz", infoVal: "");
+
+  //infos caparica e trafaria
+
+  Info waterpriceCT = new Info(infoZone: 1, infoTyp: "prices", infoNam: "Water price (l)", infoVal: "0,35€");
+  Info gaspriceCT = new Info(infoZone: 1, infoTyp: "prices", infoNam: "Gas price (m³)", infoVal: "0,45€");
+  Info elecpriceCT = new Info(infoZone: 1, infoTyp: "prices", infoNam: "Electricity price (kWh)", infoVal: "0,37€");
+  Info rentpriceCT = new Info(infoZone: 1, infoTyp: "prices", infoNam: "Rent (avg)", infoVal: "56€");
+
+  Info cttCT = new Info(infoZone: 1, infoTyp: "service", infoNam: "CTT", infoVal: "Open");
+  Info balcfinCT = new Info(infoZone: 1, infoTyp: "service", infoNam: "Balcão das Finanças", infoVal: "Open");
+  Info juntaCT = new Info(infoZone: 1, infoTyp: "service", infoNam: "Junta de Freguesia", infoVal: "Closed");
+
+  Info tst1CT = new Info(infoZone: 1, infoTyp: "transport", infoNam: "TST - Rua Trabalhadores Rurais", infoVal: "");
+  Info tst2CT = new Info(infoZone: 1, infoTyp: "transport", infoNam: "TST - Rua Con M Fernandes", infoVal: "");
+  Info mts1CT = new Info(infoZone: 1, infoTyp: "transport", infoNam: "MTS - Fomega", infoVal: "");
+  Info mts2CT = new Info(infoZone: 1, infoTyp: "transport", infoNam: "MTS - Monte da Caparica", infoVal: "");
+
+  Info jumboCT = new Info(infoZone: 1, infoTyp: "shopping", infoNam: "Jumbo", infoVal: "Open");
+  Info aldiCT = new Info(infoZone: 1, infoTyp: "shopping", infoNam: "Aldi", infoVal: "Closed");
+
+  Info tourismCT = new Info(infoZone: 1, infoTyp: "tourism", infoNam: "Cova do vapor", infoVal: "");
+
+  Info parkCT = new Info(infoZone: 1, infoTyp: "leisure", infoNam: "Praia da Fonte da Telha", infoVal: "");
+
+  //individual ratings
+
+  IndividualR indivR1LF = new IndividualR(indiRZone: 0, indiRUId: 3, indiRStr: 5, indiRTim: "1/3/2023", indiRDsc: "Boa Zona, Margem Sul Represents!");
+  IndividualR indivR2LF = new IndividualR(indiRZone: 0, indiRUId: 1, indiRStr: 2, indiRTim: "3/4/2023", indiRDsc: "Fui Assaltado! Baixo nível de segurança 🥶");
+  IndividualR indivR3LF = new IndividualR(indiRZone: 0, indiRUId: 2, indiRStr: 3, indiRTim: "23/2/2023", indiRDsc: "Zona Fixe mas os Cabeleireiros cortaram-me a cabeça!👺");
+
+  IndividualR indivR1CT = new IndividualR(indiRZone: 1, indiRUId: 3, indiRStr: 5, indiRTim: "5/4/2023", indiRDsc: "Adoro a zona, boas paisagens");
+  IndividualR indivR2CT = new IndividualR(indiRZone: 1, indiRUId: 1, indiRStr: 2, indiRTim: "9/10/2023", indiRDsc: "Zona questionável");
+  IndividualR indivR3CT = new IndividualR(indiRZone: 1, indiRUId: 2, indiRStr: 4, indiRTim: "12/3/2023", indiRDsc: "Fácil movimentação na área, pessoal simpático");
+
+  //posts LF
+  
+  ForumPost post1LF = new ForumPost(forumZone: 0, forumUId: 3, forumTtl: "À Venda - Ford Sierra 1982", forumDsc: "Viatura em bom estado, versão RS Cosworth bastante procurada. 23000€", forumRep: "", forumTst: "23/5/2023", forumIsR: 0);
+  ForumPost post2LF = new ForumPost(forumZone: 0, forumUId: 2, forumTtl: "Dentistas na Zona?", forumDsc: "Estou à procura de uma clínica dentária que não seja desnecessariamente cara.", forumRep: "", forumTst: "14/4/2023", forumIsR: 0);
+  ForumPost post3LF = new ForumPost(forumZone: 0, forumUId: 4, forumTtl: "Compro T2 Laranjeiro", forumDsc: "Mudei-me recentemente para a zona e estou a viver num apartamento alugado. Procuro uma casa definitiva mas não muito cara.", forumRep: "", forumTst: "18/9/2023", forumIsR: 0);
+
+  //posts CT
+
+  ForumPost post1CT = new ForumPost(forumZone: 1, forumUId: 3, forumTtl: "Compro - Jogos playstation 2", forumDsc: "Compro todo o tipo de jogos para a ps2, preço negociável", forumRep: "", forumTst: "23/6/2023", forumIsR: 0);
+  ForumPost post2CT = new ForumPost(forumZone: 1, forumUId: 2, forumTtl: "Procuro - Praias family friendly", forumDsc: "Gostava que me sugerissem uma praia boa para levar a familia, sem grandes confusoes e pouca gente", forumRep: "", forumTst: "23/11/2023", forumIsR: 0);
+  ForumPost post3CT = new ForumPost(forumZone: 1, forumUId: 1, forumTtl: "Procuro amigos", forumDsc: "Sou novo por aqui gostava de conhecer pessoas novas 🙂", forumRep: "", forumTst: "23/11/2023", forumIsR: 0);
+
+
+  //crime news LF
+  
+  CrimeN crime1LF = new CrimeN(crimeNZone: 0, crimeNNam: "Correio da Manhã", crimeNLogo: "", crimeNDsc: "Sujeito morre eletrocutado no Feijó, mãe chocada", crimeNHyp: "https://www.google.com", crimeNTst: "12/1/2023");
+  CrimeN crime2LF = new CrimeN(crimeNZone: 0, crimeNNam: "Público", crimeNLogo: "", crimeNDsc: "Criminalidade aumenta 14% no Laranjeiro e 3% no Feijó", crimeNHyp: "https://www.google.com", crimeNTst: "28/2/2023");
+  CrimeN crime3LF = new CrimeN(crimeNZone: 0, crimeNNam: "Rúbrica do Feijó", crimeNLogo: "", crimeNDsc: "Tiroteio no Chegadinho faz 5 mortos", crimeNHyp: "https://www.google.com", crimeNTst: "12/1/2023");
+
+  //crime news CT
+  CrimeN crime1CT = new CrimeN(crimeNZone: 1, crimeNNam: "Correio da Manhã", crimeNLogo: "", crimeNDsc: "Rapaz de 23 anos esfaqueado à porta do metro na estação da Fomega", crimeNHyp: "https://www.google.com/", crimeNTst: "12/1/2023");
+  CrimeN crime2CT = new CrimeN(crimeNZone: 1, crimeNNam: "Expresso", crimeNLogo: "", crimeNDsc: "Gangues perigosos formados na FCT voltam a atacar", crimeNHyp: "https://www.google.com/", crimeNTst: "28/8/2023");
+  CrimeN crime3CT = new CrimeN(crimeNZone: 1, crimeNNam: "Jornal da caparica", crimeNLogo: "", crimeNDsc: "Conflitos organizados entre bairros", crimeNHyp: "https://www.google.com/", crimeNTst: "12/5/2023");
+
+
 
   DBHandler._privateConstructor();
 
@@ -475,9 +551,19 @@ class DBHandler {
     return Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM $crimeTable'));
   }
 
+  Future<List<Map<String, dynamic>>> querySpecificInfos(String zoneId) async {
+    Database db = await instance.database;
+    var result = await db.rawQuery('SELECT * FROM $infoTable WHERE $columnInfoZone = ?',['$zoneId']);
+    return result.toList();
+  }
+
 
   //Seed (Populate) the database
   void seed() async {
+
+
+
+
 
     /**
     DatabaseHelper.instance.insertThemeSeed(geoNames.toMapWithoutId());
