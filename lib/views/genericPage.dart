@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:zone/Database/dbHandler.dart';
 import 'package:zone/datatypes/settingsObject.dart';
 
@@ -22,6 +24,11 @@ bool dbEmpty = true;
 // ignore: must_be_immutable
 abstract class GenericPage extends StatefulWidget {
 
+
+  void showToast(){
+    Fluttertoast.showToast(msg: "Functionality not Available in this Prototype", toastLength: Toast.LENGTH_SHORT, gravity: ToastGravity.BOTTOM, timeInSecForIosWeb: 1, backgroundColor: Colors.black, textColor: Colors.white, fontSize: 16.0);
+  }
+
   //It is a stateful page
   GenericPageState createState() => new GenericPageState();
 }
@@ -31,6 +38,7 @@ class GenericPageState extends State<GenericPage> {
 
 
   //This applies the current settings to the page's content
+
 
 
   Future<void> applySettings() async {

@@ -28,7 +28,7 @@ class ActionButtonState extends State<ActionButton> {
 
 
   Widget ratingsButton(BuildContext context) {
-    return Container(height: 70, width:70,padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+    return Column(children:[Container(height: 70, width:70,padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
         decoration: new BoxDecoration(
           shape: BoxShape.rectangle,
           borderRadius: BorderRadius.circular(5),
@@ -45,11 +45,15 @@ class ActionButtonState extends State<ActionButton> {
           MaterialPageRoute(builder: (context) => IRatingPage(widget.currentZoneOb)),
         );
       },
-    ));
+    )), Text("Ratings",style: TextStyle(
+    fontFamily: "Montserrat",
+    fontSize: 20,
+    color: Colors.white,
+    ),)]);
   }
 
   Widget infoButton(BuildContext context) {
-    return Container(height: 70, width:70,padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+    return Column(children:[Container(height: 70, width:70,padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
         decoration: new BoxDecoration(
           shape: BoxShape.rectangle,
           borderRadius: BorderRadius.circular(5),
@@ -66,12 +70,16 @@ class ActionButtonState extends State<ActionButton> {
           MaterialPageRoute(builder: (context) => InfoMenuPage(widget.currentZoneOb)),
         );
       },
-    ));
+    )), Text("Info",style: TextStyle(
+      fontFamily: "Montserrat",
+      fontSize: 20,
+      color: Colors.white,
+    ),)]);
   }
 
   Widget postsButton(BuildContext context) {
     return
-      Container(height: 70, width:70,padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+      Column(children:[Container(height: 70, width:70,padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
     decoration: new BoxDecoration(
     shape: BoxShape.rectangle,
     borderRadius: BorderRadius.circular(5),
@@ -88,7 +96,11 @@ class ActionButtonState extends State<ActionButton> {
           MaterialPageRoute(builder: (context) => PostPage(widget.currentZoneOb)),
         );
       },
-    ));
+    )), Text("Posts",style: TextStyle(
+    fontFamily: "Montserrat",
+    fontSize: 20,
+    color: Colors.white,
+    ),)]);
   }
 
   @override

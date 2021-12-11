@@ -558,6 +558,24 @@ class DBHandler {
     return result.toList();
   }
 
+  Future<List<Map<String, dynamic>>> querySpecificPosts(String zoneId) async {
+    Database db = await instance.database;
+    var result = await db.rawQuery('SELECT * FROM $forumsTable WHERE $columnForumsZone = ?',['$zoneId']);
+    return result.toList();
+  }
+
+  Future<List<Map<String, dynamic>>> querySpecificIRatings(String zoneId) async {
+    Database db = await instance.database;
+    var result = await db.rawQuery('SELECT * FROM $indivRTable WHERE $columnIndividualRZone = ?',['$zoneId']);
+    return result.toList();
+  }
+
+  Future<List<Map<String, dynamic>>> queryIndividualUser(String userId) async {
+    Database db = await instance.database;
+    var result = await db.rawQuery('SELECT * FROM $userTable WHERE $columnUserId = ?',['$userId']);
+    return result.toList();
+  }
+
 
   //Seed (Populate) the database
   void seed() async {

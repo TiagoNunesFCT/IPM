@@ -91,94 +91,11 @@ class _MapPageState extends GenericPageState {
         actions: [
           Container(
             child: Builder(
-              builder: (context) => PopupMenuButton(
+              builder: (context) => IconButton(
                 color: Colors.black,
-                itemBuilder: (context) {
-                  var list = <PopupMenuEntry<Object>>[];
-                  list.add(
-                    PopupMenuItem(
-                      child: Text(
-                        "Zoom to Location",
-                        style: TextStyle(
-                            fontFamily: "Montserrat",
-                            color: const Color(0xFFD8DEE9),
-                            fontWeight: FontWeight.w300,
-                            fontSize: 16),
-                      ),
-                      value: 1,
-                    ),
-                  );
-                  list.add(
-                    PopupMenuItem(
-                      child: Text(
-                        "Zoom to All",
-                        style: TextStyle(
-                            fontFamily: "Montserrat",
-                            color: const Color(0xFFD8DEE9),
-                            fontWeight: FontWeight.w300,
-                            fontSize: 16),
-                      ),
-                      value: 3,
-                    ),
-                  );
-                  list.add(
-                    PopupMenuItem(
-                      child: Text(
-                        "Reset Geolocation",
-                        style: TextStyle(
-                            fontFamily: "Montserrat",
-                            color: const Color(0xFFD8DEE9),
-                            fontWeight: FontWeight.w300,
-                            fontSize: 16),
-                      ),
-                      value: 0,
-                    ),
-                  );
-                  list.add(
-                    PopupMenuItem(
-                      child: Text(
-                        (autoZoom == 1)
-                            ? "Disable Auto-Zoom"
-                            : "Enable Auto-Zoom",
-                        style: TextStyle(
-                            fontFamily: "Montserrat",
-                            color: const Color(0xFFD8DEE9),
-                            fontWeight: FontWeight.w300,
-                            fontSize: 16),
-                      ),
-                      value: 2,
-                    ),
-                  );
-                  return list;
-                },
+
                 icon: Icon(Icons.search_rounded, color: Colors.white),
-                onSelected: (value) {
-                  switch (value) {
-                    case 0:
-                      {
-                        debugPrint("0");
-                      }
-                      break;
-                    case 1:
-                      {
-                        debugPrint("1");
-                      }
-                      break;
-                    case 2:
-                      {
-                        setState(() {
-                          (autoZoom == 1) ? autoZoom = 0 : autoZoom = 1;
-                          updateSettings();
-                        });
-                      }
-                      break;
-                    case 3:
-                      {
-                        debugPrint("3");
-                      }
-                      break;
-                  }
-                },
+                onPressed: () {widget.showToast();},
               ),
             ),
           ),

@@ -67,76 +67,11 @@ class _ListPageState extends GenericPageState {
           actions: [
             Container(
               child: Builder(
-                builder: (context) => PopupMenuButton(
+                builder: (context) => IconButton(
                   color: Colors.black,
-                  itemBuilder: (context) {
-                    var list = <PopupMenuEntry<Object>>[];
-                    list.add(
-                      PopupMenuItem(
-                        child: Text(
-                          "Zoom to Location",
-                          style: TextStyle(fontFamily: "Montserrat", color: const Color(0xFFD8DEE9), fontWeight: FontWeight.w300, fontSize: 16),
-                        ),
-                        value: 1,
-                      ),
-                    );
-                    list.add(
-                      PopupMenuItem(
-                        child: Text(
-                          "Zoom to All",
-                          style: TextStyle(fontFamily: "Montserrat", color: const Color(0xFFD8DEE9), fontWeight: FontWeight.w300, fontSize: 16),
-                        ),
-                        value: 3,
-                      ),
-                    );
-                    list.add(
-                      PopupMenuItem(
-                        child: Text(
-                          "Reset Geolocation",
-                          style: TextStyle(fontFamily: "Montserrat", color: const Color(0xFFD8DEE9), fontWeight: FontWeight.w300, fontSize: 16),
-                        ),
-                        value: 0,
-                      ),
-                    );
-                    list.add(
-                      PopupMenuItem(
-                        child: Text(
-                          (autoZoom == 1) ? "Disable Auto-Zoom" : "Enable Auto-Zoom",
-                          style: TextStyle(fontFamily: "Montserrat", color: const Color(0xFFD8DEE9), fontWeight: FontWeight.w300, fontSize: 16),
-                        ),
-                        value: 2,
-                      ),
-                    );
-                    return list;
-                  },
+
                   icon: Icon(Icons.search_rounded, color: Colors.white),
-                  onSelected: (value) {
-                    switch (value) {
-                      case 0:
-                        {
-                          debugPrint("0");
-                        }
-                        break;
-                      case 1:
-                        {
-                          debugPrint("1");
-                        }
-                        break;
-                      case 2:
-                        {
-                          setState(() {
-                            (autoZoom == 1) ? autoZoom = 0 : autoZoom = 1;
-                            updateSettings();
-                          });
-                        }
-                        break;
-                      case 3:
-                        {
-                          debugPrint("3");
-                        }
-                        break;
-                    }
-                  },
+                  onPressed: () {widget.showToast();},
                 ),
               ),
             ),
@@ -224,10 +159,11 @@ class _ListPageState extends GenericPageState {
                                       ),
                                     ],
                                     onChanged: (value) {
+                                    if(value != 1){
                                       setState(() {
                                         value = value;
                                         updateSettings();
-                                      });
+                                      });}else widget.showToast();
                                     }))
                           ],
                         ),
@@ -296,10 +232,13 @@ class _ListPageState extends GenericPageState {
                                   ),
                                 ],
                                 onChanged: (value) {
+                                  if (value!=1){
                                   setState(() {
                                     value = value;
                                     updateSettings();
-                                  });
+                                  });}else{
+                                    widget.showToast();
+                                  }
                                 }))
                           ],
                         ),
@@ -307,10 +246,10 @@ class _ListPageState extends GenericPageState {
                         Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            TextButton(
+                            TextButton(onPressed:() => widget.showToast(),
                                 child: Container(
                                     padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                    width: 80,
+                                    width: 90,
                                     height: 70,
                                     decoration: new BoxDecoration(
                                       shape: BoxShape.rectangle,
@@ -330,10 +269,10 @@ class _ListPageState extends GenericPageState {
                                         color: Colors.white,
                                       ),
                                     ))),
-                            TextButton(
+                            TextButton(onPressed:() => widget.showToast(),
                                 child: Container(
                                     padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                    width: 80,
+                                    width: 90,
                                     height: 70,
                                     decoration: new BoxDecoration(
                                       shape: BoxShape.rectangle,
@@ -347,7 +286,7 @@ class _ListPageState extends GenericPageState {
                                     alignment: Alignment.center,
                                     child: Text(
                                       "Clear",
-                                      style: TextStyle(
+                                      style: TextStyle(letterSpacing: 0.01,
                                         fontFamily: "Montserrat",
                                         fontSize: 30,
                                         color: Colors.white,
@@ -376,8 +315,9 @@ class _ListPageState extends GenericPageState {
                                 context,
                                 MaterialPageRoute(builder: (context) => LocPage(listZone[position].zoneId)),
                               );
-                            }, child:Container(width: 420,
+                            }, child:Container(width: 420, height:40,alignment: Alignment.centerLeft,
                               margin: EdgeInsets.fromLTRB(2, 1, 2, 1),
+                              padding:  EdgeInsets.fromLTRB(5, 0, 2, 0),
                               decoration: new BoxDecoration(
                                 shape: BoxShape.rectangle,
                                 borderRadius: BorderRadius.circular(5),
@@ -387,11 +327,11 @@ class _ListPageState extends GenericPageState {
                                   width: 1.0,
                                 ),
                               ),
-                            child:Text(listZone[position].zoneNam,style: TextStyle(
+                            child:Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,children:[Text(listZone[position].zoneNam,style: TextStyle(
                               fontFamily: "Montserrat",
-                              fontSize: 30,
+                              fontSize: 24,
                               color: Colors.white,
-                            ),)));
+                            ),), Icon(Icons.arrow_forward_ios_rounded, color: Colors.white30)])));
                           })),
                   Container(margin: EdgeInsets.fromLTRB(0, 10, 0, 10), child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [Rover(true, true, false)]))
                 ]))));

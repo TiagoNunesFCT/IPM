@@ -197,6 +197,7 @@ class _LocPageState extends GenericPageState {
                     ),
                   ),
                   child: IconButton(
+                      onPressed:() => widget.showToast(),
                       padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                       icon: Icon(
                         Icons.help_outline_rounded,

@@ -25,7 +25,7 @@ class _UserPageState extends GenericPageState {
   String zoneName = "Laranjeiro e Feijó";
   String cityName = "Almada";
   String countryName = "🇵🇹";
-  String userDesc = "Hi! I just started using this App! This is a very long descriptions solely for demonstration purporses and In no way represents the final look/ functionality of the app.";
+  String userDesc = "Hi! I just started using this App! .";
 
   //Build the widget
   @override
@@ -67,7 +67,7 @@ class _UserPageState extends GenericPageState {
                 }),
             Row(mainAxisSize: MainAxisSize.min, children: [              IconButton(
               icon: Icon(CupertinoIcons.pencil_circle),
-              onPressed: () {},
+              onPressed: () {widget.showToast();},
               iconSize: 40,
               color: const Color(0xFF1D1D1D),
             ),
@@ -81,7 +81,9 @@ class _UserPageState extends GenericPageState {
               ),
               IconButton(
                 icon: Icon(CupertinoIcons.pencil_circle),
-                onPressed: () {},
+                onPressed: () {
+                  widget.showToast();
+                },
                 iconSize: 40,
                 color: Colors.white,
               )

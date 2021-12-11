@@ -51,7 +51,7 @@ class _MainPageState extends GenericPageState {
               child: Builder(
                 builder: (context) => IconButton(
                   icon: Icon(Icons.settings_rounded, color: Colors.white),
-                  onPressed: () => Scaffold.of(context).openDrawer(),
+                  onPressed: () => widget.showToast(),
                 ),
               ),
             ),
