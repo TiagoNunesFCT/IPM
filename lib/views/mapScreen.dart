@@ -6,6 +6,8 @@ import 'package:zone/widgets/rover.dart';
 import 'genericPage.dart';
 import 'package:latlong2/latlong.dart';
 
+import 'locationScreen.dart';
+
 //The Google Maps Tile Layer
 TileLayerOptions mapService = TileLayerOptions(
     urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
@@ -54,10 +56,25 @@ class _MapPageState extends GenericPageState {
           Marker(
             width: 80.0,
             height: 80.0,
-            point: LatLng(38.66, -9.17),
+            point: LatLng(38.657, -9.15),
             builder: (ctx) =>
                 Container(
-                  child: FlutterLogo(),
+                  child: IconButton(icon: Icon(Icons.my_location_rounded, color:Colors.red),onPressed: () {                        Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LocPage.currentLoc()),
+                  );},),
+                ),
+          ),
+          Marker(
+            width: 80.0,
+            height: 80.0,
+            point: LatLng(38.663, -9.215),
+            builder: (ctx) =>
+                Container(
+                  child: IconButton(icon: Icon(Icons.my_location_rounded, color:Colors.red),onPressed: () {                        Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LocPage(1)),
+                  );},),
                 ),
           ),
         ],

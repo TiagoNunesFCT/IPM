@@ -74,8 +74,8 @@ class _MainPageState extends GenericPageState {
               height: double.infinity,
               color: const Color(0xFF1D1D1D),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [Container(height:100),
                   Column(children: [
                     Text(
                       'Current Zone:',
@@ -126,10 +126,10 @@ class _MainPageState extends GenericPageState {
                           context,
                           MaterialPageRoute(builder: (context) => LocPage.currentLoc()),
                         );
-                      }, color: Colors.white,))]),SizedBox(height:60),new Rover(false, true, true)
+                      }, color: Colors.white,))]),SizedBox(height:60)
                   ]),
 
-                ],
+                  Container(margin: EdgeInsets.fromLTRB(0, 10, 0, 10),child:Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [Rover(false, true, true)]))],
               ),
             )));
     return page;
