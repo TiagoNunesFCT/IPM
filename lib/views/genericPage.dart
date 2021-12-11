@@ -6,6 +6,8 @@ import 'package:zone/datatypes/settingsObject.dart';
 
 List<Settings> listSettings = [];
 
+int currentLocId = 0;
+
 //These are the default values for all the settings when the app is loaded for the first time and there is no data
 
 Settings currentSettings;

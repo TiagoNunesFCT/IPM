@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
@@ -561,36 +562,75 @@ class DBHandler {
   //Seed (Populate) the database
   void seed() async {
 
+    DBHandler.instance.insertUserSeed(userOurs.toMap());
+    DBHandler.instance.insertUserSeed(userRicardo.toMap());
+    DBHandler.instance.insertUserSeed(userPedro.toMap());
+    DBHandler.instance.insertUserSeed(userTiago.toMap());
+    DBHandler.instance.insertUserSeed(userOther.toMap());
+
+    DBHandler.instance.insertZoneSeed(laranFeij.toMap());
+    DBHandler.instance.insertZoneSeed(capTraf.toMap());
+
+    DBHandler.instance.insertOverallRSeed(overallLF.toMapWithoutId());
+    DBHandler.instance.insertOverallRSeed(overallCT.toMapWithoutId());
+
+    DBHandler.instance.insertInfoSeed(waterpriceLF.toMapWithoutId());
+    DBHandler.instance.insertInfoSeed(gaspriceLF.toMapWithoutId());
+    DBHandler.instance.insertInfoSeed(elecpriceLF.toMapWithoutId());
+    DBHandler.instance.insertInfoSeed(rentpriceLF.toMapWithoutId());
+    DBHandler.instance.insertInfoSeed(cttLF.toMapWithoutId());
+    DBHandler.instance.insertInfoSeed(balcfinLF.toMapWithoutId());
+    DBHandler.instance.insertInfoSeed(juntaLF.toMapWithoutId());
+    DBHandler.instance.insertInfoSeed(tst1LF.toMapWithoutId());
+    DBHandler.instance.insertInfoSeed(tst2LF.toMapWithoutId());
+    DBHandler.instance.insertInfoSeed(tst3LF.toMapWithoutId());
+    DBHandler.instance.insertInfoSeed(mts1LF.toMapWithoutId());
+    DBHandler.instance.insertInfoSeed(mts2LF.toMapWithoutId());
+    DBHandler.instance.insertInfoSeed(pingoDoceLF.toMapWithoutId());
+    DBHandler.instance.insertInfoSeed(aldiLF.toMapWithoutId());
+    DBHandler.instance.insertInfoSeed(tourismLF.toMapWithoutId());
+    DBHandler.instance.insertInfoSeed(parkLF.toMapWithoutId());
+
+    DBHandler.instance.insertInfoSeed(waterpriceCT.toMapWithoutId());
+    DBHandler.instance.insertInfoSeed(gaspriceCT.toMapWithoutId());
+    DBHandler.instance.insertInfoSeed(elecpriceCT.toMapWithoutId());
+    DBHandler.instance.insertInfoSeed(rentpriceCT.toMapWithoutId());
+    DBHandler.instance.insertInfoSeed(cttCT.toMapWithoutId());
+    DBHandler.instance.insertInfoSeed(balcfinCT.toMapWithoutId());
+    DBHandler.instance.insertInfoSeed(juntaCT.toMapWithoutId());
+    DBHandler.instance.insertInfoSeed(tst1CT.toMapWithoutId());
+    DBHandler.instance.insertInfoSeed(tst2CT.toMapWithoutId());
+    DBHandler.instance.insertInfoSeed(mts1CT.toMapWithoutId());
+    DBHandler.instance.insertInfoSeed(mts2CT.toMapWithoutId());
+    DBHandler.instance.insertInfoSeed(jumboCT.toMapWithoutId());
+    DBHandler.instance.insertInfoSeed(aldiCT.toMapWithoutId());
+    DBHandler.instance.insertInfoSeed(tourismCT.toMapWithoutId());
+    DBHandler.instance.insertInfoSeed(parkCT.toMapWithoutId());
 
 
+    DBHandler.instance.insertIndividualRSeed(indivR1LF.toMapWithoutId());
+    DBHandler.instance.insertIndividualRSeed(indivR2LF.toMapWithoutId());
+    DBHandler.instance.insertIndividualRSeed(indivR3LF.toMapWithoutId());
+    DBHandler.instance.insertIndividualRSeed(indivR1CT.toMapWithoutId());
+    DBHandler.instance.insertIndividualRSeed(indivR2CT.toMapWithoutId());
+    DBHandler.instance.insertIndividualRSeed(indivR3CT.toMapWithoutId());
 
+    DBHandler.instance.insertForumsSeed(post1LF.toMapWithoutId());
+    DBHandler.instance.insertForumsSeed(post2LF.toMapWithoutId());
+    DBHandler.instance.insertForumsSeed(post3LF.toMapWithoutId());
+    DBHandler.instance.insertForumsSeed(post1CT.toMapWithoutId());
+    DBHandler.instance.insertForumsSeed(post2CT.toMapWithoutId());
+    DBHandler.instance.insertForumsSeed(post3CT.toMapWithoutId());
 
-    /**
-    DatabaseHelper.instance.insertThemeSeed(geoNames.toMapWithoutId());
-    DatabaseHelper.instance.insertThemeSeed(outdoorActivities.toMapWithoutId());
-    DatabaseHelper.instance.insertThemeSeed(travelling.toMapWithoutId());
-    DatabaseHelper.instance.insertTagSeed(waterHarbour.toMapWithoutId());
-    DatabaseHelper.instance.insertTagSeed(parksArea.toMapWithoutId());
-    DatabaseHelper.instance.insertTagSeed(cityVillage.toMapWithoutId());
-    DatabaseHelper.instance.insertTagSeed(roadRailroad.toMapWithoutId());
-    DatabaseHelper.instance.insertTagSeed(spotBuilding.toMapWithoutId());
-    DatabaseHelper.instance.insertTagSeed(mountainRock.toMapWithoutId());
-    DatabaseHelper.instance.insertTagSeed(undersea.toMapWithoutId());
-    DatabaseHelper.instance.insertTagSeed(forest.toMapWithoutId());
-    DatabaseHelper.instance.insertTagSeed(hiking.toMapWithoutId());
-    DatabaseHelper.instance.insertTagSeed(running.toMapWithoutId());
-    DatabaseHelper.instance.insertTagSeed(cyclingBiking.toMapWithoutId());
-    DatabaseHelper.instance.insertTagSeed(offroad.toMapWithoutId());
-    DatabaseHelper.instance.insertTagSeed(sailing.toMapWithoutId());
-    DatabaseHelper.instance.insertTagSeed(flying.toMapWithoutId());
-    DatabaseHelper.instance.insertTagSeed(monumentMuseum.toMapWithoutId());
-    DatabaseHelper.instance.insertTagSeed(natureParks.toMapWithoutId());
-    DatabaseHelper.instance.insertTagSeed(funAttraction.toMapWithoutId());
-    DatabaseHelper.instance.insertTagSeed(neighborhood.toMapWithoutId());
-    DatabaseHelper.instance.insertTagSeed(hotel.toMapWithoutId());
-    DatabaseHelper.instance.insertTagSeed(publicTransport.toMapWithoutId());
-    DatabaseHelper.instance.insertTagSeed(restaurant.toMapWithoutId());
-        **/
+    DBHandler.instance.insertCrimeSeed(crime1LF.toMapWithoutId());
+    DBHandler.instance.insertCrimeSeed(crime2LF.toMapWithoutId());
+    DBHandler.instance.insertCrimeSeed(crime3LF.toMapWithoutId());
+    DBHandler.instance.insertCrimeSeed(crime1CT.toMapWithoutId());
+    DBHandler.instance.insertCrimeSeed(crime2CT.toMapWithoutId());
+    DBHandler.instance.insertCrimeSeed(crime3CT.toMapWithoutId());
+
+    debugPrint("Seeding Done");
+
   }
 
   //Update existing User Object

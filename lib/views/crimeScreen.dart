@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:zone/datatypes/zoneObject.dart';
 
 import 'genericPage.dart';
 
 class CrimePage extends GenericPage {
 
-  String zone;
+  Zone zone;
 
 //empty constructor, there isn't much we can do here
-  CrimePage(String zone){
+  CrimePage(Zone zone){
     this.zone = zone;
   }
 

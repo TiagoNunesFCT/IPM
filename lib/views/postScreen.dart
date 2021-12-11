@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:zone/Database/dbHandler.dart';
 import 'package:zone/datatypes/forumPostObject.dart';
+import 'package:zone/datatypes/zoneObject.dart';
 
 import 'genericPage.dart';
 import 'package:zone/widgets/backButton.dart' as buttonBack;
@@ -11,15 +12,15 @@ bool pressed = false;
 class PostPage extends GenericPage {
 //empty constructor, there isn't much we can do here
 
-  String zone;
+  Zone zone;
   String ogId;
 
-  PostPage(String zone) {
+  PostPage(Zone zone) {
     this.zone = zone;
     ogId = null;
   }
 
-  PostPage.isReply(String zone, String ogId) {
+  PostPage.isReply(Zone zone, String ogId) {
     this.zone = zone;
     this.ogId = ogId;
   }
@@ -29,10 +30,10 @@ class PostPage extends GenericPage {
 }
 
 class _PostPageState extends GenericPageState {
-  String zone;
+  Zone zone;
   String ogId;
 
-  _PostPageState(String zone, String ogId) {
+  _PostPageState(Zone zone, String ogId) {
     this.zone = zone;
     this.ogId = ogId;
   }
@@ -48,7 +49,7 @@ class _PostPageState extends GenericPageState {
             page = Scaffold(
                 appBar: new AppBar(
                   title: new Text(
-                    zone,
+                    zone.zoneNam,
                     style: TextStyle(
                       fontFamily: "Montserrat",
                       color: Colors.white,
@@ -189,7 +190,7 @@ class _PostPageState extends GenericPageState {
     return page;
   }
 
-  Widget addButton(String mode, String zone, String ogId) {
+  Widget addButton(String mode, Zone zone, String ogId) {
 
 
 
@@ -224,7 +225,7 @@ class _PostPageState extends GenericPageState {
     await Future.delayed(const Duration(milliseconds: 5), () {});
   }
 
-  void showAddDialog(String mode, String zone, String ogId) {
+  void showAddDialog(String mode, Zone zone, String ogId) {
     showDialog(
       context: context,
       builder: (BuildContext context) => AddPostDialog(mode, zone, ogId),
@@ -238,18 +239,18 @@ class AddPostDialog extends StatefulWidget{
 
 
   String mode;
-  String zone;
+  Zone zone;
   String OgId;
   int zoneId;
   int userId;
 
   //TODO Get zone object and extract the zoneId in order to store it. Do a similar thing for the userId (the username is given somewhere, I think, otherwise just store the current user on the commonPage)
 
-  AddPostDialog(String mode, String zone, String OgId){
+  AddPostDialog(String mode, Zone zone, String OgId){
   this.mode = mode;
   this.zone = zone;
   this.OgId = OgId;
-  zoneId = 0;
+  zoneId = zone.zoneId;
   userId = 0;
   }
 

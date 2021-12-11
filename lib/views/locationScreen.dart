@@ -1,6 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:zone/Database/dbHandler.dart';
+import 'package:zone/datatypes/overallRObject.dart';
+import 'package:zone/datatypes/zoneObject.dart';
 import 'package:zone/widgets/actions.dart';
 import 'package:zone/widgets/rover.dart';
 import 'package:zone/widgets/backButton.dart' as buttonBack;
@@ -9,38 +12,91 @@ import 'package:zone/widgets/starShower.dart';
 import 'genericPage.dart';
 
 bool isCurrent;
+bool started;
+
+String zoneName;
+String cityName;
+double rating;
+String zoneQuality;
+String countryName;
+
+Zone loc;
+OverallR locRat;
 // ignore: must_be_immutable
 class LocPage extends GenericPage {
 
+  int zoneId;
 
   //empty constructor, there isn't much we can do here
-  LocPage(){
+  LocPage(int zoneId){
     isCurrent = false;
+    this.zoneId=zoneId;
+    started = false;
+    doStuff();
   }
 
   LocPage.currentLoc(){
     isCurrent = true;
+    this.zoneId = currentLocId;
+    started = false;
+    doStuff();
+  }
+
+  void doStuff(){
+    zoneName = "Loading...";
+    cityName = "Loading...";
+    rating = 3.0;
+    zoneQuality = "Loading...";
+    countryName = "Loading...";
+    getZone(zoneId);
+    getORating(zoneId);
   }
 
   @override
-  _LocPageState createState() => new _LocPageState();
+  _LocPageState createState() => new _LocPageState(zoneId);
 }
 
 class _LocPageState extends GenericPageState {
   @override
+  int zoneId;
+
+  _LocPageState(int zoneId){
+    this.zoneId =zoneId;
+  }
+
   void initState() {
+
+
+
+
+
+    doStuff();
+  }
+
+  void doStuff() async{
+    await getZone(zoneId);
+    await getORating(zoneId);
+    zoneName = loc.zoneNam;
+    cityName = loc.zoneCty;
+    countryName = loc.zoneCtr;
+    rating = calculateRating(locRat);
+    zoneQuality = numberToRating((rating*2).round());
+    setState(() {
+
+    });
+
     super.initState();
   }
 
-  String zoneName = "Laranjeiro e Feijó";
-  String cityName = "Almada";
-  String zoneQuality = "Average";
-  String zoneRanking = "(47th)";
-  String countryName = "🇵🇹";
+
+
+
 
   //Build the widget
   @override
   Widget build(BuildContext context) {
+
+
     Widget page = Scaffold(
         body: Center(
             child: Container(
@@ -124,7 +180,7 @@ class _LocPageState extends GenericPageState {
                         Icons.crop_square,
                         color: Colors.transparent,
                       ))),
-              StarShower(0),
+              StarShower(rating),
               Container(
                   transformAlignment: Alignment.topLeft,
                   alignment: Alignment.topLeft,
@@ -150,13 +206,13 @@ class _LocPageState extends GenericPageState {
             Container(
                 padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
                 child: Text(
-                  zoneQuality + ' ' + zoneRanking,
+                  zoneQuality,
                   style: TextStyle(
                     fontFamily: "Montserrat",
                     color: Colors.white,
                   ),
                 )),
-          ]),ActionButton(zoneName),
+          ]),ActionButton(loc),
           Container(
               margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
               child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
@@ -182,6 +238,9 @@ class _LocPageState extends GenericPageState {
     )));
     return page;
   }
+
+
+
 }
 
 Color ratingToColor(String color) {
@@ -245,3 +304,44 @@ String numberToRating(int rating) {
       break;
   }
 }
+
+
+Future<List<Map<String, dynamic>>> getZone(int zoneId) async{
+  List<Map<String, dynamic>> listMap = await DBHandler.instance.queryAllRowsZones();
+    listMap.forEach((map) => addToListZone(map, zoneId));
+
+}
+
+//Method that adds Waypoints to the List, in case they are compliant with the search criteria
+addToListZone(Map<String, dynamic> map, int zoneId) {
+  if (Zone.fromMap(map).zoneId == zoneId) {
+    loc = (Zone.fromMap(map));
+  }
+}
+
+ double calculateRating(OverallR locRat) {
+  double result =  (locRat.overROne*1+locRat.overRTwo*2+locRat.overRTre*3+locRat.overRFor*4+locRat.overRFiv*3)/(locRat.overROne+locRat.overRTwo+locRat.overRTre+locRat.overRFor+locRat.overRFiv);
+
+  return result;
+}
+
+Future<List<Map<String, dynamic>>> getORating(int zoneId) async{
+  List<Map<String, dynamic>> listMap = await DBHandler.instance.queryAllRowsOverallR();
+  listMap.forEach((map) => addToListRating(map, zoneId));
+
+  zoneName = loc.zoneNam;
+  cityName = loc.zoneCty;
+  countryName = loc.zoneCtr;
+  rating = calculateRating(locRat);
+  zoneQuality = numberToRating((rating*2).round());
+}
+
+addToListRating(Map<String, dynamic> map, int zoneId) {
+  debugPrint("zone ID we want"+zoneId.toString());
+  debugPrint("zone ID we have on this particular object"+OverallR.fromMap(map).overRZon.toString());
+  if (OverallR.fromMap(map).overRZon == zoneId) {
+    locRat = (OverallR.fromMap(map));
+    debugPrint("we found it");
+  }
+}
+

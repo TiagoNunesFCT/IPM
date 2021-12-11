@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:zone/Database/dbHandler.dart';
 import 'package:zone/datatypes/individualRObject.dart';
+import 'package:zone/datatypes/zoneObject.dart';
 import 'package:zone/widgets/starSelector.dart';
 
 import 'genericPage.dart';
@@ -12,9 +13,9 @@ bool pressed = false;
 class IRatingPage extends GenericPage {
 //empty constructor, there isn't much we can do here
 
-  String zone;
+  Zone zone;
 
-  IRatingPage(String zone) {
+  IRatingPage(Zone zone) {
     this.zone = zone;
   }
 
@@ -23,9 +24,9 @@ class IRatingPage extends GenericPage {
 }
 
 class _IRatingPageState extends GenericPageState {
-  String zone;
+  Zone zone;
 
-  _IRatingPageState(String zone) {
+  _IRatingPageState(Zone zone) {
     this.zone = zone;
   }
 
@@ -40,7 +41,7 @@ class _IRatingPageState extends GenericPageState {
     page = Scaffold(
         appBar: new AppBar(
           title: new Text(
-            zone,
+            zone.zoneNam,
             style: TextStyle(
               fontFamily: "Montserrat",
               color: Colors.white,
@@ -115,7 +116,7 @@ class _IRatingPageState extends GenericPageState {
     return page;
   }
 
-  Widget addButton(String zone) {
+  Widget addButton(Zone zone) {
     return Container(
         padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
         decoration: new BoxDecoration(
@@ -146,7 +147,7 @@ class _IRatingPageState extends GenericPageState {
     await Future.delayed(const Duration(milliseconds: 5), () {});
   }
 
-  void showAddDialog(String zone) {
+  void showAddDialog(Zone zone) {
     showDialog(
       context: context,
       builder: (BuildContext context) => AddRatingDialog(zone),
@@ -155,16 +156,16 @@ class _IRatingPageState extends GenericPageState {
 }
 
 class AddRatingDialog extends StatefulWidget {
-  String zone;
+  Zone zone;
 
   int zoneId;
   int userId;
 
   //TODO Get zone object and extract the zoneId in order to store it. Do a similar thing for the userId (the username is given somewhere, I think, otherwise just store the current user on the commonPage)
 
-  AddRatingDialog(String zone) {
+  AddRatingDialog(Zone zone) {
     this.zone = zone;
-    zoneId = 0;
+    zoneId = zone.zoneId;
     userId = 0;
   }
 

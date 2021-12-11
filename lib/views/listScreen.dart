@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:zone/Database/dbHandler.dart';
+import 'package:zone/datatypes/zoneObject.dart';
 import 'package:zone/widgets/rover.dart';
 
 import 'genericPage.dart';
+import 'locationScreen.dart';
 
 String currentCountry = "🇵🇹";
 String currentCity = "Almada";
 
+List<Zone> listZone;
 
 //TODO ADD NUMBER OF CITIES AND METHOD TO CALCULATE NUMBER OF CITIES WHEN FETCHING ALL ZONES
 //TODO ADD NUMBER OF COUNTRIES AND METHOD TO CALCULATE NUMBER OF COUNTRIES WHEN FETCHING ALL ZONES
@@ -13,7 +17,10 @@ String currentCity = "Almada";
 
 class ListPage extends GenericPage {
 //empty constructor, there isn't much we can do here
-  ListPage();
+  ListPage(){
+    listZone = [];
+
+  }
 
   @override
   _ListPageState createState() => new _ListPageState();
@@ -22,6 +29,9 @@ class ListPage extends GenericPage {
 class _ListPageState extends GenericPageState {
   @override
   void initState() {
+    if(listZone.isEmpty){
+      getZone(currentCity);
+    }
     super.initState();
   }
 
@@ -359,9 +369,14 @@ class _ListPageState extends GenericPageState {
                         ),
                       ),
                       child: ListView.builder(
-                          itemCount: 35,
+                          itemCount: listZone.length,
                           itemBuilder: (context, position) {
-                            return Container(
+                            return TextButton(onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => LocPage(listZone[position].zoneId)),
+                              );
+                            }, child:Container(width: 420,
                               margin: EdgeInsets.fromLTRB(2, 1, 2, 1),
                               decoration: new BoxDecoration(
                                 shape: BoxShape.rectangle,
@@ -372,13 +387,33 @@ class _ListPageState extends GenericPageState {
                                   width: 1.0,
                                 ),
                               ),
-                            child:Text(position.toString(),style: TextStyle(
+                            child:Text(listZone[position].zoneNam,style: TextStyle(
                               fontFamily: "Montserrat",
                               fontSize: 30,
                               color: Colors.white,
-                            ),));
+                            ),)));
                           })),
                   Container(margin: EdgeInsets.fromLTRB(0, 10, 0, 10), child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [Rover(true, true, false)]))
                 ]))));
   }
+
+  Future<List<Map<String, dynamic>>> getZone(String currentCity) async{
+    listZone = [];
+    List<Map<String, dynamic>> listMap = await DBHandler.instance.queryAllRowsZones();
+    listMap.forEach((map) => addToListZone(map, currentCity));
+    setState(() {
+
+    });
+  }
+
+//Method that adds Waypoints to the List, in case they are compliant with the search criteria
+  addToListZone(Map<String, dynamic> map, String currentCity) {
+    if (Zone.fromMap(map).zoneCty == currentCity) {
+      listZone.add(Zone.fromMap(map));
+      debugPrint("doing this");
+    }
+  }
+
 }
+
+

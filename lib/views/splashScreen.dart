@@ -19,6 +19,7 @@ class _SplashScreenState extends GenericPageState {
   void initState() {
 
     super.initState();
+    applySettings();
     timerStart();
   }
 

@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:zone/Database/dbHandler.dart';
+import 'package:zone/datatypes/zoneObject.dart';
 import 'package:zone/widgets/infoButtons.dart';
 
 import 'genericPage.dart';
 import 'package:zone/widgets/backButton.dart' as buttonBack;
 
-
+Zone zone;
 
 class InfoMenuPage extends GenericPage {
 //empty constructor, there isn't much we can do here
-  InfoMenuPage();
+  InfoMenuPage(Zone thisZone){
+    zone = thisZone;
+  }
 
   @override
   _InfoMenuPageState createState() => new _InfoMenuPageState();
@@ -16,7 +20,7 @@ class InfoMenuPage extends GenericPage {
 
 class _InfoMenuPageState extends GenericPageState {
 
-  String infoZone = "Laranjeiro e Feijó";
+  String infoZone = zone.zoneNam;
 
   @override
   void initState() {
@@ -67,8 +71,10 @@ class _InfoMenuPageState extends GenericPageState {
                     fontSize: 24,
                     color: Colors.white,
                   ),)),
-                  InfoButton(infoZone),
+                  InfoButton(zone),
                   Row(children: [Container(margin: EdgeInsets.fromLTRB(10, 0, 10, 10), child: buttonBack.BackButton())])
                 ]))));
   }
 }
+
+

@@ -1,6 +1,7 @@
 //Rover is the Widget at the bottom of the screen which allows us to change between Main Views (Map, List, Home)
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:zone/datatypes/zoneObject.dart';
 import 'package:zone/views/MainScreen.dart';
 import 'package:zone/views/iRatingScreen.dart';
 import 'package:zone/views/infoMenuScreen.dart';
@@ -11,8 +12,10 @@ class ActionButton extends StatefulWidget {
 
   String currentZone;
 
-  ActionButton(String currentZone) {
-    this.currentZone = currentZone;
+  Zone currentZoneOb;
+
+  ActionButton(Zone currentZoneOb) {
+    this.currentZoneOb = currentZoneOb;
   }
 
 
@@ -39,7 +42,7 @@ class ActionButtonState extends State<ActionButton> {
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => IRatingPage(widget.currentZone)),
+          MaterialPageRoute(builder: (context) => IRatingPage(widget.currentZoneOb)),
         );
       },
     ));
@@ -60,7 +63,7 @@ class ActionButtonState extends State<ActionButton> {
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => InfoMenuPage()),
+          MaterialPageRoute(builder: (context) => InfoMenuPage(widget.currentZoneOb)),
         );
       },
     ));
@@ -82,7 +85,7 @@ class ActionButtonState extends State<ActionButton> {
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => PostPage(widget.currentZone)),
+          MaterialPageRoute(builder: (context) => PostPage(widget.currentZoneOb)),
         );
       },
     ));

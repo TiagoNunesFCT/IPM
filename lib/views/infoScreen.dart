@@ -1,19 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:zone/Database/dbHandler.dart';
 import 'package:zone/datatypes/infoObject.dart';
+import 'package:zone/datatypes/zoneObject.dart';
 
 import 'genericPage.dart';
+import 'package:zone/widgets/backButton.dart' as buttonBack;
 
 String infoZone = "Laranjeiro e Feijó";
 
+List<Info> listInfo;
+bool clean = true;
+
 class InfoPage extends GenericPage {
-  String zone;
+  Zone zone;
   String type;
 
 //empty constructor, there isn't much we can do here
-  InfoPage(String zone, String type) {
+  InfoPage(Zone zone, String type) {
+    listInfo = [];
     this.zone = zone;
     this.type = type;
+    clean = true;
   }
 
   @override
@@ -21,15 +28,20 @@ class InfoPage extends GenericPage {
 }
 
 class _InfoPageState extends GenericPageState {
-  String zone;
+  Zone zone;
   String type;
-
-  List<Info> listInfo = [];
+  List<Info> specificInfo;
 
   _InfoPageState(this.zone, this.type);
 
   @override
   void initState() {
+    setState(() {
+      if (clean) {
+        getInfo();
+        clean = false;
+      }
+    });
     super.initState();
   }
 
@@ -37,7 +49,7 @@ class _InfoPageState extends GenericPageState {
     return Scaffold(
         appBar: new AppBar(
           title: new Text(
-            zone,
+            zone.zoneNam,
             style: TextStyle(
               fontFamily: "Montserrat",
               color: Colors.white,
@@ -67,22 +79,24 @@ class _InfoPageState extends GenericPageState {
                 width: double.infinity,
                 height: double.infinity,
                 color: const Color(0xFF1D1D1D),
-                child: Container(
-                    decoration: new BoxDecoration(
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.circular(5),
-                      color: Colors.black38,
-                      border: new Border.all(
-                        color: Colors.white12,
-                        width: 1.0,
+                child: Column(mainAxisSize: MainAxisSize.max ,mainAxisAlignment: MainAxisAlignment.spaceBetween,children: [
+                  Container(height: 500,
+                      decoration: new BoxDecoration(
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.black38,
+                        border: new Border.all(
+                          color: Colors.white12,
+                          width: 1.0,
+                        ),
                       ),
-                    ),
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-
-
-                        ]))))); //TODO Return your hierarchy
+                      child: ListView.builder(
+                          itemCount: specificInfo.length,
+                          itemBuilder: (context, position) {
+                            return InfoWidget(specificInfo[position]);
+                          })),
+                  Row(children: [Container(margin: EdgeInsets.fromLTRB(10, 0, 10, 10), child: buttonBack.BackButton())])
+                ]))));
   }
 
   Widget getInfoIcon(String type) {
@@ -122,46 +136,137 @@ class _InfoPageState extends GenericPageState {
 
   //database methods
 
-
-
   Future<List<Map<String, dynamic>>> getInfo() async {
     listInfo = [];
-    List<Map<String, dynamic>> listMap = (await DBHandler.instance.querySpecificInfos(zone.toString()));
+    List<Map<String, dynamic>> listMap = (await DBHandler.instance.querySpecificInfos(zone.zoneId.toString()));
     setState(() {
       listMap.forEach((map) => listInfo.add(Info.fromMap(map)));
+      debugPrint("did that");
+      debugPrint("listinfo size " + listInfo.length.toString());
+      getSpecific(type);
+      specificInfo = Beautifier(specificInfo);
     });
-
-
   }
 
-  List<Info> getSpecific(String type){
+  void getSpecific(String type) {
+    debugPrint("begun");
     List<Info> returned = [];
     String typeLower = type.toLowerCase();
-    if(typeLower == "service"){
-      for (Info i in listInfo){
-        if(i.infoTyp.toLowerCase() == typeLower || i.infoTyp.toLowerCase() == "transport"){
+    if (typeLower == "service") {
+      for (Info i in listInfo) {
+        debugPrint("did this service");
+        if (i.infoTyp.toLowerCase() == typeLower || i.infoTyp.toLowerCase() == "transport") {
+          returned.add(i);
+        }
+      }
+    } else if (typeLower == "tourism") {
+      for (Info i in listInfo) {
+        if (i.infoTyp.toLowerCase() == typeLower || i.infoTyp.toLowerCase() == "leisure") {
+          debugPrint("did this tourism");
+          returned.add(i);
+        }
+      }
+    } else {
+      for (Info i in listInfo) {
+        if (i.infoTyp.toLowerCase() == typeLower) {
+          debugPrint("did this normal");
           returned.add(i);
         }
       }
     }
-    else if(typeLower == "tourism"){
-      for (Info i in listInfo){
-        if(i.infoTyp.toLowerCase() == typeLower || i.infoTyp.toLowerCase() == "leisure"){
-          returned.add(i);
+    specificInfo = returned;
+  }
+}
+
+class InfoWidget extends StatelessWidget {
+  Info thisInfo;
+  int position;
+
+  InfoWidget(Info specificInfo) {
+    thisInfo = specificInfo;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        margin: EdgeInsets.fromLTRB(2, 1, 2, 1),
+        padding: EdgeInsets.fromLTRB(1, 4, 1, 4),
+        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          Text(
+            thisInfo.infoNam,
+            style: TextStyle(fontFamily: "Montserrat", fontSize: (thisInfo.infoTyp != "mock") ? 20 : 24, color: Colors.white, fontWeight: (thisInfo.infoTyp != "mock") ? FontWeight.w300 : FontWeight.w700),
+          ),
+          ValueShower(thisInfo)
+        ]));
+  }
+}
+
+class ValueShower extends StatelessWidget {
+  Info thisInfo;
+
+  ValueShower(Info thisInfo) {
+    this.thisInfo = thisInfo;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Widget returned;
+    switch (thisInfo.infoTyp) {
+      case ("service"):
+      case ("shopping"):
+        {
+          (thisInfo.infoVal.toLowerCase() == "closed")
+              ? returned = Text(
+                  thisInfo.infoVal,
+                  style: TextStyle(
+                    fontFamily: "Montserrat",
+                    fontSize: 24,
+                    color: Colors.red,
+                  ),
+                )
+              : returned = Text(
+                  thisInfo.infoVal,
+                  style: TextStyle(
+                    fontFamily: "Montserrat",
+                    fontSize: 24,
+                    color: Colors.green,
+                  ),
+                );
         }
-      }
-    }else {
-      for (Info i in listInfo) {
-        if (i.infoTyp.toLowerCase() == typeLower) {
-          returned.add(i);
+        break;
+      default:
+        {
+          returned = Text(
+            thisInfo.infoVal,
+            style: TextStyle(
+              fontFamily: "Montserrat",
+              fontSize: 24,
+              color: Colors.white,
+            ),
+          );
         }
-      }
+        break;
     }
     return returned;
   }
-
-
-
 }
 
+List<Info> Beautifier(List<Info> list) {
+  List<Info> beautifiedList = list;
+  for (int i = 0; i < (beautifiedList.length - 1); i++) {
+    if (beautifiedList[i].infoTyp != beautifiedList[i + 1].infoTyp) {
+      beautifiedList.insert(i + 1, new Info(infoZone: beautifiedList[i + 1].infoZone, infoTyp: "mock", infoNam: firstCase(beautifiedList[i + 1].infoTyp), infoVal: ""));
+    }
+    i++;
+  }
+  beautifiedList.insert(0, new Info(infoZone: beautifiedList[0].infoZone, infoTyp: "mock", infoNam: firstCase(beautifiedList[0].infoTyp), infoVal: ""));
+  return beautifiedList;
+}
 
+String firstCase(String original) {
+  return original.substring(0, 1).toUpperCase() + original.substring(1).toLowerCase();
+}
+
+/**
+ *
+ */

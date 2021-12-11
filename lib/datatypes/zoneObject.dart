@@ -15,7 +15,7 @@ class Zone {
     map["zon_name"] = zoneNam;
     map["zon_lat"] = zoneLat;
     map["zon_lon"] = zoneLon;
-    map["zon:ctr"] = zoneCtr;
+    map["zon_ctr"] = zoneCtr;
     map["zon_cty"] = zoneCty;
     return map;
   }
@@ -27,7 +27,7 @@ class Zone {
     map["zon_name"] = zoneNam;
     map["zon_lat"] = zoneLat;
     map["zon_lon"] = zoneLon;
-    map["zon:ctr"] = zoneCtr;
+    map["zon_ctr"] = zoneCtr;
     map["zon_cty"] = zoneCty;
     return map;
   }
