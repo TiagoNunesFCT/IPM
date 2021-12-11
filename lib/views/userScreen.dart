@@ -21,7 +21,7 @@ class _UserPageState extends GenericPageState {
     super.initState();
   }
 
-  String userName = "User";
+  String userName = "Username";
   String zoneName = "Laranjeiro e Feijó";
   String cityName = "Almada";
   String countryName = "🇵🇹";

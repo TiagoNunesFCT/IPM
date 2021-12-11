@@ -333,7 +333,6 @@ class AddPostDialog extends StatefulWidget {
   int zoneId;
   int userId;
 
-  //TODO Get zone object and extract the zoneId in order to store it. Do a similar thing for the userId (the username is given somewhere, I think, otherwise just store the current user on the commonPage)
 
   AddPostDialog(String mode, Zone zone, String OgId, void Function() callback) {
     this.mode = mode;
@@ -437,7 +436,7 @@ class _AddPostDialogState extends State<AddPostDialog> {
           new TextButton(
             onPressed: () {
               if (postDesc.text.isNotEmpty) {
-                ForumPost postToBeAdded = new ForumPost(forumZone: widget.zoneId, forumUId: widget.userId, forumTtl: postTtl.text, forumDsc: postDesc.text, forumRep: (widget.mode == "reply") ? widget.OgId : "", forumTst: "20/4/1977", forumIsR: (widget.mode == "reply") ? 1 : 0);
+                ForumPost postToBeAdded = new ForumPost(forumZone: widget.zoneId, forumUId: widget.userId, forumTtl: postTtl.text, forumDsc: postDesc.text, forumRep: (widget.mode == "reply") ? widget.OgId : "", forumTst: "25/12/2023", forumIsR: (widget.mode == "reply") ? 1 : 0);
                 DBHandler.instance.insertForums(postToBeAdded.toMapWithoutId());
                 clean = true;
                 Navigator.of(context).pop();

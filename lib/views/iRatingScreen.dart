@@ -243,7 +243,6 @@ class AddRatingDialog extends StatefulWidget {
   int zoneId;
   int userId;
 
-  //TODO Get zone object and extract the zoneId in order to store it. Do a similar thing for the userId (the username is given somewhere, I think, otherwise just store the current user on the commonPage)
 
   AddRatingDialog(Zone zone,void Function() callback) {
     this.zone = zone;
@@ -331,7 +330,7 @@ class _AddRatingDialogState extends State<AddRatingDialog> {
           new TextButton(
             onPressed: () {
               if (rateFeedback.text.isNotEmpty) {
-                IndividualR ratingToBeAdded = new IndividualR(indiRZone: widget.zoneId, indiRUId: widget.userId, indiRStr: starSel.getStars(), indiRDsc: rateFeedback.text, indiRTim: "20/4/1977");
+                IndividualR ratingToBeAdded = new IndividualR(indiRZone: widget.zoneId, indiRUId: widget.userId, indiRStr: starSel.getStars(), indiRDsc: rateFeedback.text, indiRTim: "25/12/2023");
                 DBHandler.instance.insertIndividualR(ratingToBeAdded.toMapWithoutId());
                 debugPrint("Got these stars: " + starSel.getStars().toString());
                 clean = true;
