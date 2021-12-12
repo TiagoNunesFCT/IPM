@@ -98,7 +98,7 @@ class _PostPageState extends GenericPageState {
                     width: double.infinity,
                     height: double.infinity,
                     color: const Color(0xFF1D1D1D),
-                    child: Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+                    child: Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                       Container(
                           margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
                           height: 500,
@@ -115,7 +115,7 @@ class _PostPageState extends GenericPageState {
                               itemCount: listPost.length,
                               itemBuilder: (context, position) {
                                 return Container(
-                                    margin: EdgeInsets.fromLTRB(2, 1, 2, 5),
+                                    margin: EdgeInsets.fromLTRB(2, 1, 2, 8),
                                     decoration: new BoxDecoration(
                                       shape: BoxShape.rectangle,
                                       borderRadius: BorderRadius.circular(5),
@@ -127,7 +127,7 @@ class _PostPageState extends GenericPageState {
                                     ),
                                     child: PostContainer(listPost, position));
                               })),
-                      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [Container(margin: EdgeInsets.fromLTRB(10, 0, 10, 0), child: buttonBack.BackButton()), Container(margin: EdgeInsets.fromLTRB(10, 0, 10, 0), child: addButton("normal", zone, ogId))])
+                      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [Container(margin: EdgeInsets.fromLTRB(10, 0, 10, 10), child: buttonBack.BackButton()), Container(margin: EdgeInsets.fromLTRB(10, 0, 10, 10), child: addButton("normal", zone, ogId))])
                     ]))))
         : page = Scaffold(
             appBar: new AppBar(
@@ -227,7 +227,7 @@ class _PostPageState extends GenericPageState {
           list[position].forumTst,
           style: TextStyle(
             fontFamily: "Montserrat",
-            fontSize: 22,
+            fontSize: 18,
             color: Colors.white,
           ),
         )
@@ -237,7 +237,7 @@ class _PostPageState extends GenericPageState {
         style: TextStyle(
           fontFamily: "Montserrat",
           fontSize: 24,
-          color: Colors.white,
+          color: Colors.orange.shade400,
         ),
       ),
       Text(

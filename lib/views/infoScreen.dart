@@ -105,29 +105,29 @@ class _InfoPageState extends GenericPageState {
         return Icon(
           Icons.attach_money_rounded,
           size: 30,
-          color: Colors.white,
+          color: Colors.green,
         );
         break;
       case "service":
         return Column(children: [
-          Icon(Icons.account_balance_rounded, color: Colors.white, size: 15),
+          Icon(Icons.account_balance_rounded, color: Colors.yellow, size: 15),
           Icon(
             Icons.directions_bus_outlined,
             size: 15,
-            color: Colors.white,
+            color: Colors.yellow,
           ),
         ]);
         break;
       case "shopping":
-        return Icon(Icons.shopping_bag_outlined, color: Colors.white, size: 40);
+        return Icon(Icons.shopping_bag_outlined, color: Colors.pink, size: 40);
         break;
       case "tourism":
         return Column(children: [
-          Icon(Icons.beach_access_outlined, color: Colors.white, size: 15),
+          Icon(Icons.beach_access_outlined, color: Colors.blue, size: 15),
           Icon(
             Icons.attractions,
             size: 15,
-            color: Colors.white,
+            color: Colors.blue,
           ),
         ]);
         break;
@@ -189,12 +189,12 @@ class InfoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.fromLTRB(2, 1, 2, 1),
+        margin: (thisInfo.infoTyp != "mock") ? EdgeInsets.fromLTRB(10, 2, 10, 1) : EdgeInsets.fromLTRB(10, 15, 10, 5),
         padding: EdgeInsets.fromLTRB(1, 4, 1, 4),
         child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           Text(
             thisInfo.infoNam,
-            style: TextStyle(fontFamily: "Montserrat", fontSize: (thisInfo.infoTyp != "mock") ? 20 : 24, color: Colors.white, fontWeight: (thisInfo.infoTyp != "mock") ? FontWeight.w300 : FontWeight.w700),
+            style: TextStyle(fontFamily: "Montserrat", fontSize: (thisInfo.infoTyp != "mock") ? 20 : 24, color: (thisInfo.infoTyp != "mock") ? Colors.white : Colors.orange.shade400, fontWeight: (thisInfo.infoTyp != "mock") ? FontWeight.w300 : FontWeight.w700),
           ),
           ValueShower(thisInfo)
         ]));
@@ -220,7 +220,7 @@ class ValueShower extends StatelessWidget {
                   thisInfo.infoVal,
                   style: TextStyle(
                     fontFamily: "Montserrat",
-                    fontSize: 24,
+                    fontSize: 20,
                     color: Colors.red,
                   ),
                 )
@@ -228,7 +228,7 @@ class ValueShower extends StatelessWidget {
                   thisInfo.infoVal,
                   style: TextStyle(
                     fontFamily: "Montserrat",
-                    fontSize: 24,
+                    fontSize: 20,
                     color: Colors.green,
                   ),
                 );
@@ -240,7 +240,7 @@ class ValueShower extends StatelessWidget {
             thisInfo.infoVal,
             style: TextStyle(
               fontFamily: "Montserrat",
-              fontSize: 24,
+              fontSize: 20,
               color: Colors.white,
             ),
           );

@@ -66,10 +66,11 @@ class _InfoMenuPageState extends GenericPageState {
                 height: double.infinity,
                 color: const Color(0xFF1D1D1D),
                 child: Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                  Container(alignment: Alignment.bottomCenter,height:80, child:Text("Information", style: TextStyle(
+                  Container(alignment: Alignment.bottomCenter,height:80,margin:EdgeInsets.fromLTRB(0, 50, 0, 0), child:Text("Information", style: TextStyle(
                     fontFamily: "Montserrat",
-                    fontSize: 24,
-                    color: Colors.white,
+                    fontSize: 35,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.orange.shade400,
                   ),)),
                   InfoButton(zone),
                   Row(children: [Container(margin: EdgeInsets.fromLTRB(10, 0, 10, 10), child: buttonBack.BackButton())])

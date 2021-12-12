@@ -49,7 +49,7 @@ class InfoButtonState extends State<InfoButton> {
           ),
         ),
         child: IconButton(
-          icon: Icon(Icons.attach_money_rounded, color: Colors.white, size: 45),
+          icon: Icon(Icons.attach_money_rounded, color: Colors.green, size: 45),
           onPressed: () {
               buttonPressing("Prices");
           },
@@ -76,11 +76,11 @@ class InfoButtonState extends State<InfoButton> {
         ),
         child: IconButton(
           icon: Column(children: [
-            Icon(Icons.account_balance_rounded, color: Colors.white, size: 28),
+            Icon(Icons.account_balance_rounded, color: Colors.yellow, size: 28),
             Icon(
               Icons.directions_bus_outlined,
               size: 28,
-              color: Colors.white,
+              color: Colors.yellow,
             ),
           ]),
           onPressed: () {
@@ -108,7 +108,7 @@ class InfoButtonState extends State<InfoButton> {
           ),
         ),
         child: IconButton(
-          icon: Icon(Icons.shopping_bag_outlined, color: Colors.white, size: 40),
+          icon: Icon(Icons.shopping_bag_outlined, color: Colors.pink, size: 40),
           onPressed: () {
             buttonPressing("Shopping");
           },
@@ -135,11 +135,11 @@ class InfoButtonState extends State<InfoButton> {
         ),
         child: IconButton(
           icon: Column(children: [
-            Icon(Icons.beach_access_outlined, color: Colors.white, size: 28),
+            Icon(Icons.beach_access_outlined, color: Colors.blue, size: 28),
             Icon(
               Icons.attractions,
               size: 28,
-              color: Colors.white,
+              color: Colors.blue,
             ),
           ]),
           onPressed: () {
@@ -167,7 +167,7 @@ class InfoButtonState extends State<InfoButton> {
           ),
         ),
         child: IconButton(
-          icon: Icon(Icons.warning_amber_rounded, color: Colors.white, size: 45),
+          icon: Icon(Icons.warning_amber_rounded, color: Colors.black, size: 45),
           onPressed: () {
             buttonPressing("Crime");
             /**

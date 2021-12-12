@@ -36,7 +36,7 @@ class _MainPageState extends GenericPageState {
           leading: Container(
             child: Builder(
               builder: (context) => IconButton(
-                icon: Icon(Icons.supervised_user_circle_rounded),
+                icon: Icon(Icons.supervised_user_circle_rounded,color: Colors.white),
                 onPressed: () {
                 Navigator.push(
                 context,

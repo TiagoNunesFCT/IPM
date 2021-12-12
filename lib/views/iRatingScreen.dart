@@ -91,7 +91,7 @@ class _IRatingPageState extends GenericPageState {
                 width: double.infinity,
                 height: double.infinity,
                 color: const Color(0xFF1D1D1D),
-                child: Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+                child: Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                   Container(
                       margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
                       height: 500,
@@ -108,7 +108,7 @@ class _IRatingPageState extends GenericPageState {
                           itemCount: listRating.length,
                           itemBuilder: (context, position) {
                             return Container(
-                                margin: EdgeInsets.fromLTRB(2, 1, 2, 5),
+                                margin: EdgeInsets.fromLTRB(2, 1, 2, 8),
                                 decoration: new BoxDecoration(
                                   shape: BoxShape.rectangle,
                                   borderRadius: BorderRadius.circular(5),
@@ -120,7 +120,7 @@ class _IRatingPageState extends GenericPageState {
                                 ),
                                 child: RatingContainer(listRating,position));
                           })),
-                  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [Container(margin: EdgeInsets.fromLTRB(10, 0, 10, 0), child: buttonBack.BackButton()), Container(margin: EdgeInsets.fromLTRB(10, 0, 10, 0), child: addButton(zone))])
+                  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [Container(margin: EdgeInsets.fromLTRB(10, 0, 10, 10), child: buttonBack.BackButton()), Container(margin: EdgeInsets.fromLTRB(10, 0, 10, 10), child: addButton(zone))])
                 ]))));
     return page;
   }
@@ -145,7 +145,7 @@ class _IRatingPageState extends GenericPageState {
           list[position].indiRTim,
           style: TextStyle(
             fontFamily: "Montserrat",
-            fontSize: 22,
+            fontSize: 18,
             color: Colors.white,
           ),
         )
