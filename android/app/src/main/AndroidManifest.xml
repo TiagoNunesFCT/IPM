@@ -16,7 +16,7 @@
 
 
    <application
-        android:label="zone"
+        android:label="ZONeX"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

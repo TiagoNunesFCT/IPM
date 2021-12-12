@@ -115,7 +115,7 @@ class _PostPageState extends GenericPageState {
                               itemCount: listPost.length,
                               itemBuilder: (context, position) {
                                 return Container(
-                                    margin: EdgeInsets.fromLTRB(2, 1, 2, 1),
+                                    margin: EdgeInsets.fromLTRB(2, 1, 2, 5),
                                     decoration: new BoxDecoration(
                                       shape: BoxShape.rectangle,
                                       borderRadius: BorderRadius.circular(5),

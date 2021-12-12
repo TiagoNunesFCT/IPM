@@ -15,8 +15,19 @@ class InfoButton extends StatefulWidget {
 
   Zone zone;
 
+  bool pricePressed;
+  bool servicesPressed;
+  bool shoppingPressed;
+  bool tourismPressed;
+  bool crimePressed;
+
   InfoButton(Zone zone) {
     this.zone = zone;
+    this.pricePressed = false;
+    this.servicesPressed = false;
+    this.shoppingPressed = false;
+    this.tourismPressed = false;
+    this.crimePressed = false;
   }
 
   InfoButtonState createState() => new InfoButtonState();
@@ -31,19 +42,16 @@ class InfoButtonState extends State<InfoButton> {
         decoration: new BoxDecoration(
           shape: BoxShape.rectangle,
           borderRadius: BorderRadius.circular(5),
-          color: Colors.black38,
+          color: (widget.pricePressed) ? Colors.white12 :Colors.black38,
           border: new Border.all(
-            color: Colors.white12,
+            color: (!widget.pricePressed) ? Colors.white12 : Colors.white,
             width: 1.0,
           ),
         ),
         child: IconButton(
           icon: Icon(Icons.attach_money_rounded, color: Colors.white, size: 45),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => InfoPage(widget.zone, "Prices")),
-            );
+              buttonPressing("Prices");
           },
         )), Text("Prices\n",textAlign: TextAlign.center,style: TextStyle(
     fontFamily: "Montserrat",
@@ -60,9 +68,9 @@ class InfoButtonState extends State<InfoButton> {
         decoration: new BoxDecoration(
           shape: BoxShape.rectangle,
           borderRadius: BorderRadius.circular(5),
-          color: Colors.black38,
+          color: (widget.servicesPressed) ? Colors.white12 :Colors.black38,
           border: new Border.all(
-            color: Colors.white12,
+            color: (!widget.servicesPressed) ? Colors.white12 : Colors.white,
             width: 1.0,
           ),
         ),
@@ -76,10 +84,7 @@ class InfoButtonState extends State<InfoButton> {
             ),
           ]),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => InfoPage(widget.zone, "Service")),
-            );
+            buttonPressing("Services");
           },
         )), Text("Services\nTransport",textAlign: TextAlign.center,style: TextStyle(
     fontFamily: "Montserrat",
@@ -96,19 +101,16 @@ class InfoButtonState extends State<InfoButton> {
         decoration: new BoxDecoration(
           shape: BoxShape.rectangle,
           borderRadius: BorderRadius.circular(5),
-          color: Colors.black38,
+          color: (widget.shoppingPressed) ? Colors.white12 :Colors.black38,
           border: new Border.all(
-            color: Colors.white12,
+            color: (!widget.shoppingPressed) ? Colors.white12 : Colors.white,
             width: 1.0,
           ),
         ),
         child: IconButton(
           icon: Icon(Icons.shopping_bag_outlined, color: Colors.white, size: 40),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => InfoPage(widget.zone, "Shopping")),
-            );
+            buttonPressing("Shopping");
           },
         )), Text("Shops\n",textAlign: TextAlign.center,style: TextStyle(
     fontFamily: "Montserrat",
@@ -125,9 +127,9 @@ class InfoButtonState extends State<InfoButton> {
         decoration: new BoxDecoration(
           shape: BoxShape.rectangle,
           borderRadius: BorderRadius.circular(5),
-          color: Colors.black38,
+          color: (widget.tourismPressed) ? Colors.white12 :Colors.black38,
           border: new Border.all(
-            color: Colors.white12,
+            color: (!widget.tourismPressed) ? Colors.white12 : Colors.white,
             width: 1.0,
           ),
         ),
@@ -141,10 +143,7 @@ class InfoButtonState extends State<InfoButton> {
             ),
           ]),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => InfoPage(widget.zone, "Tourism")),
-            );
+            buttonPressing("Tourism");
           },
         )), Text("Tourism\nLeisure",textAlign: TextAlign.center,style: TextStyle(
     fontFamily: "Montserrat",
@@ -170,7 +169,7 @@ class InfoButtonState extends State<InfoButton> {
         child: IconButton(
           icon: Icon(Icons.warning_amber_rounded, color: Colors.white, size: 45),
           onPressed: () {
-            showToast();
+            buttonPressing("Crime");
             /**
             Navigator.push(
               context,
@@ -193,21 +192,79 @@ class InfoButtonState extends State<InfoButton> {
     ]);
   }
 
-/*Future<void> buttonPressing(String button) async {
-
-    switch(button){
-      case ("Home"):
-        {    homePressed = true;
-        setState(() {});
-        await Future.delayed(const Duration(milliseconds: 10), () {});
-        pressed = false;
-        setState(() {});
-        await Future.delayed(const Duration(milliseconds: 5), () {});}
+  Future<void> buttonPressing(String button) async {
+    switch (button) {
+      case ("Prices"):
+        {
+          widget.pricePressed = true;
+          setState(() {});
+          await Future.delayed(const Duration(milliseconds: 10), () {});
+          widget.pricePressed = false;
+          setState(() {});
+          await Future.delayed(const Duration(milliseconds: 10), () {});
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => InfoPage(widget.zone, "Prices")),
+          );
+        }
         break;
+      case ("Services"):
+        {
+          widget.servicesPressed = true;
+          setState(() {});
+          await Future.delayed(const Duration(milliseconds: 10), () {});
+          widget.servicesPressed = false;
+          setState(() {});
+          await Future.delayed(const Duration(milliseconds: 10), () {});
 
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => InfoPage(widget.zone, "Service")),
+          );
+
+        }
+        break;
+      case ("Shopping"):
+        {
+          widget.shoppingPressed = true;
+          setState(() {});
+          await Future.delayed(const Duration(milliseconds: 10), () {});
+          widget.shoppingPressed = false;
+          setState(() {});
+          await Future.delayed(const Duration(milliseconds: 10), () {});
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => InfoPage(widget.zone, "Shopping")),
+          );
+        }
+        break;
+      case ("Tourism"):
+        {
+          widget.tourismPressed = true;
+          setState(() {});
+          await Future.delayed(const Duration(milliseconds: 10), () {});
+          widget.tourismPressed = false;
+          setState(() {});
+          await Future.delayed(const Duration(milliseconds: 10), () {});
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => InfoPage(widget.zone, "Tourism")),
+          );
+        }
+        break;
+      case ("Crime"):
+        {
+          widget.crimePressed = true;
+          setState(() {});
+          await Future.delayed(const Duration(milliseconds: 10), () {});
+          widget.crimePressed = false;
+          setState(() {});
+          await Future.delayed(const Duration(milliseconds: 10), () {});
+          showToast();
+        }
+        break;
     }
-
-  }*/
+  }
 
 }
 
