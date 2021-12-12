@@ -25,7 +25,7 @@ class _UserPageState extends GenericPageState {
   String zoneName = "Laranjeiro e Feijó";
   String cityName = "Almada";
   String countryName = "🇵🇹";
-  String userDesc = "Hi! I just started using this App! .";
+  String userDesc = "Hi! I just started using this App!\nBeen having a lot of fun!!! 🤓♿🤪";
 
   //Build the widget
   @override
@@ -38,9 +38,9 @@ class _UserPageState extends GenericPageState {
       color: const Color(0xFF1D1D1D),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Column(mainAxisSize: MainAxisSize.max, children: [
+          Container(height: 10),Column(mainAxisSize: MainAxisSize.max, children: [
             IconButton(
                 iconSize: 240,
                 icon: Stack(alignment: Alignment.center, children: [
@@ -106,57 +106,57 @@ class _UserPageState extends GenericPageState {
                       style: TextStyle(
                         fontFamily: "Montserrat",
                         fontSize: 24,
-                        color: Colors.white,
+                        color: Colors.orange.shade400,
                       )),
                   Text(zoneName,
                       style: TextStyle(
                         fontFamily: "Montserrat",
                         fontSize: 24,
-                        color: Colors.white,
+                        color: const Color(0xFFD8DEE9),
                       ))
-                ]),
+                ]),Container(height: 5),
                 Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                   Text("City:",
                       style: TextStyle(
                         fontFamily: "Montserrat",
                         fontSize: 24,
-                        color: Colors.white,
+                        color: Colors.orange.shade400,
                       )),
                   Text(cityName,
                       style: TextStyle(
                         fontFamily: "Montserrat",
                         fontSize: 24,
-                        color: Colors.white,
+                        color: const Color(0xFFD8DEE9),
                       ))
-                ]),
+                ]),Container(height: 5),
                 Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                   Text("Country:",
                       style: TextStyle(
                         fontFamily: "Montserrat",
                         fontSize: 24,
-                        color: Colors.white,
+                        color: Colors.orange.shade400,
                       )),
                   Text(countryName,
                       style: TextStyle(
                         fontFamily: "Montserrat",
                         fontSize: 24,
-                        color: Colors.white,
+                        color: const Color(0xFFD8DEE9),
                       ))
-                ]),
+                ]),Container(height: 5),
                 Text("About Me:",
                     style: TextStyle(
                       fontFamily: "Montserrat",
                       fontSize: 24,
-                      color: Colors.white,
-                    )),
+                      color: Colors.orange.shade400,
+                    )),Container(height: 5),
                 Text(userDesc,
                     style: TextStyle(
                       fontFamily: "Montserrat",
                       fontSize: 20,
-                      color: Colors.white,
+                      color: const Color(0xFFD8DEE9),
                     ))
               ])))
-            ,Row(children:[Container(margin:EdgeInsets.fromLTRB(10, 0, 10, 5),child:buttonBack.BackButton())])],
+            ,Row(children:[Container(margin:EdgeInsets.fromLTRB(10, 0, 10, 10),child:buttonBack.BackButton())])],
       ),
     )));
     return page;

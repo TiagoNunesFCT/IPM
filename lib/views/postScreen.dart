@@ -198,7 +198,7 @@ class _PostPageState extends GenericPageState {
                                       style: TextStyle(
                                         fontFamily: "Montserrat",
                                         fontSize: 30,
-                                        color: Colors.white,
+                                        color: const Color(0xFFD8DEE9),
                                       ),
                                     ));
                               })),
@@ -213,13 +213,13 @@ class _PostPageState extends GenericPageState {
         Row(mainAxisSize: MainAxisSize.min, children: [
           Icon(
             Icons.supervised_user_circle_rounded,
-              color: Colors.white, size: 30,),
+            color: const Color(0xFFD8DEE9), size: 30,),
           Text(
             (getUserFromId(list[position].forumUId.toString()) != null) ? (getUserFromId(list[position].forumUId.toString()).usrNam) : "Username",
             style: TextStyle(
               fontFamily: "Montserrat",
               fontSize: 22,
-              color: Colors.white,
+              color: const Color(0xFFD8DEE9),
             ),
           )
         ]),
@@ -228,7 +228,7 @@ class _PostPageState extends GenericPageState {
           style: TextStyle(
             fontFamily: "Montserrat",
             fontSize: 18,
-            color: Colors.white,
+            color: const Color(0xFFD8DEE9),
           ),
         )
       ]),
@@ -245,7 +245,7 @@ class _PostPageState extends GenericPageState {
         style: TextStyle(
           fontFamily: "Montserrat",
           fontSize: 18,
-          color: Colors.white,
+          color: const Color(0xFFD8DEE9),
         ),
       )
     ]);
@@ -427,7 +427,7 @@ class _AddPostDialogState extends State<AddPostDialog> {
               'Cancel',
               style: TextStyle(
                   fontFamily: "Montserrat",
-                  color: Colors.white,
+                  color: const Color(0xFFD8DEE9),
                   //Color(0xFFE97553), old color, nicer looking
                   fontWeight: FontWeight.w300,
                   fontSize: 16.0),
@@ -448,7 +448,7 @@ class _AddPostDialogState extends State<AddPostDialog> {
             },
             child: Text(
               'Publish',
-              style: TextStyle(fontFamily: "Montserrat", color: Colors.white, fontWeight: FontWeight.w300, fontSize: 16.0),
+              style: TextStyle(fontFamily: "Montserrat", color: const Color(0xFFD8DEE9), fontWeight: FontWeight.w300, fontSize: 16.0),
             ),
           ),
         ])

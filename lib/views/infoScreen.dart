@@ -194,7 +194,7 @@ class InfoWidget extends StatelessWidget {
         child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           Text(
             thisInfo.infoNam,
-            style: TextStyle(fontFamily: "Montserrat", fontSize: (thisInfo.infoTyp != "mock") ? 20 : 24, color: (thisInfo.infoTyp != "mock") ? Colors.white : Colors.orange.shade400, fontWeight: (thisInfo.infoTyp != "mock") ? FontWeight.w300 : FontWeight.w700),
+            style: TextStyle(fontFamily: "Montserrat", fontSize: (thisInfo.infoTyp != "mock") ? 20 : 24, color: (thisInfo.infoTyp != "mock") ? const Color(0xFFD8DEE9) : Colors.orange.shade400, fontWeight: (thisInfo.infoTyp != "mock") ? FontWeight.w300 : FontWeight.w700),
           ),
           ValueShower(thisInfo)
         ]));
@@ -241,7 +241,7 @@ class ValueShower extends StatelessWidget {
             style: TextStyle(
               fontFamily: "Montserrat",
               fontSize: 20,
-              color: Colors.white,
+              color: Colors.green,
             ),
           );
         }

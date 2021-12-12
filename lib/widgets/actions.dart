@@ -45,7 +45,7 @@ class ActionButtonState extends State<ActionButton> {
             width: 1.0,
           ),
         ),child:IconButton(
-      icon: Icon(Icons.star_outline_rounded, color: Colors.white, size: 45),
+      icon: Icon(Icons.star_outline_rounded, color: Colors.orange.shade600, size: 45),
       onPressed: () {
         buttonPressing("Ratings");
       },
@@ -67,7 +67,7 @@ class ActionButtonState extends State<ActionButton> {
             width: 1.0,
           ),
         ),child:IconButton(
-      icon: Icon(Icons.info_outline_rounded, color: Colors.white, size: 40),
+      icon: Icon(Icons.info_outline_rounded, color: Colors.indigo, size: 40),
       onPressed: () {buttonPressing("Info");},
     )), Text("Info",style: TextStyle(
       fontFamily: "Montserrat",
@@ -88,7 +88,7 @@ class ActionButtonState extends State<ActionButton> {
     width: 1.0,
     ),
     ),child:IconButton(
-      icon: Icon(Icons.chat_bubble_outline_rounded, color: Colors.white, size: 40),
+      icon: Icon(Icons.chat_bubble_outline_rounded, color: Colors.blueAccent, size: 40),
       onPressed: () {
         buttonPressing("Posts");
       },

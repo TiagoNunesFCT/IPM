@@ -131,13 +131,13 @@ class _IRatingPageState extends GenericPageState {
         Row(mainAxisSize: MainAxisSize.min, children: [
           Icon(
             Icons.supervised_user_circle_rounded,
-            color: Colors.white, size: 30,),
+            color: const Color(0xFFD8DEE9), size: 30,),
           Text(
             (getUserFromId(list[position].indiRUId.toString()) != null) ? (getUserFromId(list[position].indiRUId.toString()).usrNam) : "Username",
             style: TextStyle(
               fontFamily: "Montserrat",
               fontSize: 22,
-              color: Colors.white,
+              color: const Color(0xFFD8DEE9),
             ),
           )
         ]),
@@ -146,7 +146,7 @@ class _IRatingPageState extends GenericPageState {
           style: TextStyle(
             fontFamily: "Montserrat",
             fontSize: 18,
-            color: Colors.white,
+            color: const Color(0xFFD8DEE9),
           ),
         )
       ]),
@@ -156,7 +156,7 @@ StarShower(list[position].indiRStr.toDouble()),
         style: TextStyle(
           fontFamily: "Montserrat",
           fontSize: 18,
-          color: Colors.white,
+          color: const Color(0xFFD8DEE9),
         ),
       )
     ]);
@@ -321,7 +321,7 @@ class _AddRatingDialogState extends State<AddRatingDialog> {
               'Cancel',
               style: TextStyle(
                   fontFamily: "Montserrat",
-                  color: Colors.white,
+                  color: const Color(0xFFD8DEE9),
                   //Color(0xFFE97553), old color, nicer looking
                   fontWeight: FontWeight.w300,
                   fontSize: 16.0),
@@ -343,7 +343,7 @@ class _AddRatingDialogState extends State<AddRatingDialog> {
             },
             child: Text(
               'Publish',
-              style: TextStyle(fontFamily: "Montserrat", color: Colors.white, fontWeight: FontWeight.w300, fontSize: 16.0),
+              style: TextStyle(fontFamily: "Montserrat", color: const Color(0xFFD8DEE9), fontWeight: FontWeight.w300, fontSize: 16.0),
             ),
           ),
         ])

@@ -99,7 +99,7 @@ class _ListPageState extends GenericPageState {
                               style: TextStyle(
                                 fontFamily: "Montserrat",
                                 fontSize: 30,
-                                color: Colors.white,
+                                color: Colors.orange.shade400,
                               ),
                             ),
                             Container(
@@ -133,7 +133,7 @@ class _ListPageState extends GenericPageState {
                                               style: TextStyle(
                                                 fontFamily: "Montserrat",
                                                 fontSize: 47,
-                                                color: Colors.white,
+                                                color: const Color(0xFFD8DEE9),
                                               ),
                                           ),
                                         ),
@@ -148,7 +148,7 @@ class _ListPageState extends GenericPageState {
                                             style: TextStyle(
                                               fontFamily: "Montserrat",
                                               fontSize: 47,
-                                              color: Colors.white,
+                                              color: const Color(0xFFD8DEE9),
                                             ),
                                           ),
                                         ),
@@ -173,7 +173,7 @@ class _ListPageState extends GenericPageState {
                               style: TextStyle(
                                 fontFamily: "Montserrat",
                                 fontSize: 30,
-                                color: Colors.white,
+                                color: Colors.orange.shade400,
                               ),
                             ),
                             Container(
@@ -206,7 +206,7 @@ class _ListPageState extends GenericPageState {
                                           style: TextStyle(
                                             fontFamily: "Montserrat",
                                             fontSize: 30,
-                                            color: Colors.white,
+                                            color: const Color(0xFFD8DEE9),
                                           )
                                       ),
                                     ),
@@ -221,7 +221,7 @@ class _ListPageState extends GenericPageState {
                                           style: TextStyle(
                                             fontFamily: "Montserrat",
                                             fontSize: 30,
-                                            color: Colors.white,
+                                            color: const Color(0xFFD8DEE9),
                                           )
                                       ),
                                     ),
@@ -263,7 +263,7 @@ class _ListPageState extends GenericPageState {
                                       style: TextStyle(
                                         fontFamily: "Montserrat",
                                         fontSize: 30,
-                                        color: Colors.white,
+                                        color: const Color(0xFFD8DEE9),
                                       ),
                                     ))),
                             TextButton(onPressed:() => widget.showToast(),
@@ -286,7 +286,7 @@ class _ListPageState extends GenericPageState {
                                       style: TextStyle(letterSpacing: 0.01,
                                         fontFamily: "Montserrat",
                                         fontSize: 30,
-                                        color: Colors.white,
+                                        color: const Color(0xFFD8DEE9),
                                       ),
                                     )))
                           ],
@@ -327,7 +327,7 @@ class _ListPageState extends GenericPageState {
                             child:Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,children:[Text(listZone[position].zoneNam,style: TextStyle(
                               fontFamily: "Montserrat",
                               fontSize: 24,
-                              color: Colors.white,
+                              color: const Color(0xFFD8DEE9),
                             ),), Icon(Icons.arrow_forward_ios_rounded, color: Colors.white30)])));
                           })),
                   Container(margin: EdgeInsets.fromLTRB(0, 10, 0, 10), child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [Rover(true, true, false)]))
