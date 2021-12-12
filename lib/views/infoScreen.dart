@@ -105,29 +105,29 @@ class _InfoPageState extends GenericPageState {
         return Icon(
           Icons.attach_money_rounded,
           size: 30,
-          color: Colors.green,
+          color: const Color(0xFF3A863E)
         );
         break;
       case "service":
         return Column(children: [
-          Icon(Icons.account_balance_rounded, color: Colors.yellow, size: 15),
+          Icon(Icons.account_balance_rounded, color: const Color(0xFFAC8C32), size: 15),
           Icon(
             Icons.directions_bus_outlined,
             size: 15,
-            color: Colors.yellow,
+            color: const Color(0xFFAC8C32),
           ),
         ]);
         break;
       case "shopping":
-        return Icon(Icons.shopping_bag_outlined, color: Colors.pink, size: 40);
+        return Icon(Icons.shopping_bag_outlined, color: const Color(0xFF8E364A), size: 40);
         break;
       case "tourism":
         return Column(children: [
-          Icon(Icons.beach_access_outlined, color: Colors.blue, size: 15),
+          Icon(Icons.beach_access_outlined, color: const Color(0xFF265880), size: 15),
           Icon(
             Icons.attractions,
             size: 15,
-            color: Colors.blue,
+            color: const Color(0xFF265880),
           ),
         ]);
         break;

@@ -49,7 +49,7 @@ class InfoButtonState extends State<InfoButton> {
           ),
         ),
         child: IconButton(
-          icon: Icon(Icons.attach_money_rounded, color: Colors.green, size: 45),
+          icon: Icon(Icons.attach_money_rounded, color: const Color(0xFF3A863E), size: 45),
           onPressed: () {
               buttonPressing("Prices");
           },
@@ -76,11 +76,11 @@ class InfoButtonState extends State<InfoButton> {
         ),
         child: IconButton(
           icon: Column(children: [
-            Icon(Icons.account_balance_rounded, color: Colors.yellow, size: 28),
+            Icon(Icons.account_balance_rounded, color:  const Color(0xFFAC8C32), size: 28),
             Icon(
               Icons.directions_bus_outlined,
               size: 28,
-              color: Colors.yellow,
+              color: const Color(0xFFAC8C32),
             ),
           ]),
           onPressed: () {
@@ -108,7 +108,7 @@ class InfoButtonState extends State<InfoButton> {
           ),
         ),
         child: IconButton(
-          icon: Icon(Icons.shopping_bag_outlined, color: Colors.pink, size: 40),
+          icon: Icon(Icons.shopping_bag_outlined, color: const Color(0xFF8E364A), size: 40),
           onPressed: () {
             buttonPressing("Shopping");
           },
@@ -135,11 +135,11 @@ class InfoButtonState extends State<InfoButton> {
         ),
         child: IconButton(
           icon: Column(children: [
-            Icon(Icons.beach_access_outlined, color: Colors.blue, size: 28),
+            Icon(Icons.beach_access_outlined, color: const Color(0xFF265880), size: 28),
             Icon(
               Icons.attractions,
               size: 28,
-              color: Colors.blue,
+              color: const Color(0xFF265880),
             ),
           ]),
           onPressed: () {
