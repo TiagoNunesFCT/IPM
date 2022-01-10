@@ -103,17 +103,17 @@ class _InfoPageState extends GenericPageState {
     switch (type.toLowerCase()) {
       case "prices":
         return Icon(
-          Icons.attach_money_rounded,
-          size: 35,
-          color: const Color(0xFF3A863E)
+            Icons.attach_money_rounded,
+            size: 35,
+            color: const Color(0xFF3A863E)
         );
         break;
       case "service":
         return Column(children: [
-          Icon(Icons.account_balance_rounded, color: const Color(0xFFAC8C32), size: 20),
+          Icon(Icons.account_balance_rounded, color: const Color(0xFFAC8C32), size: 15),
           Icon(
             Icons.directions_bus_outlined,
-            size: 20,
+            size: 15,
             color: const Color(0xFFAC8C32),
           ),
         ]);
@@ -123,10 +123,10 @@ class _InfoPageState extends GenericPageState {
         break;
       case "tourism":
         return Column(children: [
-          Icon(Icons.beach_access_outlined, color: const Color(0xFF265880), size: 20),
+          Icon(Icons.beach_access_outlined, color: const Color(0xFF265880), size: 15),
           Icon(
             Icons.attractions,
-            size: 20,
+            size: 15,
             color: const Color(0xFF265880),
           ),
         ]);
@@ -217,21 +217,21 @@ class ValueShower extends StatelessWidget {
         {
           (thisInfo.infoVal.toLowerCase() == "closed")
               ? returned = Text(
-                  thisInfo.infoVal,
-                  style: TextStyle(
-                    fontFamily: "Montserrat",
-                    fontSize: 20,
-                    color: Colors.red,
-                  ),
-                )
+            thisInfo.infoVal,
+            style: TextStyle(
+              fontFamily: "Montserrat",
+              fontSize: 20,
+              color: Colors.red,
+            ),
+          )
               : returned = Text(
-                  thisInfo.infoVal,
-                  style: TextStyle(
-                    fontFamily: "Montserrat",
-                    fontSize: 20,
-                    color: Colors.green,
-                  ),
-                );
+            thisInfo.infoVal,
+            style: TextStyle(
+              fontFamily: "Montserrat",
+              fontSize: 20,
+              color: Colors.green,
+            ),
+          );
         }
         break;
       default:
