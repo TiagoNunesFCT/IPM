@@ -118,7 +118,7 @@ class _IRatingPageState extends GenericPageState {
                                     width: 1.0,
                                   ),
                                 ),
-                                child: RatingContainer(listRating,position));
+                                child: RatingContainer(listRating, position));
                           })),
                   Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [Container(margin: EdgeInsets.fromLTRB(10, 0, 10, 10), child: buttonBack.BackButton()), Container(margin: EdgeInsets.fromLTRB(10, 0, 10, 10), child: addButton(zone))])
                 ]))));
@@ -126,12 +126,14 @@ class _IRatingPageState extends GenericPageState {
   }
 
   Widget RatingContainer(List<IndividualR> list, int position) {
-    return Column(crossAxisAlignment: CrossAxisAlignment.start,children: [
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Row(mainAxisSize: MainAxisSize.min, children: [
           Icon(
             Icons.supervised_user_circle_rounded,
-            color: const Color(0xFFD8DEE9), size: 30,),
+            color: const Color(0xFFD8DEE9),
+            size: 30,
+          ),
           Text(
             (getUserFromId(list[position].indiRUId.toString()) != null) ? (getUserFromId(list[position].indiRUId.toString()).usrNam) : "Username",
             style: TextStyle(
@@ -150,7 +152,7 @@ class _IRatingPageState extends GenericPageState {
           ),
         )
       ]),
-StarShower(list[position].indiRStr.toDouble()),
+      StarShower(list[position].indiRStr.toDouble()),
       Text(
         list[position].indiRDsc,
         style: TextStyle(
@@ -234,7 +236,6 @@ StarShower(list[position].indiRStr.toDouble()),
     }
     return null;
   }
-
 }
 
 class AddRatingDialog extends StatefulWidget {
@@ -243,8 +244,7 @@ class AddRatingDialog extends StatefulWidget {
   int zoneId;
   int userId;
 
-
-  AddRatingDialog(Zone zone,void Function() callback) {
+  AddRatingDialog(Zone zone, void Function() callback) {
     this.zone = zone;
     zoneId = zone.zoneId;
     userId = 0;
@@ -256,7 +256,8 @@ class AddRatingDialog extends StatefulWidget {
 
 class _AddRatingDialogState extends State<AddRatingDialog> {
   void Function() callback;
-  _AddRatingDialogState(void Function() callback){
+
+  _AddRatingDialogState(void Function() callback) {
     this.callback = callback;
   }
 
@@ -329,7 +330,7 @@ class _AddRatingDialogState extends State<AddRatingDialog> {
           ),
           new TextButton(
             onPressed: () {
-              if (rateFeedback.text.isNotEmpty) {
+              if (rateFeedback.text.isNotEmpty && !userHasRating(widget.userId)) {
                 IndividualR ratingToBeAdded = new IndividualR(indiRZone: widget.zoneId, indiRUId: widget.userId, indiRStr: starSel.getStars(), indiRDsc: rateFeedback.text, indiRTim: "25/12/2023");
                 DBHandler.instance.insertIndividualR(ratingToBeAdded.toMapWithoutId());
                 debugPrint("Got these stars: " + starSel.getStars().toString());
@@ -350,4 +351,11 @@ class _AddRatingDialogState extends State<AddRatingDialog> {
       ],
     )));
   }
+}
+
+bool userHasRating(int userId) {
+  for (IndividualR r in listRating){
+    if(r.indiRUId == userId)return true;
+  }
+  return false;
 }

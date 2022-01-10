@@ -104,7 +104,7 @@ class _InfoPageState extends GenericPageState {
       case "prices":
         return Icon(
           Icons.attach_money_rounded,
-          size: 30,
+          size: 35,
           color: const Color(0xFF3A863E)
         );
         break;
@@ -119,7 +119,7 @@ class _InfoPageState extends GenericPageState {
         ]);
         break;
       case "shopping":
-        return Icon(Icons.shopping_bag_outlined, color: const Color(0xFF8E364A), size: 40);
+        return Icon(Icons.shopping_bag_outlined, color: const Color(0xFF8E364A), size: 35);
         break;
       case "tourism":
         return Column(children: [
