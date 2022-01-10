@@ -110,10 +110,10 @@ class _InfoPageState extends GenericPageState {
         break;
       case "service":
         return Column(children: [
-          Icon(Icons.account_balance_rounded, color: const Color(0xFFAC8C32), size: 15),
+          Icon(Icons.account_balance_rounded, color: const Color(0xFFAC8C32), size: 20),
           Icon(
             Icons.directions_bus_outlined,
-            size: 15,
+            size: 20,
             color: const Color(0xFFAC8C32),
           ),
         ]);
@@ -123,10 +123,10 @@ class _InfoPageState extends GenericPageState {
         break;
       case "tourism":
         return Column(children: [
-          Icon(Icons.beach_access_outlined, color: const Color(0xFF265880), size: 15),
+          Icon(Icons.beach_access_outlined, color: const Color(0xFF265880), size: 20),
           Icon(
             Icons.attractions,
-            size: 15,
+            size: 20,
             color: const Color(0xFF265880),
           ),
         ]);
