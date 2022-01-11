@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:zone/Database/dbHandler.dart';
 import 'package:zone/datatypes/individualRObject.dart';
 import 'package:zone/datatypes/userObject.dart';
@@ -340,6 +341,8 @@ class _AddRatingDialogState extends State<AddRatingDialog> {
                 setState(() {
                   callback();
                 });
+              }else if(userHasRating(widget.userId)){
+                Fluttertoast.showToast(msg: "You have already rated this zone!", toastLength: Toast.LENGTH_SHORT, gravity: ToastGravity.BOTTOM, timeInSecForIosWeb: 1, backgroundColor: Colors.black, textColor: Colors.white, fontSize: 16.0);
               }
             },
             child: Text(
