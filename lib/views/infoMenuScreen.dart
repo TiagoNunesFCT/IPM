@@ -46,7 +46,7 @@ class _InfoMenuPageState extends GenericPageState {
                     icon: Icon(
                       Icons.info_outline_rounded,
                       size: 30,
-                      color: Colors.white,
+                      color: Colors.indigo,
                     ),
                   ),
                 ),

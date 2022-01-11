@@ -73,7 +73,7 @@ class _IRatingPageState extends GenericPageState {
                     icon: Icon(
                       Icons.star_border_rounded,
                       size: 30,
-                      color: Colors.white,
+                      color: Colors.orange.shade600,
                     ),
                   ),
                 ),

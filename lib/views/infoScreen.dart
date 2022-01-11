@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:zone/Database/dbHandler.dart';
 import 'package:zone/datatypes/infoObject.dart';
 import 'package:zone/datatypes/zoneObject.dart';
@@ -79,23 +80,25 @@ class _InfoPageState extends GenericPageState {
                 width: double.infinity,
                 height: double.infinity,
                 color: const Color(0xFF1D1D1D),
-                child: Column(mainAxisSize: MainAxisSize.max ,mainAxisAlignment: MainAxisAlignment.spaceBetween,children: [
-                  Flexible(child:Container(height: double.infinity,
-                      margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
-                      decoration: new BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(5),
-                        color: Colors.black38,
-                        border: new Border.all(
-                          color: Colors.white12,
-                          width: 1.0,
-                        ),
-                      ),
-                      child: ListView.builder(
-                          itemCount: specificInfo.length,
-                          itemBuilder: (context, position) {
-                            return InfoWidget(specificInfo[position]);
-                          }))),
+                child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                  Flexible(
+                      child: Container(
+                          height: double.infinity,
+                          margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
+                          decoration: new BoxDecoration(
+                            shape: BoxShape.rectangle,
+                            borderRadius: BorderRadius.circular(5),
+                            color: Colors.black38,
+                            border: new Border.all(
+                              color: Colors.white12,
+                              width: 1.0,
+                            ),
+                          ),
+                          child: ListView.builder(
+                              itemCount: specificInfo.length,
+                              itemBuilder: (context, position) {
+                                return InfoWidget(specificInfo[position]);
+                              }))),
                   Row(children: [Container(margin: EdgeInsets.fromLTRB(10, 0, 10, 10), child: buttonBack.BackButton())])
                 ]))));
   }
@@ -103,11 +106,7 @@ class _InfoPageState extends GenericPageState {
   Widget getInfoIcon(String type) {
     switch (type.toLowerCase()) {
       case "prices":
-        return Icon(
-            Icons.attach_money_rounded,
-            size: 35,
-            color: const Color(0xFF3A863E)
-        );
+        return Icon(Icons.attach_money_rounded, size: 35, color: const Color(0xFF3A863E));
         break;
       case "service":
         return Column(children: [
@@ -217,22 +216,32 @@ class ValueShower extends StatelessWidget {
       case ("shopping"):
         {
           (thisInfo.infoVal.toLowerCase() == "closed")
-              ? returned = Text(
-            thisInfo.infoVal,
-            style: TextStyle(
-              fontFamily: "Montserrat",
-              fontSize: 20,
-              color: Colors.red,
-            ),
-          )
-              : returned = Text(
-            thisInfo.infoVal,
-            style: TextStyle(
-              fontFamily: "Montserrat",
-              fontSize: 20,
-              color: Colors.green,
-            ),
-          );
+              ? returned = TextButton(
+                  style: TextButton.styleFrom(padding: const EdgeInsets.all(0.0), minimumSize: Size.zero, tapTargetSize: MaterialTapTargetSize.shrinkWrap),
+                  onPressed: () {
+                    Fluttertoast.showToast(msg: "Closed! 8:00 - 17:00", toastLength: Toast.LENGTH_SHORT, gravity: ToastGravity.BOTTOM, timeInSecForIosWeb: 1, backgroundColor: Colors.black, textColor: Colors.white, fontSize: 16.0);
+                  },
+                  child: Text(
+                    thisInfo.infoVal,
+                    style: TextStyle(
+                      fontFamily: "Montserrat",
+                      fontSize: 20,
+                      color: Colors.red,
+                    ),
+                  ))
+              : returned = TextButton(
+                  style: TextButton.styleFrom(padding: const EdgeInsets.all(0.0), minimumSize: Size.zero, tapTargetSize: MaterialTapTargetSize.shrinkWrap),
+                  onPressed: () {
+                    Fluttertoast.showToast(msg: "Open! 9:00 - 18:00", toastLength: Toast.LENGTH_SHORT, gravity: ToastGravity.BOTTOM, timeInSecForIosWeb: 1, backgroundColor: Colors.black, textColor: Colors.white, fontSize: 16.0);
+                  },
+                  child: Text(
+                    thisInfo.infoVal,
+                    style: TextStyle(
+                      fontFamily: "Montserrat",
+                      fontSize: 20,
+                      color: Colors.green,
+                    ),
+                  ));
         }
         break;
       default:

@@ -79,7 +79,7 @@ class _PostPageState extends GenericPageState {
                         icon: Icon(
                           Icons.chat_bubble_outline_rounded,
                           size: 30,
-                          color: Colors.white,
+                          color: Colors.blueAccent,
                         ),
                       ),
                     ),
