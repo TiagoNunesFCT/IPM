@@ -123,7 +123,7 @@ class _MapPageState extends GenericPageState {
         alignment: Alignment.bottomCenter,
         children: [
           _map,
-          Container(margin: EdgeInsets.fromLTRB(0, 10, 0, 10),child:Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [Rover(true, false, true)]))
+          Container(margin: EdgeInsets.fromLTRB(0, 10, 0, 10),child:Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [Rover(true, true, true, "map")]))
         ],
       ),
 

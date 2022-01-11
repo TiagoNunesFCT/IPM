@@ -12,15 +12,17 @@ class Rover extends StatefulWidget {
   bool homePressed;
   bool mapPressed;
   bool listPressed;
+  String current;
   List<Widget> buttonList;
 
-  Rover(bool hasHome, bool hasMap, bool hasList) {
+  Rover(bool hasHome, bool hasMap, bool hasList, String current) {
     this.hasHome = hasHome;
     this.hasMap = hasMap;
     this.hasList = hasList;
     this.homePressed = false;
     this.mapPressed = false;
     this.listPressed = false;
+    this.current = current;
   }
 
   RoverState createState() => new RoverState();
@@ -32,12 +34,12 @@ class RoverState extends State<Rover> {
         decoration: new BoxDecoration(
           shape: BoxShape.rectangle,
           borderRadius: BorderRadius.circular(5),
-          color: (widget.homePressed) ? Colors.white12 : Colors.transparent,
+          color: (widget.homePressed || widget.current.toLowerCase() == "home") ? Colors.white12 : Colors.transparent,
         ),
         child: IconButton(
-          icon: Icon(Icons.house_rounded, color: (widget.homePressed) ? Colors.white12 : Colors.white, size: 30),
+          icon: Icon(Icons.house_rounded, color: (widget.homePressed || widget.current.toLowerCase() == "home") ? Colors.white12 : Colors.white, size: 30),
           onPressed: () {
-            buttonPressing("Home");
+            (widget.current.toLowerCase() == "home")?debugPrint("User is trying to access the page they're on"):buttonPressing("Home");
 
           },
         ));
@@ -48,12 +50,12 @@ class RoverState extends State<Rover> {
         decoration: new BoxDecoration(
           shape: BoxShape.rectangle,
           borderRadius: BorderRadius.circular(5),
-          color: (widget.mapPressed) ? Colors.white12 : Colors.transparent,
+          color: (widget.mapPressed || widget.current.toLowerCase() == "map") ? Colors.white12 : Colors.transparent,
         ),
         child: IconButton(
-          icon: Container(child: Icon(Icons.map_rounded, color: (widget.mapPressed) ? Colors.white12 : Colors.white, size: 30)),
+          icon: Container(child: Icon(Icons.map_rounded, color: (widget.mapPressed || widget.current.toLowerCase() == "map") ? Colors.white12 : Colors.white, size: 30)),
           onPressed: () {
-            buttonPressing("Map");
+            (widget.current.toLowerCase() == "map")?debugPrint("User is trying to access the page they're on"):buttonPressing("Map");
 
           },
         ));
@@ -64,12 +66,12 @@ class RoverState extends State<Rover> {
         decoration: new BoxDecoration(
           shape: BoxShape.rectangle,
           borderRadius: BorderRadius.circular(5),
-          color: (widget.listPressed) ? Colors.white12 : Colors.transparent,
+          color: (widget.listPressed || widget.current.toLowerCase() == "list") ? Colors.white12 : Colors.transparent,
         ),
         child: IconButton(
-          icon: Container(child: Icon(Icons.list_rounded, color: (widget.listPressed) ? Colors.white12 : Colors.white, size: 30)),
+          icon: Container(child: Icon(Icons.list_rounded, color: (widget.listPressed || widget.current.toLowerCase() == "list") ? Colors.white12 : Colors.white, size: 30)),
           onPressed: () {
-            buttonPressing("List");
+            (widget.current.toLowerCase() == "list")?debugPrint("User is trying to access the page they're on"):buttonPressing("List");
 
           },
         ));
@@ -115,6 +117,7 @@ class RoverState extends State<Rover> {
           widget.homePressed = false;
           setState(() {});
           await Future.delayed(const Duration(milliseconds: 10), () {});
+          Navigator.popUntil(context, ModalRoute.withName('/'));
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => MainPage()),
@@ -129,6 +132,7 @@ class RoverState extends State<Rover> {
           widget.mapPressed = false;
           setState(() {});
           await Future.delayed(const Duration(milliseconds: 10), () {});
+          Navigator.popUntil(context, ModalRoute.withName('/'));
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => MapPage()),
@@ -143,6 +147,7 @@ class RoverState extends State<Rover> {
           widget.listPressed = false;
           setState(() {});
           await Future.delayed(const Duration(milliseconds: 10), () {});
+          Navigator.popUntil(context, ModalRoute.withName('/'));
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => ListPage()),

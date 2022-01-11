@@ -330,7 +330,7 @@ class _ListPageState extends GenericPageState {
                               color: const Color(0xFFD8DEE9),
                             ),), Icon(Icons.arrow_forward_ios_rounded, color: Colors.white30)])));
                           })),
-                  Container(margin: EdgeInsets.fromLTRB(0, 10, 0, 10), child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [Rover(true, true, false)]))
+                  Container(margin: EdgeInsets.fromLTRB(0, 10, 0, 10), child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [Rover(true, true, true, "list")]))
                 ]))));
   }
 

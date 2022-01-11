@@ -129,7 +129,7 @@ class _MainPageState extends GenericPageState {
                       }, color: Colors.white,))]),SizedBox(height:60)
                   ]),
 
-                  Container(margin: EdgeInsets.fromLTRB(0, 10, 0, 10),child:Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [Rover(false, true, true)]))],
+                  Container(margin: EdgeInsets.fromLTRB(0, 10, 0, 10),child:Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [Rover(true, true, true, "home")]))],
               ),
             )));
     return page;

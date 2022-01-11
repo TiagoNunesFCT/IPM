@@ -218,7 +218,7 @@ class _LocPageState extends GenericPageState {
               margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
               child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 Container(margin: EdgeInsets.fromLTRB(10, 0, 10, 0), child: buttonBack.BackButton()),
-                Rover(true, false, false),
+                Rover(true, true, true, "location"),
                 Container(
                     margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
                     decoration: new BoxDecoration(
