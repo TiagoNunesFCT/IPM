@@ -93,9 +93,9 @@ class _IRatingPageState extends GenericPageState {
                 height: double.infinity,
                 color: const Color(0xFF1D1D1D),
                 child: Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                  Container(
-                      margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                      height: 500,
+                  Flexible(child:Container(
+                      margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
+                      height: double.infinity,
                       decoration: new BoxDecoration(
                         shape: BoxShape.rectangle,
                         borderRadius: BorderRadius.circular(5),
@@ -120,7 +120,8 @@ class _IRatingPageState extends GenericPageState {
                                   ),
                                 ),
                                 child: RatingContainer(listRating, position));
-                          })),
+                          })
+                  )),
                   Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [Container(margin: EdgeInsets.fromLTRB(10, 0, 10, 10), child: buttonBack.BackButton()), Container(margin: EdgeInsets.fromLTRB(10, 0, 10, 10), child: addButton(zone))])
                 ]))));
     return page;
@@ -341,7 +342,7 @@ class _AddRatingDialogState extends State<AddRatingDialog> {
                 setState(() {
                   callback();
                 });
-              }else if(userHasRating(widget.userId)){
+              } else if (userHasRating(widget.userId)) {
                 Fluttertoast.showToast(msg: "You have already rated this zone!", toastLength: Toast.LENGTH_SHORT, gravity: ToastGravity.BOTTOM, timeInSecForIosWeb: 1, backgroundColor: Colors.black, textColor: Colors.white, fontSize: 16.0);
               }
             },
@@ -357,8 +358,8 @@ class _AddRatingDialogState extends State<AddRatingDialog> {
 }
 
 bool userHasRating(int userId) {
-  for (IndividualR r in listRating){
-    if(r.indiRUId == userId)return true;
+  for (IndividualR r in listRating) {
+    if (r.indiRUId == userId) return true;
   }
   return false;
 }

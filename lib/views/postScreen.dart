@@ -99,9 +99,9 @@ class _PostPageState extends GenericPageState {
                     height: double.infinity,
                     color: const Color(0xFF1D1D1D),
                     child: Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                      Container(
-                          margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                          height: 500,
+                      Flexible(child:Container(
+                          margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
+                          height: double.infinity,
                           decoration: new BoxDecoration(
                             shape: BoxShape.rectangle,
                             borderRadius: BorderRadius.circular(5),
@@ -126,7 +126,7 @@ class _PostPageState extends GenericPageState {
                                       ),
                                     ),
                                     child: PostContainer(listPost, position));
-                              })),
+                              }))),
                       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [Container(margin: EdgeInsets.fromLTRB(10, 0, 10, 10), child: buttonBack.BackButton()), Container(margin: EdgeInsets.fromLTRB(10, 0, 10, 10), child: addButton("normal", zone, ogId))])
                     ]))))
         : page = Scaffold(
@@ -167,9 +167,9 @@ class _PostPageState extends GenericPageState {
                     height: double.infinity,
                     color: const Color(0xFF1D1D1D),
                     child: Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-                      Container(
-                          margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                          height: 500,
+                      Flexible(child:Container(
+                          margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
+                          height: double.infinity,
                           decoration: new BoxDecoration(
                             shape: BoxShape.rectangle,
                             borderRadius: BorderRadius.circular(5),
@@ -201,7 +201,7 @@ class _PostPageState extends GenericPageState {
                                         color: const Color(0xFFD8DEE9),
                                       ),
                                     ));
-                              })),
+                              }))),
                       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [Container(margin: EdgeInsets.fromLTRB(10, 0, 10, 0), child: buttonBack.BackButton()), Container(margin: EdgeInsets.fromLTRB(10, 0, 10, 0), child: addButton("normal", zone, ogId))])
                     ]))));
     return page;

@@ -80,7 +80,8 @@ class _InfoPageState extends GenericPageState {
                 height: double.infinity,
                 color: const Color(0xFF1D1D1D),
                 child: Column(mainAxisSize: MainAxisSize.max ,mainAxisAlignment: MainAxisAlignment.spaceBetween,children: [
-                  Container(height: 500,
+                  Flexible(child:Container(height: double.infinity,
+                      margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
                       decoration: new BoxDecoration(
                         shape: BoxShape.rectangle,
                         borderRadius: BorderRadius.circular(5),
@@ -94,7 +95,7 @@ class _InfoPageState extends GenericPageState {
                           itemCount: specificInfo.length,
                           itemBuilder: (context, position) {
                             return InfoWidget(specificInfo[position]);
-                          })),
+                          }))),
                   Row(children: [Container(margin: EdgeInsets.fromLTRB(10, 0, 10, 10), child: buttonBack.BackButton())])
                 ]))));
   }
